@@ -1,0 +1,185 @@
+/* Perspective Component Styles */
+:root{--p-bg:#1a1a1a;--p-bg2:#0d0704;--p-accent:#ff6b35;--p-txt:#f0f0f0;--p-grn:#0f0;--p-yel:#ffa500;--p-red:#f00;--p-cyn:#0ff;--p-border:#3d2418}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:12px system-ui,monospace;background:linear-gradient(135deg,var(--p-bg),#2d1810);color:var(--p-txt);min-height:100vh}
+
+/* Page Layout */
+.p-page{display:grid;grid-template-rows:50px 40px 1fr 25px;min-height:100vh}
+.p-header{background:linear-gradient(90deg,#2d1810,#1a0e08);border-bottom:2px solid var(--p-accent);display:flex;align-items:center;padding:0 15px;gap:15px}
+.p-header-title{font-size:18px;color:var(--p-accent);text-shadow:0 0 10px rgba(255,107,53,.5)}
+.p-header-batch{margin-left:auto;display:flex;gap:12px;align-items:center}
+.p-batch-id{background:#2d1810;padding:4px 12px;border-radius:15px;border:1px solid var(--p-accent);color:var(--p-yel)}
+.p-batch-state{background:var(--p-grn);color:#000;padding:2px 8px;border-radius:4px;font-weight:bold}
+.p-nav{background:var(--p-bg2);display:flex;gap:5px;padding:5px 15px;border-bottom:1px solid var(--p-border)}
+.p-nav-link{color:var(--p-txt);text-decoration:none;padding:5px 12px;border-radius:4px;transition:.2s}
+.p-nav-link:hover,.p-nav-link.active{background:#2d1810;color:var(--p-accent)}
+.p-main{padding:15px;overflow-y:auto;background:var(--p-bg)}
+.p-footer{background:var(--p-bg2);border-top:1px solid var(--p-border);display:flex;align-items:center;padding:0 15px;font-size:10px;color:#666}
+.p-footer-leds{margin-left:auto;display:flex;gap:12px}
+.p-led-wrap{display:flex;align-items:center;gap:4px}
+
+/* Sidebar Layout */
+.p-sidebar-layout{display:grid;grid-template-columns:1fr 220px;height:100%}
+.p-sidebar-main{padding:15px;overflow-y:auto}
+.p-sidebar{background:var(--p-bg2);border-left:1px solid var(--p-border);padding:15px;overflow-y:auto}
+
+/* Cards */
+.p-card{background:var(--p-bg2);border:1px solid var(--p-border);border-radius:8px;padding:15px;margin-bottom:15px}
+.p-card-title{color:var(--p-accent);font-size:14px;margin-bottom:10px;font-weight:bold}
+
+/* Metrics */
+.p-metrics-panel h3{color:var(--p-accent);font-size:13px;margin-bottom:12px}
+.p-metric-card{margin:8px 0;padding:10px;background:#1a0e08;border-radius:4px;border-left:3px solid var(--p-accent)}
+.p-metric-lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.5px}
+.p-metric-val{font-size:18px;color:var(--p-cyn);margin-top:4px;font-weight:bold}
+
+/* Vessels */
+.p-vessel-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:15px}
+.p-vessel3d{width:100px;text-align:center}
+.p-vessel3d-body{width:70px;height:110px;background:linear-gradient(90deg,#2a2a2a,#4a4a4a,#2a2a2a);border-radius:8px;position:relative;overflow:hidden;transform:rotateY(-15deg);margin:0 auto;box-shadow:5px 5px 15px rgba(0,0,0,.5)}
+.p-vessel3d-fill{position:absolute;bottom:0;width:100%;transition:height .5s}
+.p-vessel3d-glass{position:absolute;inset:0;background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.1) 50%,transparent 70%)}
+.p-vessel3d-label{font-size:11px;margin-top:8px;color:var(--p-yel)}
+.p-vessel3d-temp{font-size:16px;color:var(--p-grn);margin-top:4px}
+
+/* Fermenters */
+.p-fermenter{background:var(--p-bg2);border:2px solid var(--p-border);border-radius:8px;padding:15px;width:200px}
+.p-fermenter.active{border-color:var(--p-grn)}
+.p-fermenter.empty{opacity:.5}
+.p-fermenter-header{display:flex;justify-content:space-between;margin-bottom:10px}
+.p-fermenter-name{color:var(--p-accent);font-weight:bold}
+.p-fermenter-status{padding:2px 8px;border-radius:4px;font-size:10px}
+.p-fermenter-status.ferm{background:var(--p-grn);color:#000}
+.p-fermenter-status.cond{background:var(--p-cyn);color:#000}
+.p-fermenter-status.idle{background:#333;color:#888}
+.p-fermenter-tank{margin:10px 0}
+.p-fermenter-body{width:80px;height:100px;background:linear-gradient(90deg,#2a2a2a,#4a4a4a,#2a2a2a);border-radius:8px 8px 20px 20px;margin:0 auto;position:relative;overflow:hidden}
+.p-fermenter-fill{position:absolute;bottom:0;width:100%;background:linear-gradient(180deg,#8b4513,#5a2d0a);border-radius:0 0 20px 20px;transition:height .5s}
+.p-fermenter-cone{width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-top:25px solid #3a3a3a;margin:0 auto}
+.p-fermenter-beer{text-align:center;color:var(--p-yel);font-size:11px;margin:8px 0}
+.p-fermenter-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.p-metric{background:#1a0e08;padding:6px;border-radius:4px;text-align:center}
+.p-metric-lbl{font-size:8px;color:#888}
+.p-metric-val{font-size:12px;color:var(--p-cyn)}
+.p-fermenter-progress{height:6px;background:#1a0e08;border-radius:3px;margin-top:8px;overflow:hidden}
+.p-fermenter-progress-fill{height:100%;background:linear-gradient(90deg,var(--p-grn),#0a0);transition:width .5s}
+.p-fermenter-days{font-size:10px;color:#888;text-align:center;margin-top:4px}
+
+/* Gauges */
+.p-gauge{position:relative}.p-gauge-label{text-align:center;font-size:10px;color:#888;margin-top:4px}
+.p-bar{margin:8px 0}.p-bar-label{font-size:10px;color:#888;margin-bottom:4px}
+.p-bar-track{height:12px;background:#1a0e08;border-radius:6px;overflow:hidden}
+.p-bar-fill{height:100%;transition:width .3s}
+.p-bar-value{font-size:11px;color:var(--p-cyn);margin-top:2px}
+
+/* LEDs & Badges */
+.p-led{display:inline-block;width:10px;height:10px;border-radius:50%;background:#333}
+.p-led.on,.p-led.grn{background:var(--p-grn);box-shadow:0 0 5px var(--p-grn)}
+.p-led.yel{background:var(--p-yel);box-shadow:0 0 5px var(--p-yel)}
+.p-led.red{background:var(--p-red);box-shadow:0 0 5px var(--p-red)}
+.p-badge{padding:2px 8px;border-radius:4px;font-size:10px;color:#000}
+
+/* Progress */
+.p-progress-track{height:25px;background:#1a0e08;border-radius:12px;overflow:hidden}
+.p-progress-fill{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+
+/* Tables */
+.p-table{width:100%;border-collapse:collapse;background:var(--p-bg2);border-radius:8px;overflow:hidden}
+.p-table th,.p-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--p-border)}
+.p-table th{background:#1a0e08;color:#888;font-weight:normal;font-size:10px;text-transform:uppercase}
+.p-table tr:hover{background:#1a0e08}
+
+/* Phases */
+.p-phase-list{background:var(--p-bg2);border-radius:8px;padding:15px}
+.p-phase-title{color:var(--p-accent);margin-bottom:10px}
+.p-phase{display:flex;align-items:center;padding:8px;margin:4px 0;border-radius:4px;border-left:3px solid #333}
+.p-phase.done{border-color:#666;color:#666}
+.p-phase.active{border-color:var(--p-grn);background:rgba(0,255,0,.1)}
+.p-phase-num{width:20px;height:20px;background:var(--p-accent);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;margin-right:10px}
+.p-phase-name{font-weight:bold;margin-right:10px}
+.p-phase-detail{font-size:10px;color:#888}
+
+/* Inputs */
+.p-input,.p-select,.p-date{background:#1a0e08;border:1px solid var(--p-border);color:#fff;padding:8px;border-radius:4px;width:100%}
+.p-btn{background:var(--p-accent);border:none;color:#fff;padding:8px 16px;border-radius:4px;cursor:pointer}
+.p-btn:hover{filter:brightness(1.2)}
+.p-btn.secondary{background:#2d1810;border:1px solid var(--p-accent);color:var(--p-accent)}
+
+/* Alarms */
+.p-alarm{display:none;padding:8px 15px;font-weight:bold}
+.p-alarm.active{display:flex;gap:10px;align-items:center;animation:pulse .5s infinite}
+.p-alarm.pri-1{background:linear-gradient(90deg,#800,var(--p-red));color:#ff0}
+.p-alarm.pri-2{background:linear-gradient(90deg,#660,var(--p-yel));color:#fff}
+@keyframes pulse{50%{opacity:.7}}
+
+/* Python */
+.p-python{background:var(--p-bg2);border:1px solid var(--p-border);border-radius:8px;overflow:hidden}
+.p-python-header{background:#1a0e08;padding:8px 12px;display:flex;justify-content:space-between;align-items:center}
+.p-python-code{padding:12px;font-family:monospace;font-size:11px;white-space:pre;overflow-x:auto;margin:0}
+.p-python-run{background:var(--p-grn);border:none;color:#000;padding:4px 12px;border-radius:4px;cursor:pointer}
+
+/* Atomic Templates - Atoms */
+.p-text{display:inline}.p-heading{color:var(--p-accent);margin-bottom:8px}
+.p-indicator{display:inline-block;width:8px;height:8px;border-radius:50%;background:#333}
+.p-indicator.on{background:var(--p-grn);box-shadow:0 0 5px var(--p-grn)}
+.p-indicator.pulse{animation:pulse 1s infinite}
+.p-dot{display:inline-block;border-radius:50%}
+.p-value{font-weight:bold}.p-unit{font-size:10px;color:#888}
+.p-metric-atom{display:flex;flex-direction:column;gap:2px}
+.p-metric-atom .p-metric-lbl{font-size:9px;color:#888;text-transform:uppercase}
+
+/* Atomic Templates - Molecules */
+.p-led-status{display:flex;align-items:center;gap:6px}
+.p-labeled-bar{margin:8px 0}
+.p-bar-header{display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px}
+.p-vessel-mini{text-align:center;width:50px}
+.p-vessel-mini-body{width:30px;height:50px;background:#333;border-radius:4px;margin:0 auto;position:relative;overflow:hidden}
+.p-vessel-mini-body::after{content:'';position:absolute;bottom:0;width:100%;height:var(--fill);background:var(--color)}
+.p-phase-step{display:flex;align-items:center;gap:8px;padding:6px;border-radius:4px}
+.p-phase-step.active{background:rgba(0,255,0,.1)}
+.p-phase-step .detail{font-size:10px;color:#888;margin-left:auto}
+.p-icon-btn{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:4px;border:none;cursor:pointer}
+
+/* Atomic Templates - Organisms */
+.p-metrics-section{padding:15px}
+.p-vessel-group{padding:15px}
+.p-phase-timeline{padding:15px}
+.p-phase-steps{display:flex;flex-direction:column;gap:4px}
+.p-status-bar{display:flex;gap:12px;margin-left:auto}
+.p-fermenter-card{background:var(--p-bg2);border:1px solid var(--p-border);border-radius:8px;padding:12px;width:180px}
+.p-fermenter-card.ferm{border-color:var(--p-grn)}
+.p-fermenter-card.cond{border-color:var(--p-cyn)}
+.p-fermenter-header{display:flex;justify-content:space-between;margin-bottom:8px}
+.p-fermenter-tank{height:80px;margin:8px 0}
+.p-fermenter-body{width:60px;height:70px;background:linear-gradient(90deg,#2a2a2a,#4a4a4a,#2a2a2a);border-radius:6px 6px 15px 15px;margin:0 auto;position:relative;overflow:hidden}
+.p-fermenter-body::after{content:'';position:absolute;bottom:0;width:100%;height:var(--fill);background:linear-gradient(180deg,#8b4513,#5a2d0a);border-radius:0 0 15px 15px}
+.p-fermenter-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}
+.p-data-table-wrap{overflow-x:auto}
+.p-data-table{width:100%;border-collapse:collapse}
+.p-data-table th,.p-data-table td{padding:8px;text-align:left;border-bottom:1px solid var(--p-border)}
+.p-data-table th{background:#1a0e08;color:#888;font-size:10px}
+.p-alarm-summary{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:4px;background:var(--p-bg2)}
+.p-alarm-summary.active{background:linear-gradient(90deg,#800,#400)}
+
+/* Atomic Templates - Templates */
+.p-app-header{display:flex;align-items:center;padding:0 15px;height:50px;background:linear-gradient(90deg,#2d1810,#1a0e08);border-bottom:2px solid var(--p-accent)}
+.p-app-header h1{font-size:18px;color:var(--p-accent)}
+.p-header-info{margin-left:auto;display:flex;align-items:center;gap:12px}
+.p-batch-tag{background:#2d1810;padding:4px 12px;border-radius:15px;border:1px solid var(--p-accent);color:var(--p-yel)}
+.p-app-nav{display:flex;gap:5px;padding:5px 15px;background:var(--p-bg2);border-bottom:1px solid var(--p-border)}
+.p-app-footer{display:flex;align-items:center;padding:0 15px;height:25px;background:var(--p-bg2);border-top:1px solid var(--p-border);font-size:10px;color:#666}
+.p-sidebar-template{display:grid;grid-template-columns:1fr auto;height:100%}
+.p-main-content{padding:15px;overflow-y:auto}
+.p-split-template{display:grid;gap:15px}
+.p-dashboard{display:grid;grid-template-rows:50px 40px 1fr 25px;min-height:100vh}
+.p-dashboard-main{overflow-y:auto;background:var(--p-bg)}
+.p-fermenters-grid{display:flex;flex-wrap:wrap;gap:15px;padding:15px;justify-content:center}
+.p-mini-fermenters{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Responsive */
+@media(max-width:768px){
+  .p-sidebar-layout,.p-sidebar-template{grid-template-columns:1fr}
+  .p-sidebar{border-left:none;border-top:1px solid var(--p-border)}
+  .p-vessel-row{gap:10px}
+  .p-fermenter,.p-fermenter-card{width:100%}
+}

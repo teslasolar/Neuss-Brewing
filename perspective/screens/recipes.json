@@ -1,0 +1,56 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Recipe Manager",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "brewhouse.html", "label": "Brewhouse"},
+      {"href": "fermentation.html", "label": "Fermentation"},
+      {"href": "recipes.html", "label": "Recipes", "active": true},
+      {"href": "history.html", "label": "History"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "250px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Recipes"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "name", "header": "Name"},
+                {"field": "style", "header": "Style"},
+                {"field": "og", "header": "OG"},
+                {"field": "ibu", "header": "IBU"}
+              ],
+              "data": "{recipes.list}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "10px"},
+      "children": [
+        {"type": "button", "props": {"text": "New Recipe", "class": "primary"}},
+        {"type": "button", "props": {"text": "Import", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Export", "class": "secondary"}},
+        {
+          "type": "card",
+          "props": {"title": "Quick Calc"},
+          "children": [{
+            "type": "brewcalc",
+            "props": {"og": 1.055, "fg": 1.012, "ibu": 35, "srm": 8}
+          }]
+        }
+      ]
+    }]
+  }]
+}

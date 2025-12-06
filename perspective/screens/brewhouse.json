@@ -1,0 +1,70 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Brewhouse",
+    "batch": "{batch.id}",
+    "state": "{batch.state}",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "brewhouse.html", "label": "Brewhouse", "active": true},
+      {"href": "fermentation.html", "label": "Fermentation"},
+      {"href": "recipes.html", "label": "Recipes"},
+      {"href": "history.html", "label": "History"}
+    ],
+    "leds": [{"label": "PLC", "state": "grn"}, {"label": "Pumps", "state": "{pumps.any?'grn':'off'}"}]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "200px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Vessels"},
+          "children": [{
+            "type": "vessel-row",
+            "props": {
+              "mode": "3d",
+              "vessels": [
+                {"name": "HLT", "temp": "{hlt.temp}", "level": "{hlt.level}", "color": "#4169e1", "setpoint": "{hlt.sp}"},
+                {"name": "MLT", "temp": "{mlt.temp}", "level": "{mlt.level}", "color": "#8b4513"},
+                {"name": "BK", "temp": "{bk.temp}", "level": "{bk.level}", "color": "#daa520", "setpoint": "{bk.sp}"}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Pumps & Valves"},
+          "children": [{
+            "type": "grid",
+            "props": {"columns": 3, "gap": "10px"},
+            "children": [
+              {"type": "pump", "props": {"name": "P1", "state": "{p1.run}"}},
+              {"type": "pump", "props": {"name": "P2", "state": "{p2.run}"}},
+              {"type": "pump", "props": {"name": "P3", "state": "{p3.run}"}},
+              {"type": "valve", "props": {"name": "V1", "state": "{v1.state}"}},
+              {"type": "valve", "props": {"name": "V2", "state": "{v2.state}"}},
+              {"type": "valve", "props": {"name": "V3", "state": "{v3.state}"}}
+            ]
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "phase-list",
+      "props": {
+        "title": "Brew Phases",
+        "phases": [
+          {"name": "Strike", "status": "{phases.strike}", "detail": "Heat to 168°F"},
+          {"name": "Mash", "status": "{phases.mash}", "detail": "60 min @ 152°F"},
+          {"name": "Sparge", "status": "{phases.sparge}", "detail": "Collect wort"},
+          {"name": "Boil", "status": "{phases.boil}", "detail": "60 min"},
+          {"name": "Cool", "status": "{phases.cool}", "detail": "To 68°F"}
+        ]
+      }
+    }]
+  }]
+}

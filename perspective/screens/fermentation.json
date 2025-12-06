@@ -1,0 +1,26 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Fermentation",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "brewhouse.html", "label": "Brewhouse"},
+      {"href": "fermentation.html", "label": "Fermentation", "active": true},
+      {"href": "recipes.html", "label": "Recipes"},
+      {"href": "history.html", "label": "History"}
+    ],
+    "leds": [{"label": "Glycol", "state": "grn"}, {"label": "Temps", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"gap": "20px", "wrap": "wrap", "justify": "center", "padding": "20px"},
+    "children": [
+      {"type": "fermenter", "props": {"name": "FV1", "status": "{fv1.status}", "beer": "{fv1.beer}", "temp": "{fv1.temp}", "sg": "{fv1.sg}", "level": 85, "progress": "{fv1.progress}", "days": "{fv1.days}"}},
+      {"type": "fermenter", "props": {"name": "FV2", "status": "{fv2.status}", "beer": "{fv2.beer}", "temp": "{fv2.temp}", "sg": "{fv2.sg}", "level": 90, "progress": "{fv2.progress}", "days": "{fv2.days}"}},
+      {"type": "fermenter", "props": {"name": "FV3", "status": "{fv3.status}", "beer": "{fv3.beer}", "temp": "{fv3.temp}", "sg": "{fv3.sg}", "level": 0, "progress": 0, "days": "--"}},
+      {"type": "fermenter", "props": {"name": "FV4", "status": "idle", "beer": "--", "temp": "--", "sg": "--", "level": 0, "progress": 0, "days": "--"}},
+      {"type": "fermenter", "props": {"name": "BBT1", "status": "{bbt1.status}", "beer": "{bbt1.beer}", "temp": "{bbt1.temp}", "sg": "{bbt1.sg}", "level": 95, "progress": 100, "days": "Ready"}},
+      {"type": "fermenter", "props": {"name": "BBT2", "status": "idle", "beer": "--", "temp": "--", "sg": "--", "level": 0, "progress": 0, "days": "--"}}
+    ]
+  }]
+}
