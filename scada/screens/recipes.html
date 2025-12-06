@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>📋 Recipes - SCADA</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .rcp-container{display:grid;grid-template-columns:250px 1fr;gap:15px;padding:15px;height:calc(100vh - 145px)}
+    .rcp-list{background:#0d0704;border:1px solid #3d2418;border-radius:8px;overflow-y:auto}
+    .rcp-item{padding:12px;border-bottom:1px solid #3d2418;cursor:pointer;transition:.2s}
+    .rcp-item:hover,.rcp-item.active{background:#2d1810}
+    .rcp-item-name{color:#ff6b35;font-weight:bold}
+    .rcp-item-style{font-size:10px;color:#888}
+    .rcp-detail{background:#0d0704;border:1px solid #3d2418;border-radius:8px;padding:15px;overflow-y:auto}
+    .rcp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #3d2418}
+    .rcp-title{color:#ff6b35;font-size:18px}
+    .rcp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
+    .rcp-stat{background:#1a0e08;padding:10px;border-radius:4px;text-align:center}
+    .rcp-stat-lbl{font-size:9px;color:#888}
+    .rcp-stat-val{font-size:16px;color:#0ff;margin-top:3px}
+    .rcp-section{margin-bottom:15px}
+    .rcp-section h4{color:#ffa500;margin-bottom:8px;font-size:12px}
+    .rcp-table{width:100%;border-collapse:collapse}
+    .rcp-table th,.rcp-table td{padding:6px 8px;text-align:left;border-bottom:1px solid #3d2418;font-size:11px}
+    .rcp-table th{color:#888;font-weight:normal}
+    .rcp-phases{margin-top:15px}
+    .rcp-phase{display:flex;align-items:center;padding:8px;background:#1a0e08;margin:5px 0;border-radius:4px;border-left:3px solid #ff6b35}
+    .rcp-phase-num{width:25px;height:25px;background:#ff6b35;color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:10px;font-weight:bold;font-size:11px}
+    .rcp-phase-info{flex:1}
+    .rcp-phase-name{font-weight:bold}
+    .rcp-phase-detail{font-size:10px;color:#888}
+    .rcp-actions{margin-top:15px;display:flex;gap:10px}
+    .rcp-btn{background:#2d1810;border:1px solid #ff6b35;color:#ff6b35;padding:8px 16px;border-radius:4px;cursor:pointer}
+    .rcp-btn:hover{background:#ff6b35;color:#fff}
+    .rcp-btn.primary{background:#ff6b35;color:#fff}
+  </style>
+</head>
+<body>
+  <div class="scada-grid">
+    <header class="hdr"><h1>📋 Recipe Management</h1></header>
+    <nav class="nav">
+      <a href="../../index.html">Overview</a>
+      <a href="brewhouse.html">Brewhouse</a>
+      <a href="fermentation.html">Fermentation</a>
+      <a href="recipes.html" class="active">Recipes</a>
+      <a href="history.html">History</a>
+    </nav>
+    <div class="alm-banner"></div>
+    <main class="main" style="grid-column:1/-1">
+      <div class="rcp-container">
+        <!-- Recipe List -->
+        <div class="rcp-list">
+          <div class="rcp-item active">
+            <div class="rcp-item-name">West Coast IPA</div>
+            <div class="rcp-item-style">American IPA • 6.8% ABV</div>
+          </div>
+          <div class="rcp-item">
+            <div class="rcp-item-name">Oatmeal Stout</div>
+            <div class="rcp-item-style">Stout • 5.2% ABV</div>
+          </div>
+          <div class="rcp-item">
+            <div class="rcp-item-name">Pilsner</div>
+            <div class="rcp-item-style">German Pilsner • 4.8% ABV</div>
+          </div>
+          <div class="rcp-item">
+            <div class="rcp-item-name">Belgian Wit</div>
+            <div class="rcp-item-style">Witbier • 4.5% ABV</div>
+          </div>
+          <div class="rcp-item">
+            <div class="rcp-item-name">Pale Ale</div>
+            <div class="rcp-item-style">American Pale Ale • 5.5% ABV</div>
+          </div>
+        </div>
+        <!-- Recipe Detail -->
+        <div class="rcp-detail">
+          <div class="rcp-header">
+            <span class="rcp-title">West Coast IPA</span>
+            <span style="color:#888">Version 2.1</span>
+          </div>
+          <div class="rcp-stats">
+            <div class="rcp-stat"><div class="rcp-stat-lbl">OG</div><div class="rcp-stat-val">1.065</div></div>
+            <div class="rcp-stat"><div class="rcp-stat-lbl">FG</div><div class="rcp-stat-val">1.010</div></div>
+            <div class="rcp-stat"><div class="rcp-stat-lbl">ABV</div><div class="rcp-stat-val">6.8%</div></div>
+            <div class="rcp-stat"><div class="rcp-stat-lbl">IBU</div><div class="rcp-stat-val">65</div></div>
+          </div>
+          <div class="rcp-section">
+            <h4>Grain Bill (400L batch)</h4>
+            <table class="rcp-table">
+              <tr><th>Grain</th><th>Amount</th><th>%</th></tr>
+              <tr><td>Pale Malt 2-Row</td><td>45 kg</td><td>85%</td></tr>
+              <tr><td>Crystal 40L</td><td>4 kg</td><td>7.5%</td></tr>
+              <tr><td>Munich Malt</td><td>4 kg</td><td>7.5%</td></tr>
+            </table>
+          </div>
+          <div class="rcp-section">
+            <h4>Hop Schedule</h4>
+            <table class="rcp-table">
+              <tr><th>Hop</th><th>Amount</th><th>Time</th><th>IBU</th></tr>
+              <tr><td>Warrior</td><td>50g</td><td>60 min</td><td>35</td></tr>
+              <tr><td>Centennial</td><td>80g</td><td>30 min</td><td>15</td></tr>
+              <tr><td>Cascade</td><td>100g</td><td>15 min</td><td>10</td></tr>
+              <tr><td>Citra</td><td>150g</td><td>0 min</td><td>5</td></tr>
+              <tr><td>Simcoe</td><td>200g</td><td>Dry Hop</td><td>-</td></tr>
+            </table>
+          </div>
+          <div class="rcp-phases">
+            <h4>Process Phases (ISA-88)</h4>
+            <div class="rcp-phase"><span class="rcp-phase-num">1</span><div class="rcp-phase-info"><div class="rcp-phase-name">Strike Water</div><div class="rcp-phase-detail">Heat HLT to 74°C (168L)</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">2</span><div class="rcp-phase-info"><div class="rcp-phase-name">Mash</div><div class="rcp-phase-detail">Single infusion @ 67°C for 60 min</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">3</span><div class="rcp-phase-info"><div class="rcp-phase-name">Mash Out</div><div class="rcp-phase-detail">Raise to 76°C, hold 10 min</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">4</span><div class="rcp-phase-info"><div class="rcp-phase-name">Sparge</div><div class="rcp-phase-detail">Fly sparge with 77°C water</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">5</span><div class="rcp-phase-info"><div class="rcp-phase-name">Boil</div><div class="rcp-phase-detail">60 min boil with hop additions</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">6</span><div class="rcp-phase-info"><div class="rcp-phase-name">Whirlpool</div><div class="rcp-phase-detail">20 min rest @ 82°C</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">7</span><div class="rcp-phase-info"><div class="rcp-phase-name">Chill</div><div class="rcp-phase-detail">Cool to 18°C, transfer to FV</div></div></div>
+            <div class="rcp-phase"><span class="rcp-phase-num">8</span><div class="rcp-phase-info"><div class="rcp-phase-name">Ferment</div><div class="rcp-phase-detail">US-05 @ 18°C for 14 days</div></div></div>
+          </div>
+          <div class="rcp-actions">
+            <button class="rcp-btn primary">Start Batch</button>
+            <button class="rcp-btn">Edit Recipe</button>
+            <button class="rcp-btn">Clone</button>
+            <button class="rcp-btn">Export</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="ftr"><span>ISA-88 Recipe Management | 5 Recipes in Library</span></footer>
+  </div>
+</body>
+</html>

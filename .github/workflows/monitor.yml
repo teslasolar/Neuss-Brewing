@@ -1,0 +1,31 @@
+name: Brewery Monitor
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Collect Metrics
+        run: |
+          echo "Collecting brewery metrics..."
+          echo "{\"ts\":$(date +%s),\"scan\":\"ok\"}" > data/realtime/status.json
+
+      - name: Check Alarms
+        run: |
+          echo "Checking alarm conditions..."
+          # Add alarm logic here
+
+      - name: Commit Data
+        run: |
+          git config user.name "Brewery Monitor"
+          git config user.email "monitor@brewery.local"
+          git add data/ || true
+          git diff --staged --quiet || git commit -m "Update metrics $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push || true

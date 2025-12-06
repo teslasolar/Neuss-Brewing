@@ -1,0 +1,35 @@
+name: Brewery Alerts
+
+on:
+  workflow_dispatch:
+    inputs:
+      alarm_id:
+        description: 'Alarm ID'
+        required: true
+      severity:
+        description: 'Severity (1=CRITICAL, 2=WARNING, 3=INFO)'
+        required: true
+        default: '2'
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Process Alert
+        run: |
+          echo "Processing alarm: ${{ github.event.inputs.alarm_id }}"
+          echo "Severity: ${{ github.event.inputs.severity }}"
+
+      - name: Log Alert
+        run: |
+          mkdir -p data/alerts
+          echo "{\"id\":\"${{ github.event.inputs.alarm_id }}\",\"sev\":${{ github.event.inputs.severity }},\"ts\":$(date +%s)}" >> data/alerts/log.json
+
+      - name: Send Notification
+        if: github.event.inputs.severity == '1'
+        run: |
+          echo "CRITICAL ALARM - Would send notification"
+          # Add notification logic (email, SMS, webhook)

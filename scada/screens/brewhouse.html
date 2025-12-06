@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>🍺 Brewhouse - SCADA</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .bh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;padding:15px}
+    .vessel-card{background:#0d0704;border:1px solid #3d2418;border-radius:8px;padding:15px;text-align:center}
+    .vessel-card h3{color:#ff6b35;margin-bottom:10px}
+    .vessel-svg{width:100%;height:150px}
+    .ctrl-panel{background:#1a0e08;padding:10px;border-radius:4px;margin-top:10px}
+    .ctrl-btn{background:#2d1810;border:1px solid #ff6b35;color:#ff6b35;padding:5px 10px;margin:2px;border-radius:4px;cursor:pointer}
+    .ctrl-btn:hover{background:#ff6b35;color:#fff}
+    .ctrl-btn.active{background:#0f0;color:#000;border-color:#0f0}
+    .phase-list{text-align:left;margin-top:15px}
+    .phase{padding:5px;border-left:3px solid #333;margin:5px 0;padding-left:10px}
+    .phase.active{border-color:#0f0;background:rgba(0,255,0,.1)}
+    .phase.done{border-color:#666;color:#666}
+  </style>
+</head>
+<body>
+  <div class="scada-grid">
+    <header class="hdr"><h1>🍺 Brewhouse Control</h1><div class="batch-info"><span class="batch-id">Batch #2024-042</span><span class="state">BOILING</span></div></header>
+    <nav class="nav">
+      <a href="../../index.html">Overview</a>
+      <a href="brewhouse.html" class="active">Brewhouse</a>
+      <a href="fermentation.html">Fermentation</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="history.html">History</a>
+    </nav>
+    <div class="alm-banner" id="almBanner"></div>
+    <main class="main" style="grid-column:1/-1">
+      <div class="bh-grid">
+        <!-- HLT -->
+        <div class="vessel-card">
+          <h3>HLT - Hot Liquor Tank</h3>
+          <svg class="vessel-svg" viewBox="0 0 100 150">
+            <rect x="10" y="20" width="80" height="110" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <rect x="10" y="40" width="80" height="90" fill="#4a90e2" opacity="0.6" rx="4"/>
+            <text x="50" y="15" text-anchor="middle" fill="#ffa500" font-size="10">450L</text>
+            <text x="50" y="85" text-anchor="middle" fill="#fff" font-size="16">75°C</text>
+          </svg>
+          <div class="ctrl-panel">
+            <button class="ctrl-btn">HEAT</button>
+            <button class="ctrl-btn active">CIRC</button>
+            <button class="ctrl-btn">DRAIN</button>
+          </div>
+        </div>
+        <!-- Mash Tun -->
+        <div class="vessel-card">
+          <h3>MSH - Mash Tun</h3>
+          <svg class="vessel-svg" viewBox="0 0 100 150">
+            <rect x="10" y="20" width="80" height="110" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <rect x="10" y="50" width="80" height="80" fill="#8b4513" opacity="0.6" rx="4"/>
+            <text x="50" y="15" text-anchor="middle" fill="#ffa500" font-size="10">380L</text>
+            <text x="50" y="90" text-anchor="middle" fill="#0f0" font-size="16">67°C</text>
+          </svg>
+          <div class="ctrl-panel">
+            <button class="ctrl-btn">RECIRC</button>
+            <button class="ctrl-btn">SPARGE</button>
+            <button class="ctrl-btn">DRAIN</button>
+          </div>
+        </div>
+        <!-- Boil Kettle -->
+        <div class="vessel-card">
+          <h3>BK - Boil Kettle</h3>
+          <svg class="vessel-svg" viewBox="0 0 100 150">
+            <rect x="10" y="20" width="80" height="110" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <rect x="10" y="40" width="80" height="90" fill="#ff6b35" opacity="0.6" rx="4"/>
+            <text x="50" y="15" text-anchor="middle" fill="#ffa500" font-size="10">360L</text>
+            <text x="50" y="85" text-anchor="middle" fill="#ff0" font-size="16">100°C</text>
+            <circle cx="30" cy="110" r="3" fill="#fff" class="blink"/>
+            <circle cx="50" cy="105" r="3" fill="#fff" class="blink"/>
+            <circle cx="70" cy="112" r="3" fill="#fff" class="blink"/>
+          </svg>
+          <div class="ctrl-panel">
+            <button class="ctrl-btn active">BOIL</button>
+            <button class="ctrl-btn">WHIRL</button>
+            <button class="ctrl-btn">COOL</button>
+          </div>
+        </div>
+        <!-- Whirlpool/Chiller -->
+        <div class="vessel-card">
+          <h3>WP - Whirlpool</h3>
+          <svg class="vessel-svg" viewBox="0 0 100 150">
+            <rect x="10" y="20" width="80" height="110" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <text x="50" y="15" text-anchor="middle" fill="#ffa500" font-size="10">EMPTY</text>
+            <text x="50" y="85" text-anchor="middle" fill="#666" font-size="14">STANDBY</text>
+          </svg>
+          <div class="ctrl-panel">
+            <button class="ctrl-btn">FILL</button>
+            <button class="ctrl-btn">WHIRL</button>
+            <button class="ctrl-btn">XFER</button>
+          </div>
+        </div>
+      </div>
+      <!-- Recipe Phase Progress -->
+      <div style="padding:15px">
+        <h3 style="color:#ff6b35">Recipe: West Coast IPA - Phase Progress</h3>
+        <div class="phase-list">
+          <div class="phase done">1. Strike Water - Heat to 74°C ✓</div>
+          <div class="phase done">2. Mash In - 67°C for 60 min ✓</div>
+          <div class="phase done">3. Mash Out - 76°C for 10 min ✓</div>
+          <div class="phase done">4. Sparge - Collect 400L ✓</div>
+          <div class="phase active">5. Boil - 60 min (39/60) ⏱</div>
+          <div class="phase">6. Hop Add @15 - Cascade 100g</div>
+          <div class="phase">7. Whirlpool - 20 min rest</div>
+          <div class="phase">8. Chill - Target 18°C</div>
+        </div>
+      </div>
+    </main>
+    <footer class="ftr"><span>ISA-88 Brewhouse Control | Scan: 100ms</span></footer>
+  </div>
+</body>
+</html>

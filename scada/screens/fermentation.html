@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>🧪 Fermentation - SCADA</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .fv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;padding:15px}
+    .fv-card{background:#0d0704;border:2px solid #3d2418;border-radius:8px;padding:15px;position:relative}
+    .fv-card.active{border-color:#0f0}
+    .fv-card.empty{opacity:.5}
+    .fv-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .fv-name{color:#ff6b35;font-weight:bold}
+    .fv-status{padding:2px 8px;border-radius:4px;font-size:10px}
+    .fv-status.ferm{background:#0f0;color:#000}
+    .fv-status.cond{background:#0ff;color:#000}
+    .fv-status.empty{background:#333;color:#888}
+    .fv-tank{width:100%;height:180px;position:relative;margin:10px 0}
+    .fv-body{width:80px;height:140px;background:linear-gradient(90deg,#2a2a2a,#4a4a4a,#2a2a2a);border-radius:8px 8px 20px 20px;margin:0 auto;position:relative;overflow:hidden}
+    .fv-fill{position:absolute;bottom:0;width:100%;background:linear-gradient(180deg,#8b4513,#5a2d0a);border-radius:0 0 20px 20px;transition:height .5s}
+    .fv-cone{width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-top:30px solid #3a3a3a;margin:0 auto}
+    .fv-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .fv-metric{background:#1a0e08;padding:8px;border-radius:4px;text-align:center}
+    .fv-metric-lbl{font-size:9px;color:#888}
+    .fv-metric-val{font-size:14px;color:#0ff;margin-top:2px}
+    .fv-metric-val.warn{color:#ffa500}
+    .fv-progress{height:8px;background:#1a0e08;border-radius:4px;margin-top:10px;overflow:hidden}
+    .fv-progress-fill{height:100%;background:linear-gradient(90deg,#0f0,#0a0);transition:width .5s}
+    .fv-days{font-size:10px;color:#888;margin-top:5px;text-align:center}
+    .cube-view{perspective:800px;margin:20px auto;width:120px;height:120px}
+    .fv-cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:rotateCube 20s linear infinite}
+    .cube-face{position:absolute;width:120px;height:120px;background:rgba(0,0,0,.8);border:1px solid #ff6b35;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;backface-visibility:hidden}
+    .cube-face span{font-size:16px;color:#0ff}
+    @keyframes rotateCube{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+    .front{transform:translateZ(60px)}.back{transform:translateZ(-60px) rotateY(180deg)}
+    .left{transform:translateX(-60px) rotateY(-90deg)}.right{transform:translateX(60px) rotateY(90deg)}
+  </style>
+</head>
+<body>
+  <div class="scada-grid">
+    <header class="hdr"><h1>🧪 Fermentation Control</h1></header>
+    <nav class="nav">
+      <a href="../../index.html">Overview</a>
+      <a href="brewhouse.html">Brewhouse</a>
+      <a href="fermentation.html" class="active">Fermentation</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="history.html">History</a>
+    </nav>
+    <div class="alm-banner"></div>
+    <main class="main" style="grid-column:1/-1">
+      <div class="fv-grid">
+        <!-- FV1 -->
+        <div class="fv-card active">
+          <div class="fv-header">
+            <span class="fv-name">FV-1</span>
+            <span class="fv-status ferm">FERMENTING</span>
+          </div>
+          <div class="fv-tank">
+            <div class="fv-body"><div class="fv-fill" style="height:85%"></div></div>
+            <div class="fv-cone"></div>
+          </div>
+          <div style="text-align:center;color:#ffa500;font-size:12px">West Coast IPA</div>
+          <div class="fv-metrics">
+            <div class="fv-metric"><div class="fv-metric-lbl">TEMP</div><div class="fv-metric-val">18°C</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">SG</div><div class="fv-metric-val">1.012</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">PRESSURE</div><div class="fv-metric-val">12 PSI</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">pH</div><div class="fv-metric-val">4.2</div></div>
+          </div>
+          <div class="fv-progress"><div class="fv-progress-fill" style="width:35%"></div></div>
+          <div class="fv-days">Day 5 of 14</div>
+        </div>
+        <!-- FV2 -->
+        <div class="fv-card active">
+          <div class="fv-header">
+            <span class="fv-name">FV-2</span>
+            <span class="fv-status ferm">FERMENTING</span>
+          </div>
+          <div class="fv-tank">
+            <div class="fv-body"><div class="fv-fill" style="height:90%"></div></div>
+            <div class="fv-cone"></div>
+          </div>
+          <div style="text-align:center;color:#ffa500;font-size:12px">Oatmeal Stout</div>
+          <div class="fv-metrics">
+            <div class="fv-metric"><div class="fv-metric-lbl">TEMP</div><div class="fv-metric-val">20°C</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">SG</div><div class="fv-metric-val">1.045</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">PRESSURE</div><div class="fv-metric-val">10 PSI</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">pH</div><div class="fv-metric-val">4.4</div></div>
+          </div>
+          <div class="fv-progress"><div class="fv-progress-fill" style="width:57%"></div></div>
+          <div class="fv-days">Day 12 of 21</div>
+        </div>
+        <!-- FV3 -->
+        <div class="fv-card active">
+          <div class="fv-header">
+            <span class="fv-name">FV-3</span>
+            <span class="fv-status cond">CONDITIONING</span>
+          </div>
+          <div class="fv-tank">
+            <div class="fv-body"><div class="fv-fill" style="height:75%"></div></div>
+            <div class="fv-cone"></div>
+          </div>
+          <div style="text-align:center;color:#ffa500;font-size:12px">Pilsner</div>
+          <div class="fv-metrics">
+            <div class="fv-metric"><div class="fv-metric-lbl">TEMP</div><div class="fv-metric-val">2°C</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">SG</div><div class="fv-metric-val">1.008</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">PRESSURE</div><div class="fv-metric-val">14 PSI</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">pH</div><div class="fv-metric-val">4.1</div></div>
+          </div>
+          <div class="fv-progress"><div class="fv-progress-fill" style="width:75%"></div></div>
+          <div class="fv-days">Day 21 of 28</div>
+        </div>
+        <!-- FV4 Empty -->
+        <div class="fv-card empty">
+          <div class="fv-header">
+            <span class="fv-name">FV-4</span>
+            <span class="fv-status empty">CIP READY</span>
+          </div>
+          <div class="fv-tank">
+            <div class="fv-body"><div class="fv-fill" style="height:0%"></div></div>
+            <div class="fv-cone"></div>
+          </div>
+          <div style="text-align:center;color:#666;font-size:12px">Available</div>
+          <div class="fv-metrics">
+            <div class="fv-metric"><div class="fv-metric-lbl">TEMP</div><div class="fv-metric-val" style="color:#666">--</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">SG</div><div class="fv-metric-val" style="color:#666">--</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">PRESSURE</div><div class="fv-metric-val" style="color:#666">--</div></div>
+            <div class="fv-metric"><div class="fv-metric-lbl">pH</div><div class="fv-metric-val" style="color:#666">--</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- 3D Cube View -->
+      <div style="text-align:center;padding:20px">
+        <h3 style="color:#ff6b35">3D Sensor Cube - FV-1</h3>
+        <div class="cube-view">
+          <div class="fv-cube">
+            <div class="cube-face front">TEMP<span>18°C</span></div>
+            <div class="cube-face back">PRES<span>12 PSI</span></div>
+            <div class="cube-face left">pH<span>4.2</span></div>
+            <div class="cube-face right">SG<span>1.012</span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="ftr"><span>ISA-88 Fermentation Control | Glycol: OK | CO2: OK</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "id": "RCP002",
+  "nm": "Oatmeal Stout",
+  "style": "Oatmeal Stout",
+  "ver": "1.3",
+  "vol": 400,
+  "stats": {"og": 1.058, "fg": 1.014, "abv": 5.8, "ibu": 35, "srm": 35},
+  "grain": [
+    {"nm": "Pale Malt", "kg": 35, "pct": 70},
+    {"nm": "Flaked Oats", "kg": 5, "pct": 10},
+    {"nm": "Chocolate Malt", "kg": 3, "pct": 6},
+    {"nm": "Roasted Barley", "kg": 2.5, "pct": 5},
+    {"nm": "Crystal 80L", "kg": 2.5, "pct": 5},
+    {"nm": "Black Patent", "kg": 2, "pct": 4}
+  ],
+  "hops": [
+    {"nm": "East Kent Goldings", "g": 80, "t": 60, "use": "boil"},
+    {"nm": "Fuggle", "g": 60, "t": 15, "use": "boil"}
+  ],
+  "yeast": {"nm": "S-04", "temp": 20, "days": 21},
+  "phases": [
+    {"nm": "Strike", "tmp": 72, "dur": 15, "vol": 160},
+    {"nm": "Mash", "tmp": 68, "dur": 60},
+    {"nm": "MashOut", "tmp": 76, "dur": 10},
+    {"nm": "Sparge", "tmp": 77, "dur": 45},
+    {"nm": "Boil", "tmp": 100, "dur": 60},
+    {"nm": "Chill", "tmp": 20, "dur": 20},
+    {"nm": "Ferm", "tmp": 20, "dur": 30240}
+  ]
+}

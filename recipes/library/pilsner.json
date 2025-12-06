@@ -1,0 +1,29 @@
+{
+  "id": "RCP003",
+  "nm": "Pilsner",
+  "style": "German Pilsner",
+  "ver": "1.5",
+  "vol": 400,
+  "stats": {"og": 1.048, "fg": 1.008, "abv": 5.2, "ibu": 38, "srm": 3},
+  "grain": [
+    {"nm": "Pilsner Malt", "kg": 40, "pct": 95},
+    {"nm": "Carapils", "kg": 2, "pct": 5}
+  ],
+  "hops": [
+    {"nm": "Hallertau Magnum", "g": 40, "t": 60, "use": "boil"},
+    {"nm": "Saaz", "g": 100, "t": 15, "use": "boil"},
+    {"nm": "Saaz", "g": 80, "t": 0, "use": "whirl"}
+  ],
+  "yeast": {"nm": "W-34/70", "temp": 10, "days": 28},
+  "phases": [
+    {"nm": "Strike", "tmp": 65, "dur": 15},
+    {"nm": "Mash1", "tmp": 52, "dur": 15, "notes": "Protein rest"},
+    {"nm": "Mash2", "tmp": 63, "dur": 30, "notes": "Beta rest"},
+    {"nm": "Mash3", "tmp": 72, "dur": 20, "notes": "Alpha rest"},
+    {"nm": "MashOut", "tmp": 78, "dur": 10},
+    {"nm": "Boil", "tmp": 100, "dur": 90},
+    {"nm": "Chill", "tmp": 10, "dur": 30},
+    {"nm": "Ferm", "tmp": 10, "dur": 20160},
+    {"nm": "Lager", "tmp": 2, "dur": 20160}
+  ]
+}

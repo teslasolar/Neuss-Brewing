@@ -1,0 +1,14 @@
+{
+  "alarms": {
+    "ALM001": {"tag": "MSH_TMP", "cond": "HI", "pri": 1, "msg": "Mash temp HIGH", "action": "Check heating"},
+    "ALM002": {"tag": "MSH_TMP", "cond": "LO", "pri": 2, "msg": "Mash temp LOW", "action": "Add heat"},
+    "ALM003": {"tag": "BK_TMP", "cond": "LO", "pri": 2, "msg": "Boil not reached", "action": "Check burner"},
+    "ALM004": {"tag": "FV1_TMP", "cond": "HI", "pri": 1, "msg": "FV1 temp HIGH", "action": "Check glycol"},
+    "ALM005": {"tag": "FV1_PRS", "cond": "HI", "pri": 1, "msg": "FV1 pressure HIGH", "action": "Vent PRV"},
+    "ALM006": {"tag": "GLY_TMP", "cond": "HI", "pri": 1, "msg": "Glycol temp HIGH", "action": "Check chiller"},
+    "ALM007": {"tag": "CO2_PRS", "cond": "LO", "pri": 2, "msg": "CO2 tank LOW", "action": "Replace tank"},
+    "ALM008": {"tag": "HLT_LVL", "cond": "LO", "pri": 2, "msg": "HLT level LOW", "action": "Fill water"}
+  },
+  "priorities": {"1": "CRITICAL", "2": "WARNING", "3": "INFO"},
+  "colors": {"1": "#f00", "2": "#ffa500", "3": "#0ff"}
+}

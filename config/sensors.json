@@ -1,0 +1,18 @@
+{
+  "sensors": {
+    "HLT_TMP": {"nm": "HLT Temperature", "eu": "°C", "hi": 82, "lo": 60, "scan": 100},
+    "HLT_LVL": {"nm": "HLT Level", "eu": "L", "hi": 500, "lo": 50, "scan": 500},
+    "MSH_TMP": {"nm": "Mash Temperature", "eu": "°C", "hi": 72, "lo": 62, "scan": 100},
+    "MSH_PH": {"nm": "Mash pH", "eu": "pH", "hi": 5.6, "lo": 5.2, "scan": 1000},
+    "BK_TMP": {"nm": "Boil Kettle Temp", "eu": "°C", "hi": 102, "lo": 95, "scan": 100},
+    "BK_LVL": {"nm": "Boil Kettle Level", "eu": "L", "hi": 450, "lo": 50, "scan": 500},
+    "FV1_TMP": {"nm": "FV1 Temperature", "eu": "°C", "hi": 22, "lo": 2, "scan": 1000},
+    "FV1_PRS": {"nm": "FV1 Pressure", "eu": "PSI", "hi": 15, "lo": 0, "scan": 1000},
+    "FV1_SG": {"nm": "FV1 Gravity", "eu": "SG", "hi": 1.1, "lo": 0.99, "scan": 60000},
+    "FV2_TMP": {"nm": "FV2 Temperature", "eu": "°C", "hi": 22, "lo": 2, "scan": 1000},
+    "FV3_TMP": {"nm": "FV3 Temperature", "eu": "°C", "hi": 22, "lo": 2, "scan": 1000},
+    "FV4_TMP": {"nm": "FV4 Temperature", "eu": "°C", "hi": 22, "lo": 2, "scan": 1000},
+    "GLY_TMP": {"nm": "Glycol Temperature", "eu": "°C", "hi": 5, "lo": -5, "scan": 5000},
+    "CO2_PRS": {"nm": "CO2 Tank Pressure", "eu": "PSI", "hi": 800, "lo": 100, "scan": 60000}
+  }
+}

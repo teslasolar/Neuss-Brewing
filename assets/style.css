@@ -1,0 +1,53 @@
+/* 🍺 Brewery SCADA - Compact CSS */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#1a1a1a;--bg2:#0d0704;--accent:#ff6b35;--txt:#f0f0f0;--grn:#0f0;--yel:#ffa500;--red:#f00;--cyn:#0ff}
+body{font:12px system-ui,monospace;background:linear-gradient(135deg,var(--bg),#2d1810);color:var(--txt);overflow-x:hidden}
+/* Grid Layout */
+.scada-grid{display:grid;grid-template-columns:180px 1fr 200px;grid-template-rows:50px 40px 30px 1fr 25px;height:100vh}
+.hdr{grid-column:1/-1;background:linear-gradient(90deg,#2d1810,#1a0e08);border-bottom:2px solid var(--accent);display:flex;align-items:center;padding:0 15px;gap:15px}
+.hdr h1{font-size:18px;color:var(--accent);text-shadow:0 0 10px rgba(255,107,53,.5)}
+.batch-info{margin-left:auto;display:flex;gap:15px;align-items:center}
+.batch-id{background:#2d1810;padding:4px 12px;border-radius:15px;border:1px solid var(--accent);color:var(--yel)}
+.state{background:var(--grn);color:#000;padding:2px 8px;border-radius:4px;font-weight:bold}
+.mode-toggle button{background:var(--accent);border:none;color:#fff;padding:5px 10px;border-radius:4px;cursor:pointer}
+/* Nav */
+.nav{grid-column:1/-1;background:var(--bg2);display:flex;gap:5px;padding:5px 15px;border-bottom:1px solid #3d2418}
+.nav a{color:var(--txt);text-decoration:none;padding:5px 12px;border-radius:4px;transition:.2s}
+.nav a:hover,.nav a.active{background:#2d1810;color:var(--accent)}
+/* Alarm Banner */
+.alm-banner{grid-column:1/-1;background:linear-gradient(90deg,#800,var(--red));color:#ff0;padding:5px 15px;font-weight:bold;display:none}
+.alm-banner.active{display:block;animation:pulse .5s infinite}
+@keyframes pulse{50%{opacity:.7}}
+/* Main */
+.main{padding:15px;overflow-y:auto}
+.view{display:none}.view.active{display:block}
+#svg2d{width:100%;height:300px;background:var(--bg2);border-radius:8px;border:1px solid #3d2418}
+/* 3D Vessels */
+.vessel-row{display:flex;gap:20px;justify-content:center;perspective:1000px;padding:20px}
+.vsl3d{width:100px;text-align:center}
+.vsl-body{width:70px;height:110px;background:linear-gradient(90deg,#2a2a2a,#4a4a4a,#2a2a2a);border-radius:8px;position:relative;overflow:hidden;transform:rotateY(-15deg);margin:0 auto;box-shadow:5px 5px 15px rgba(0,0,0,.5)}
+.vsl-fill{position:absolute;bottom:0;width:100%;background:linear-gradient(180deg,#4a90e2,#2d5a8a);transition:height .5s}
+.vsl-glass{position:absolute;inset:0;background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.1) 50%,transparent 70%)}
+.vsl-label{font-size:11px;margin-top:8px;color:var(--yel)}
+.vsl-temp{font-size:16px;color:var(--grn);margin-top:4px}
+/* Progress */
+.progress-box{margin-top:15px;background:var(--bg2);border:1px solid #3d2418;border-radius:8px;padding:12px}
+.progress-bar{height:25px;background:#1a0e08;border-radius:12px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--yel));transition:width .5s;display:flex;align-items:center;justify-content:center;font-size:11px}
+/* Metrics Panel */
+.metrics{background:var(--bg2);border-left:1px solid #3d2418;padding:10px;overflow-y:auto}
+.metric{margin:10px 0;padding:8px;background:#1a0e08;border-radius:4px}
+.metric-lbl{font-size:9px;color:#888;text-transform:uppercase}
+.metric-val{font-size:16px;color:var(--cyn);margin-top:3px}
+/* Footer */
+.ftr{grid-column:1/-1;background:var(--bg2);border-top:1px solid #3d2418;display:flex;align-items:center;padding:0 15px;font-size:10px;color:#666}
+.leds{margin-left:auto;display:flex;gap:12px}
+.led{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.led.grn{background:var(--grn);box-shadow:0 0 5px var(--grn)}
+.led.yel{background:var(--yel);box-shadow:0 0 5px var(--yel)}
+.led.red{background:var(--red);box-shadow:0 0 5px var(--red)}
+/* Animations */
+.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.blink{animation:blink .5s infinite}@keyframes blink{50%{opacity:.3}}
+/* Mobile */
+@media(max-width:768px){.scada-grid{grid-template-columns:1fr;grid-template-rows:50px 40px 30px 1fr auto 25px}.metrics{border-left:none;border-top:1px solid #3d2418}}

@@ -1,0 +1,21 @@
+{
+  "vessels": {
+    "HLT": {"nm": "Hot Liquor Tank", "cap": 500, "type": "tank", "sensors": ["TMP", "LVL"]},
+    "MSH": {"nm": "Mash Tun", "cap": 450, "type": "tun", "sensors": ["TMP", "PH", "LVL"]},
+    "BK": {"nm": "Boil Kettle", "cap": 450, "type": "kettle", "sensors": ["TMP", "LVL"]},
+    "WP": {"nm": "Whirlpool", "cap": 400, "type": "tank", "sensors": ["TMP", "LVL"]},
+    "FV1": {"nm": "Fermenter 1", "cap": 500, "type": "fv", "sensors": ["TMP", "PRS", "PH", "SG"]},
+    "FV2": {"nm": "Fermenter 2", "cap": 500, "type": "fv", "sensors": ["TMP", "PRS", "PH", "SG"]},
+    "FV3": {"nm": "Fermenter 3", "cap": 500, "type": "fv", "sensors": ["TMP", "PRS", "PH", "SG"]},
+    "FV4": {"nm": "Fermenter 4", "cap": 500, "type": "fv", "sensors": ["TMP", "PRS", "PH", "SG"]},
+    "BT1": {"nm": "Bright Tank 1", "cap": 500, "type": "bt", "sensors": ["TMP", "PRS", "CO2"]}
+  },
+  "pumps": {
+    "P1": {"nm": "HLT Pump", "kw": 0.75}, "P2": {"nm": "Mash Pump", "kw": 0.75},
+    "P3": {"nm": "Boil Pump", "kw": 1.5}, "P4": {"nm": "Transfer Pump", "kw": 0.75}
+  },
+  "valves": {
+    "V1": "HLT Out", "V2": "Mash In", "V3": "Mash Out", "V4": "BK In",
+    "V5": "BK Out", "V6": "Chiller In", "V7": "FV In", "V8": "Glycol"
+  }
+}

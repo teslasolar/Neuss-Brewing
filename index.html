@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>🍺 Brewery SCADA - Konomi 3D</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div id="app" class="scada-grid">
+    <!-- Header -->
+    <header class="hdr">
+      <h1>🍺 Brewery SCADA</h1>
+      <div class="batch-info">
+        <span class="batch-id" id="batchId">Batch #2024-042</span>
+        <span id="recipeName">West Coast IPA</span>
+        <span class="state" id="batchState">BOILING</span>
+      </div>
+      <div class="mode-toggle">
+        <button onclick="toggleMode()" id="modeBtn">3D</button>
+      </div>
+    </header>
+    <!-- Nav -->
+    <nav class="nav">
+      <a href="index.html" class="active">Overview</a>
+      <a href="scada/screens/brewhouse.html">Brewhouse</a>
+      <a href="scada/screens/fermentation.html">Fermentation</a>
+      <a href="scada/screens/recipes.html">Recipes</a>
+      <a href="scada/screens/history.html">History</a>
+    </nav>
+    <!-- Alarm Banner -->
+    <div class="alm-banner" id="almBanner"></div>
+    <!-- Main -->
+    <main class="main">
+      <!-- 2D View -->
+      <div id="view2d" class="view active">
+        <svg id="svg2d" viewBox="0 0 800 400"></svg>
+      </div>
+      <!-- 3D View -->
+      <div id="view3d" class="view">
+        <div class="vessel-row" id="vessels3d"></div>
+      </div>
+      <!-- Progress -->
+      <div class="progress-box">
+        <h3>Recipe Progress</h3>
+        <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+        <span id="progText">BOILING: 39/60 min</span>
+      </div>
+    </main>
+    <!-- Metrics -->
+    <aside class="metrics" id="metricsPanel"></aside>
+    <!-- Footer -->
+    <footer class="ftr">
+      <span>ISA-88/95/101 | Scan: <span id="scanRate">100ms</span></span>
+      <div class="leds" id="statusLeds"></div>
+    </footer>
+  </div>
+  <script type="module" src="scada/app.js"></script>
+</body>
+</html>

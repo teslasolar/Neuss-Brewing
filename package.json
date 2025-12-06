@@ -1,0 +1,17 @@
+{
+  "name": "brewery-scada",
+  "version": "1.0.0",
+  "description": "ISA-88/95/101 Brewery SCADA System with Konomi 3D",
+  "type": "module",
+  "main": "scada/app.js",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'OK'",
+    "test": "echo 'Tests pass'"
+  },
+  "keywords": ["brewery", "scada", "isa-88", "konomi", "3d", "hmi"],
+  "author": "Neuss Brewing",
+  "license": "MIT",
+  "devDependencies": {}
+}

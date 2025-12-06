@@ -1,0 +1,13 @@
+{
+  "id": "2024-042",
+  "rcp": "RCP001",
+  "nm": "West Coast IPA",
+  "start": "2024-12-01T08:00:00Z",
+  "vessel": "FV1",
+  "phase": 8,
+  "og": 1.065,
+  "sg": 1.012,
+  "tmp": 18,
+  "day": 5,
+  "notes": ["Good fermentation start", "Dry hop scheduled day 10"]
+}

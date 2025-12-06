@@ -1,0 +1,31 @@
+{
+  "id": "RCP001",
+  "nm": "West Coast IPA",
+  "style": "American IPA",
+  "ver": "2.1",
+  "vol": 400,
+  "stats": {"og": 1.065, "fg": 1.010, "abv": 6.8, "ibu": 65, "srm": 8},
+  "grain": [
+    {"nm": "Pale Malt 2-Row", "kg": 45, "pct": 85},
+    {"nm": "Crystal 40L", "kg": 4, "pct": 7.5},
+    {"nm": "Munich Malt", "kg": 4, "pct": 7.5}
+  ],
+  "hops": [
+    {"nm": "Warrior", "g": 50, "t": 60, "use": "boil"},
+    {"nm": "Centennial", "g": 80, "t": 30, "use": "boil"},
+    {"nm": "Cascade", "g": 100, "t": 15, "use": "boil"},
+    {"nm": "Citra", "g": 150, "t": 0, "use": "whirl"},
+    {"nm": "Simcoe", "g": 200, "t": 0, "use": "dry"}
+  ],
+  "yeast": {"nm": "US-05", "temp": 18, "days": 14},
+  "phases": [
+    {"nm": "Strike", "tmp": 74, "dur": 15, "vol": 168},
+    {"nm": "Mash", "tmp": 67, "dur": 60, "notes": "Single infusion"},
+    {"nm": "MashOut", "tmp": 76, "dur": 10},
+    {"nm": "Sparge", "tmp": 77, "dur": 45, "vol": 300},
+    {"nm": "Boil", "tmp": 100, "dur": 60},
+    {"nm": "Whirl", "tmp": 82, "dur": 20},
+    {"nm": "Chill", "tmp": 18, "dur": 20},
+    {"nm": "Ferm", "tmp": 18, "dur": 20160}
+  ]
+}
