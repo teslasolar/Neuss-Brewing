@@ -3,58 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>🍺 Brewery SCADA - Konomi 3D</title>
+  <title>Brewery SCADA - Konomi 3D</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div id="app" class="scada-grid">
-    <!-- Header -->
     <header class="hdr">
-      <h1>🍺 Brewery SCADA</h1>
+      <h1>Brewery SCADA</h1>
       <div class="batch-info">
-        <span class="batch-id" id="batchId">Batch #2024-042</span>
-        <span id="recipeName">West Coast IPA</span>
-        <span class="state" id="batchState">BOILING</span>
+        <span class="batch-id">Batch #2024-042</span>
+        <span>West Coast IPA</span>
+        <span class="state">BOILING</span>
       </div>
       <div class="mode-toggle">
         <button onclick="toggleMode()" id="modeBtn">3D</button>
       </div>
     </header>
-    <!-- Nav -->
     <nav class="nav">
       <a href="index.html" class="active">Overview</a>
       <a href="scada/screens/brewhouse.html">Brewhouse</a>
       <a href="scada/screens/fermentation.html">Fermentation</a>
       <a href="scada/screens/recipes.html">Recipes</a>
       <a href="scada/screens/history.html">History</a>
+      <a href="scada/screens/compliance.html">Compliance</a>
     </nav>
-    <!-- Alarm Banner -->
-    <div class="alm-banner" id="almBanner"></div>
-    <!-- Main -->
     <main class="main">
-      <!-- 2D View -->
       <div id="view2d" class="view active">
-        <svg id="svg2d" viewBox="0 0 800 400"></svg>
+        <svg id="svg2d" viewBox="0 0 800 280">
+          <style>.vsl-lbl{fill:#ffa500;font-size:11px}.vsl-tmp{fill:#0f0;font-size:14px}.vsl-vol{fill:#888;font-size:10px}</style>
+          <g transform="translate(50,30)">
+            <rect width="80" height="120" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <rect y="24" width="80" height="96" fill="#4a90e2" opacity="0.6" rx="4"/>
+            <text x="40" y="-8" text-anchor="middle" class="vsl-lbl">HLT</text>
+            <text x="40" y="75" text-anchor="middle" class="vsl-tmp">75°C</text>
+            <text x="40" y="145" text-anchor="middle" class="vsl-vol">450L</text>
+          </g>
+          <g transform="translate(200,30)">
+            <rect width="80" height="120" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <rect y="36" width="80" height="84" fill="#8b4513" opacity="0.6" rx="4"/>
+            <text x="40" y="-8" text-anchor="middle" class="vsl-lbl">MASH</text>
+            <text x="40" y="75" text-anchor="middle" class="vsl-tmp">67°C</text>
+            <text x="40" y="145" text-anchor="middle" class="vsl-vol">380L</text>
+          </g>
+          <g transform="translate(350,30)">
+            <rect width="80" height="120" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <rect y="24" width="80" height="96" fill="#ff6b35" opacity="0.6" rx="4"/>
+            <text x="40" y="-8" text-anchor="middle" class="vsl-lbl">BOIL</text>
+            <text x="40" y="75" text-anchor="middle" style="fill:#ff0;font-size:14px">100°C</text>
+            <text x="40" y="145" text-anchor="middle" class="vsl-vol">360L</text>
+          </g>
+          <g transform="translate(500,30)">
+            <rect width="80" height="120" fill="none" stroke="#3d2418" stroke-width="2" rx="4"/>
+            <text x="40" y="-8" text-anchor="middle" class="vsl-lbl">WHIRL</text>
+            <text x="40" y="75" text-anchor="middle" style="fill:#666;font-size:12px">STANDBY</text>
+          </g>
+          <line x1="130" y1="90" x2="200" y2="90" stroke="#0ff" stroke-width="3"/>
+          <line x1="280" y1="90" x2="350" y2="90" stroke="#0ff" stroke-width="3"/>
+          <line x1="430" y1="90" x2="500" y2="90" stroke="#666" stroke-width="3"/>
+          <circle cx="165" cy="90" r="8" fill="#0f0"/><circle cx="315" cy="90" r="8" fill="#0f0"/>
+          <g transform="translate(620,30)">
+            <rect width="120" height="120" fill="none" stroke="#3d2418" stroke-width="1" rx="4"/>
+            <text x="60" y="-8" text-anchor="middle" class="vsl-lbl">FERMENTERS</text>
+            <rect x="5" y="10" width="25" height="100" fill="none" stroke="#3d2418" rx="2"/>
+            <rect x="5" y="25" width="25" height="85" fill="#8b4513" opacity="0.5" rx="2"/>
+            <rect x="35" y="10" width="25" height="100" fill="none" stroke="#3d2418" rx="2"/>
+            <rect x="35" y="20" width="25" height="90" fill="#8b4513" opacity="0.5" rx="2"/>
+            <rect x="65" y="10" width="25" height="100" fill="none" stroke="#3d2418" rx="2"/>
+            <rect x="65" y="35" width="25" height="75" fill="#8b4513" opacity="0.5" rx="2"/>
+            <rect x="95" y="10" width="25" height="100" fill="none" stroke="#3d2418" rx="2"/>
+            <text x="17" y="125" text-anchor="middle" style="fill:#888;font-size:8px">FV1</text>
+            <text x="47" y="125" text-anchor="middle" style="fill:#888;font-size:8px">FV2</text>
+            <text x="77" y="125" text-anchor="middle" style="fill:#888;font-size:8px">FV3</text>
+            <text x="107" y="125" text-anchor="middle" style="fill:#888;font-size:8px">FV4</text>
+          </g>
+        </svg>
       </div>
-      <!-- 3D View -->
       <div id="view3d" class="view">
-        <div class="vessel-row" id="vessels3d"></div>
+        <div class="vessel-row">
+          <div class="vsl3d"><div class="vsl-body"><div class="vsl-fill" style="height:90%"></div><div class="vsl-glass"></div></div><div class="vsl-label">HLT</div><div class="vsl-temp">75°C</div></div>
+          <div class="vsl3d"><div class="vsl-body"><div class="vsl-fill" style="height:84%"></div><div class="vsl-glass"></div></div><div class="vsl-label">MASH</div><div class="vsl-temp">67°C</div></div>
+          <div class="vsl3d"><div class="vsl-body"><div class="vsl-fill" style="height:80%;background:linear-gradient(180deg,#ff6b35,#cc4400)"></div><div class="vsl-glass"></div></div><div class="vsl-label">BOIL</div><div class="vsl-temp" style="color:#ff0">100°C</div></div>
+          <div class="vsl3d"><div class="vsl-body"><div class="vsl-fill" style="height:0%"></div><div class="vsl-glass"></div></div><div class="vsl-label">WHIRL</div><div class="vsl-temp" style="color:#666">--</div></div>
+        </div>
       </div>
-      <!-- Progress -->
       <div class="progress-box">
         <h3>Recipe Progress</h3>
-        <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
-        <span id="progText">BOILING: 39/60 min</span>
+        <div class="progress-bar"><div class="progress-fill" id="progFill">BOILING: 39/60 min</div></div>
       </div>
     </main>
-    <!-- Metrics -->
-    <aside class="metrics" id="metricsPanel"></aside>
-    <!-- Footer -->
+    <aside class="metrics">
+      <h3>Live Metrics</h3>
+      <div class="metric"><div class="metric-lbl">Boil Rate</div><div class="metric-val">8.5%/hr</div></div>
+      <div class="metric"><div class="metric-lbl">pH</div><div class="metric-val">5.2</div></div>
+      <div class="metric"><div class="metric-lbl">Flow Rate</div><div class="metric-val" id="flowRate">12.3 L/min</div></div>
+      <div class="metric"><div class="metric-lbl">Pressure</div><div class="metric-val">1.2 bar</div></div>
+      <div class="metric"><div class="metric-lbl">OG Target</div><div class="metric-val">1.065</div></div>
+      <div class="metric"><div class="metric-lbl">IBU Target</div><div class="metric-val">65</div></div>
+      <div class="metric"><div class="metric-lbl">Glycol</div><div class="metric-val" style="color:#0f0">-2°C OK</div></div>
+    </aside>
     <footer class="ftr">
-      <span>ISA-88/95/101 | Scan: <span id="scanRate">100ms</span></span>
-      <div class="leds" id="statusLeds"></div>
+      <span>ISA-88/95/101 | 21 CFR 11 | Scan: 100ms</span>
+      <div class="leds">
+        <span><i class="led grn"></i>BH</span>
+        <span><i class="led grn"></i>FV</span>
+        <span><i class="led yel"></i>GLY</span>
+        <span><i class="led grn"></i>CO2</span>
+      </div>
     </footer>
   </div>
-  <script type="module" src="scada/app.js"></script>
+  <script>
+    window.toggleMode=()=>{
+      const v2=document.getElementById('view2d');
+      const v3=document.getElementById('view3d');
+      const btn=document.getElementById('modeBtn');
+      v2.classList.toggle('active');
+      v3.classList.toggle('active');
+      btn.textContent=v2.classList.contains('active')?'3D':'2D';
+    };
+    setInterval(()=>{
+      document.getElementById('flowRate').textContent=(10+Math.random()*5).toFixed(1)+' L/min';
+    },2000);
+  </script>
 </body>
 </html>

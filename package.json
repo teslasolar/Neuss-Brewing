@@ -1,17 +1,21 @@
 {
   "name": "brewery-scada",
   "version": "1.0.0",
-  "description": "ISA-88/95/101 Brewery SCADA System with Konomi 3D",
+  "description": "ISA-88/95/101 Brewery SCADA System with Konomi 3D + 21 CFR 11",
   "type": "module",
-  "main": "scada/app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "npx serve .",
-    "build": "echo 'Static site - no build needed'",
-    "lint": "echo 'OK'",
-    "test": "echo 'Tests pass'"
+    "start": "node server.js 3000",
+    "dev": "node server.js 3000",
+    "serve": "npx serve . -p 3000",
+    "test:index": "node server.js 3001",
+    "test:brewhouse": "node server.js 3002",
+    "test:ferment": "node server.js 3003",
+    "test:recipes": "node server.js 3004",
+    "test:history": "node server.js 3005",
+    "test:compliance": "node server.js 3006"
   },
-  "keywords": ["brewery", "scada", "isa-88", "konomi", "3d", "hmi"],
+  "keywords": ["brewery", "scada", "isa-88", "isa-95", "isa-101", "21cfr11", "konomi", "3d", "hmi"],
   "author": "Neuss Brewing",
-  "license": "MIT",
-  "devDependencies": {}
+  "license": "MIT"
 }
