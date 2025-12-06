@@ -1,0 +1,91 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Facility Layout",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/location", "label": "Location"},
+      {"href": "?screen=startup/equipment", "label": "Equipment"},
+      {"href": "?screen=startup/facility", "label": "Facility", "active": true},
+      {"href": "?screen=startup/facility-3d", "label": "3D View"},
+      {"href": "?screen=startup/financials", "label": "Financials"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "layout-select", "props": {"name": "Northeast Layout", "sqft": 5000, "style": "Urban warehouse", "href": "?screen=startup/template-northeast", "active": true}},
+          {"type": "layout-select", "props": {"name": "Southern Layout", "sqft": 6500, "style": "Industrial flex", "href": "?screen=startup/template-south"}},
+          {"type": "layout-select", "props": {"name": "West Coast Layout", "sqft": 4500, "style": "Modern brewpub", "href": "?screen=startup/template-west"}},
+          {"type": "layout-select", "props": {"name": "Dock Configs", "sqft": 400, "style": "Loading dock options", "href": "?screen=startup/template-dock"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Northeast Layout - 5,000 sqft"},
+        "children": [{
+          "type": "facility-map",
+          "props": {
+            "width": 100,
+            "height": 50,
+            "zones": [
+              {"name": "Brewhouse", "x": 0, "y": 0, "w": 30, "h": 30, "color": "#ff6b35"},
+              {"name": "Fermentation", "x": 30, "y": 0, "w": 35, "h": 30, "color": "#0ff"},
+              {"name": "Cold Storage", "x": 65, "y": 0, "w": 20, "h": 20, "color": "#0f0"},
+              {"name": "Packaging", "x": 65, "y": 20, "w": 20, "h": 10, "color": "#ffa500"},
+              {"name": "Dock", "x": 85, "y": 0, "w": 15, "h": 30, "color": "#666"},
+              {"name": "Taproom", "x": 0, "y": 30, "w": 50, "h": 20, "color": "#9b59b6"},
+              {"name": "Kitchen", "x": 50, "y": 30, "w": 20, "h": 20, "color": "#e74c3c"},
+              {"name": "Office/Lab", "x": 70, "y": 30, "w": 15, "h": 20, "color": "#3498db"},
+              {"name": "Restrooms", "x": 85, "y": 30, "w": 15, "h": 20, "color": "#888"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Zone Breakdown"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "zone", "header": "Zone"},
+                  {"field": "sqft", "header": "Sq Ft"},
+                  {"field": "pct", "header": "%"},
+                  {"field": "requirements", "header": "Requirements"}
+                ],
+                "data": "{facility.zones}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Utility Requirements"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Electrical", "value": "400A 3-phase"}},
+                {"type": "calc-row", "props": {"label": "Water", "value": "2\" main"}},
+                {"type": "calc-row", "props": {"label": "Gas", "value": "500K BTU"}},
+                {"type": "calc-row", "props": {"label": "Drain", "value": "4\" floor drains"}},
+                {"type": "calc-row", "props": {"label": "Glycol", "value": "2\" insulated loop"}},
+                {"type": "calc-row", "props": {"label": "CO2", "value": "Bulk tank + dist"}},
+                {"type": "calc-row", "props": {"label": "Ventilation", "value": "Brewhouse hood"}}
+              ]
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

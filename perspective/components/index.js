@@ -9,6 +9,7 @@ import './business.js';
 import './controls.js';
 import './science.js';
 import './isa95.js';
+import './startup.js';
 
 // Page template components (atomic structure)
 

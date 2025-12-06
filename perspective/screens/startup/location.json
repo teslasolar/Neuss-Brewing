@@ -1,0 +1,113 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Location Analysis",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/location", "label": "Location", "active": true},
+      {"href": "?screen=startup/equipment", "label": "Equipment"},
+      {"href": "?screen=startup/facility", "label": "Facility"},
+      {"href": "?screen=startup/financials", "label": "Financials"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "card",
+        "props": {"title": "Pennsylvania vs California Comparison"},
+        "children": [{
+          "type": "comparison-table",
+          "props": {
+            "headers": ["Factor", "Pennsylvania", "California", "Winner"],
+            "rows": [
+              {"factor": "TTB Processing", "pa": "4-6 months", "ca": "4-6 months", "winner": "tie"},
+              {"factor": "State License", "pa": "$700/yr", "ca": "$1,485/yr", "winner": "pa"},
+              {"factor": "Self-Distribution", "pa": "Allowed", "ca": "Allowed", "winner": "tie"},
+              {"factor": "Franchise Law", "pa": "No", "ca": "Yes (restrictive)", "winner": "pa"},
+              {"factor": "Min Wage", "pa": "$7.25", "ca": "$16.00", "winner": "pa"},
+              {"factor": "Commercial Rent", "pa": "$8-15/sqft", "ca": "$18-35/sqft", "winner": "pa"},
+              {"factor": "Craft Beer Market", "pa": "Growing", "ca": "Saturated", "winner": "pa"},
+              {"factor": "Weather (brewing)", "pa": "4 seasons", "ca": "Mild year-round", "winner": "ca"},
+              {"factor": "Water Quality", "pa": "Good", "ca": "Varies", "winner": "pa"},
+              {"factor": "Hop Proximity", "pa": "East Coast", "ca": "Yakima close", "winner": "ca"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Pennsylvania Sites"},
+            "children": [{
+              "type": "site-list",
+              "props": {
+                "sites": [
+                  {"name": "Pittsburgh - Strip District", "sqft": 5000, "rent": "$12/sqft", "pros": "Foot traffic, culture", "cons": "Parking"},
+                  {"name": "Philadelphia - Fishtown", "sqft": 4500, "rent": "$15/sqft", "pros": "Beer scene, young demo", "cons": "Competition"},
+                  {"name": "Lancaster County", "sqft": 8000, "rent": "$8/sqft", "pros": "Space, tourism", "cons": "Rural"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "California Sites"},
+            "children": [{
+              "type": "site-list",
+              "props": {
+                "sites": [
+                  {"name": "San Diego - Miramar", "sqft": 4000, "rent": "$22/sqft", "pros": "Craft beer hub", "cons": "Saturated"},
+                  {"name": "Oakland - Jack London", "sqft": 5500, "rent": "$18/sqft", "pros": "Emerging", "cons": "Permits slow"},
+                  {"name": "Sacramento", "sqft": 6000, "rent": "$14/sqft", "pros": "Growing, affordable", "cons": "Less tourism"}
+                ]
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Total Cost Comparison (Year 1)"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 2, "gap": "15px"},
+          "children": [
+            {
+              "type": "cost-breakdown",
+              "props": {
+                "title": "Pennsylvania (Pittsburgh)",
+                "total": "$685,000",
+                "items": [
+                  {"item": "Lease (5000 sqft)", "cost": "$60,000"},
+                  {"item": "Buildout", "cost": "$180,000"},
+                  {"item": "Equipment", "cost": "$320,000"},
+                  {"item": "Licensing", "cost": "$5,000"},
+                  {"item": "Working Capital", "cost": "$120,000"}
+                ]
+              }
+            },
+            {
+              "type": "cost-breakdown",
+              "props": {
+                "title": "California (San Diego)",
+                "total": "$895,000",
+                "items": [
+                  {"item": "Lease (4000 sqft)", "cost": "$88,000"},
+                  {"item": "Buildout", "cost": "$220,000"},
+                  {"item": "Equipment", "cost": "$340,000"},
+                  {"item": "Licensing", "cost": "$12,000"},
+                  {"item": "Working Capital", "cost": "$235,000"}
+                ]
+              }
+            }
+          ]
+        }]
+      }
+    ]
+  }]
+}

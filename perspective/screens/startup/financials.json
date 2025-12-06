@@ -1,0 +1,109 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Financial Projections",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/equipment", "label": "Equipment"},
+      {"href": "?screen=startup/financials", "label": "Financials", "active": true},
+      {"href": "?screen=startup/timeline", "label": "Timeline"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Startup Cost", "value": "685K", "unit": "$", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Year 1 Revenue", "value": "320K", "unit": "$", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Break Even", "value": "18", "unit": "mo", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Year 3 Profit", "value": "145K", "unit": "$", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "5-Year ROI", "value": "185", "unit": "%", "color": "#0f0"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Startup Capital Requirements"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "category", "header": "Category"},
+                  {"field": "amount", "header": "Amount"},
+                  {"field": "pct", "header": "%"}
+                ],
+                "data": [
+                  {"category": "Equipment", "amount": "$384,000", "pct": "56%"},
+                  {"category": "Buildout", "amount": "$120,000", "pct": "18%"},
+                  {"category": "Licensing", "amount": "$8,000", "pct": "1%"},
+                  {"category": "Inventory", "amount": "$25,000", "pct": "4%"},
+                  {"category": "Working Capital", "amount": "$100,000", "pct": "15%"},
+                  {"category": "Contingency", "amount": "$48,000", "pct": "7%"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Funding Sources"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "source", "header": "Source"},
+                  {"field": "amount", "header": "Amount"},
+                  {"field": "terms", "header": "Terms"}
+                ],
+                "data": [
+                  {"source": "Owner Equity", "amount": "$200,000", "terms": "Cash"},
+                  {"source": "SBA 7(a) Loan", "amount": "$350,000", "terms": "10yr @ 7.5%"},
+                  {"source": "Equipment Lease", "amount": "$100,000", "terms": "5yr @ 8%"},
+                  {"source": "Line of Credit", "amount": "$35,000", "terms": "Prime + 2%"}
+                ]
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "5-Year Financial Projections"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "metric", "header": "Metric"},
+              {"field": "y1", "header": "Year 1"},
+              {"field": "y2", "header": "Year 2"},
+              {"field": "y3", "header": "Year 3"},
+              {"field": "y4", "header": "Year 4"},
+              {"field": "y5", "header": "Year 5"}
+            ],
+            "data": [
+              {"metric": "BBL Produced", "y1": "800", "y2": "1,500", "y3": "2,200", "y4": "2,800", "y5": "3,000"},
+              {"metric": "Revenue", "y1": "$320K", "y2": "$580K", "y3": "$825K", "y4": "$980K", "y5": "$1.1M"},
+              {"metric": "COGS", "y1": "$160K", "y2": "$275K", "y3": "$380K", "y4": "$440K", "y5": "$480K"},
+              {"metric": "Gross Profit", "y1": "$160K", "y2": "$305K", "y3": "$445K", "y4": "$540K", "y5": "$620K"},
+              {"metric": "Operating Exp", "y1": "$220K", "y2": "$240K", "y3": "$300K", "y4": "$340K", "y5": "$380K"},
+              {"metric": "Net Income", "y1": "-$60K", "y2": "$65K", "y3": "$145K", "y4": "$200K", "y5": "$240K"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Revenue & Profit Trend"},
+        "children": [{
+          "type": "trend", "props": {"data": [320, 580, 825, 980, 1100], "height": 100, "color": "#0f0"}
+        }]
+      }
+    ]
+  }]
+}

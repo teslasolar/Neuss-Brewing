@@ -1,0 +1,128 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Southern Template - Industrial Flex",
+    "nav": [
+      {"href": "?screen=startup/facility", "label": "Overview"},
+      {"href": "?screen=startup/template-northeast", "label": "Northeast"},
+      {"href": "?screen=startup/template-south", "label": "South", "active": true},
+      {"href": "?screen=startup/template-west", "label": "West Coast"},
+      {"href": "?screen=startup/template-dock", "label": "Dock Config"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Sqft", "value": "6,500", "unit": "sf", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Monthly Rent", "value": "5,850", "unit": "$", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Capacity", "value": "4,000", "unit": "BBL/yr", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Buildout", "value": "95K", "unit": "$", "color": "#ff6b35"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Southern Industrial Flex Layout"},
+        "children": [{
+          "type": "facility-map",
+          "props": {
+            "width": 130,
+            "height": 50,
+            "zones": [
+              {"name": "Grain Storage", "x": 0, "y": 0, "w": 15, "h": 25, "color": "#8b4513"},
+              {"name": "Mill Room", "x": 0, "y": 25, "w": 15, "h": 25, "color": "#cd853f"},
+              {"name": "Brewhouse", "x": 15, "y": 0, "w": 30, "h": 30, "color": "#ff6b35"},
+              {"name": "Fermentation", "x": 45, "y": 0, "w": 35, "h": 30, "color": "#0ff"},
+              {"name": "Cold Room", "x": 80, "y": 0, "w": 20, "h": 30, "color": "#0f0"},
+              {"name": "Packaging", "x": 100, "y": 0, "w": 15, "h": 30, "color": "#ffa500"},
+              {"name": "Dock 1", "x": 115, "y": 0, "w": 15, "h": 25, "color": "#666"},
+              {"name": "Dock 2", "x": 115, "y": 25, "w": 15, "h": 25, "color": "#555"},
+              {"name": "Utilities", "x": 15, "y": 30, "w": 15, "h": 20, "color": "#444"},
+              {"name": "CIP Room", "x": 30, "y": 30, "w": 15, "h": 20, "color": "#3498db"},
+              {"name": "Taproom", "x": 45, "y": 30, "w": 40, "h": 20, "color": "#9b59b6"},
+              {"name": "Kitchen", "x": 85, "y": 30, "w": 15, "h": 20, "color": "#e74c3c"},
+              {"name": "Office", "x": 100, "y": 30, "w": 15, "h": 20, "color": "#2ecc71"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Zone Allocation"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "zone", "header": "Zone"},
+                  {"field": "sqft", "header": "Sq Ft"},
+                  {"field": "height", "header": "Ceiling"},
+                  {"field": "floor", "header": "Floor Type"}
+                ],
+                "data": [
+                  {"zone": "Grain/Mill", "sqft": "500", "height": "14'", "floor": "Sealed Concrete"},
+                  {"zone": "Brewhouse", "sqft": "900", "height": "20'", "floor": "Epoxy + Drains"},
+                  {"zone": "Fermentation", "sqft": "1,050", "height": "18'", "floor": "Epoxy + Drains"},
+                  {"zone": "Cold Room", "sqft": "600", "height": "14'", "floor": "Epoxy"},
+                  {"zone": "Packaging", "sqft": "450", "height": "14'", "floor": "Epoxy"},
+                  {"zone": "Loading Docks", "sqft": "500", "height": "16'", "floor": "Concrete"},
+                  {"zone": "Utilities/CIP", "sqft": "450", "height": "12'", "floor": "Epoxy"},
+                  {"zone": "Taproom", "sqft": "1,200", "height": "14'", "floor": "Polished Concrete"},
+                  {"zone": "Kitchen/Office", "sqft": "450", "height": "10'", "floor": "Tile/Carpet"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Southern Considerations"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "checklist-item", "props": {"text": "High-efficiency HVAC (100°F+ summers)", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Oversized glycol chiller (+20%)", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Insulated cold room walls (R-40)", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Dual loading docks", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Hurricane-rated roll-up doors", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Backup generator", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Covered outdoor patio option", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Industrial water softener", "done": false}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Cost Comparison vs Northeast"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "item", "header": "Item"},
+              {"field": "northeast", "header": "Northeast"},
+              {"field": "south", "header": "South"},
+              {"field": "savings", "header": "Savings"}
+            ],
+            "data": [
+              {"item": "Rent ($/sqft/yr)", "northeast": "$20.40", "south": "$10.80", "savings": "47%"},
+              {"item": "Buildout ($/sqft)", "northeast": "$24.00", "south": "$14.60", "savings": "39%"},
+              {"item": "Utilities (avg/mo)", "northeast": "$2,200", "south": "$2,800", "savings": "-27%"},
+              {"item": "Labor (avg/hr)", "northeast": "$22.00", "south": "$16.00", "savings": "27%"},
+              {"item": "Property Tax Rate", "northeast": "2.4%", "south": "0.9%", "savings": "63%"},
+              {"item": "5-Year OpEx", "northeast": "$890K", "south": "$680K", "savings": "24%"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

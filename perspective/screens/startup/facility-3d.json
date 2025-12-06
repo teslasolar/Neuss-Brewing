@@ -1,0 +1,125 @@
+{
+  "type": "page",
+  "props": {
+    "title": "3D Factory Simulator",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/facility", "label": "2D Layout"},
+      {"href": "?screen=startup/facility-3d", "label": "3D View", "active": true},
+      {"href": "?screen=startup/assembly", "label": "Assembly Lines"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "260px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "3D Factory View"},
+          "children": [{
+            "type": "factory-3d",
+            "props": {
+              "layout": "northeast",
+              "view": "isometric",
+              "showFlow": true,
+              "showEquipment": true,
+              "equipment": [
+                {"type": "mlt", "pos": [10, 0, 10], "label": "MLT"},
+                {"type": "bk", "pos": [20, 0, 10], "label": "Brew Kettle"},
+                {"type": "hlt", "pos": [5, 0, 5], "label": "HLT"},
+                {"type": "fv", "pos": [40, 0, 10], "label": "FV-01"},
+                {"type": "fv", "pos": [50, 0, 10], "label": "FV-02"},
+                {"type": "fv", "pos": [60, 0, 10], "label": "FV-03"},
+                {"type": "fv", "pos": [70, 0, 10], "label": "FV-04"},
+                {"type": "bbt", "pos": [80, 0, 10], "label": "BBT-01"},
+                {"type": "canner", "pos": [85, 0, 25], "label": "Canning"},
+                {"type": "glycol", "pos": [90, 0, 5], "label": "Glycol"}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Production Flow Simulation"},
+          "children": [{
+            "type": "flow-diagram",
+            "props": {
+              "nodes": [
+                {"id": "grain", "label": "Grain Silo", "x": 0, "y": 0},
+                {"id": "mill", "label": "Mill", "x": 1, "y": 0},
+                {"id": "mlt", "label": "MLT", "x": 2, "y": 0},
+                {"id": "bk", "label": "Kettle", "x": 3, "y": 0},
+                {"id": "fv", "label": "FV", "x": 4, "y": 0},
+                {"id": "bbt", "label": "BBT", "x": 5, "y": 0},
+                {"id": "pkg", "label": "Packaging", "x": 6, "y": 0},
+                {"id": "cold", "label": "Cold Room", "x": 7, "y": 0}
+              ],
+              "connections": [
+                {"from": "grain", "to": "mill"},
+                {"from": "mill", "to": "mlt"},
+                {"from": "mlt", "to": "bk"},
+                {"from": "bk", "to": "fv"},
+                {"from": "fv", "to": "bbt"},
+                {"from": "bbt", "to": "pkg"},
+                {"from": "pkg", "to": "cold"}
+              ]
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "View Controls"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "8px"},
+            "children": [
+              {"type": "button", "props": {"text": "Isometric", "class": "primary"}},
+              {"type": "button", "props": {"text": "Top Down", "class": "secondary"}},
+              {"type": "button", "props": {"text": "Walkthrough", "class": "secondary"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Display Options"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "toggle", "props": {"label": "Show Equipment", "value": true}},
+              {"type": "toggle", "props": {"label": "Show Piping", "value": true}},
+              {"type": "toggle", "props": {"label": "Show Flow", "value": true}},
+              {"type": "toggle", "props": {"label": "Show Utilities", "value": false}},
+              {"type": "toggle", "props": {"label": "Animate", "value": false}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Templates"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "button", "props": {"text": "Northeast Urban", "class": "secondary"}},
+              {"type": "button", "props": {"text": "Southern Flex", "class": "secondary"}},
+              {"type": "button", "props": {"text": "West Coast Modern", "class": "secondary"}},
+              {"type": "button", "props": {"text": "Dock Loading", "class": "secondary"}}
+            ]
+          }]
+        },
+        {"type": "button", "props": {"text": "Export CAD", "class": "primary"}},
+        {"type": "button", "props": {"text": "Print Layout", "class": "secondary"}}
+      ]
+    }]
+  }]
+}

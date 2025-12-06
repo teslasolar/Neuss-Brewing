@@ -1,0 +1,137 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Northeast Template - Urban Warehouse",
+    "nav": [
+      {"href": "?screen=startup/facility", "label": "Overview"},
+      {"href": "?screen=startup/template-northeast", "label": "Northeast", "active": true},
+      {"href": "?screen=startup/template-south", "label": "South"},
+      {"href": "?screen=startup/template-west", "label": "West Coast"},
+      {"href": "?screen=startup/template-dock", "label": "Dock Config"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Sqft", "value": "5,000", "unit": "sf", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Monthly Rent", "value": "8,500", "unit": "$", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Capacity", "value": "3,000", "unit": "BBL/yr", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Buildout", "value": "120K", "unit": "$", "color": "#ff6b35"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Northeast Urban Warehouse Layout"},
+        "children": [{
+          "type": "facility-map",
+          "props": {
+            "width": 100,
+            "height": 50,
+            "zones": [
+              {"name": "Brewhouse", "x": 0, "y": 0, "w": 25, "h": 30, "color": "#ff6b35"},
+              {"name": "Grain Room", "x": 0, "y": 30, "w": 15, "h": 20, "color": "#8b4513"},
+              {"name": "Mill", "x": 15, "y": 30, "w": 10, "h": 20, "color": "#cd853f"},
+              {"name": "Fermentation", "x": 25, "y": 0, "w": 30, "h": 30, "color": "#0ff"},
+              {"name": "Brite Tanks", "x": 25, "y": 30, "w": 15, "h": 20, "color": "#00bfff"},
+              {"name": "Cold Storage", "x": 55, "y": 0, "w": 15, "h": 25, "color": "#0f0"},
+              {"name": "Glycol", "x": 55, "y": 25, "w": 15, "h": 25, "color": "#006400"},
+              {"name": "Packaging", "x": 70, "y": 0, "w": 15, "h": 25, "color": "#ffa500"},
+              {"name": "Dock", "x": 85, "y": 0, "w": 15, "h": 50, "color": "#666"},
+              {"name": "Taproom", "x": 40, "y": 30, "w": 30, "h": 20, "color": "#9b59b6"},
+              {"name": "Restrooms", "x": 70, "y": 25, "w": 15, "h": 25, "color": "#888"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Zone Allocation"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "zone", "header": "Zone"},
+                  {"field": "sqft", "header": "Sq Ft"},
+                  {"field": "height", "header": "Ceiling"},
+                  {"field": "floor", "header": "Floor Type"}
+                ],
+                "data": [
+                  {"zone": "Brewhouse", "sqft": "750", "height": "18'", "floor": "Epoxy + Drains"},
+                  {"zone": "Grain/Mill", "sqft": "375", "height": "12'", "floor": "Sealed Concrete"},
+                  {"zone": "Fermentation", "sqft": "900", "height": "16'", "floor": "Epoxy + Drains"},
+                  {"zone": "Brite/Cold", "sqft": "600", "height": "14'", "floor": "Epoxy"},
+                  {"zone": "Packaging", "sqft": "375", "height": "12'", "floor": "Epoxy"},
+                  {"zone": "Dock", "sqft": "375", "height": "14'", "floor": "Concrete"},
+                  {"zone": "Taproom", "sqft": "900", "height": "12'", "floor": "Hardwood"},
+                  {"zone": "Restrooms", "sqft": "375", "height": "10'", "floor": "Tile"},
+                  {"zone": "Glycol Room", "sqft": "350", "height": "10'", "floor": "Concrete"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Northeast Considerations"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "checklist-item", "props": {"text": "Insulation for cold winters (R-30 walls)", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Heated glycol lines (freeze protection)", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Snow load rated roof (40 PSF)", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Loading dock with leveler", "done": true}},
+                {"type": "checklist-item", "props": {"text": "3-phase 400A electrical", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Natural gas for steam boiler", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Floor drains to grease trap", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Vestibule entry for taproom", "done": true}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Equipment Placement - Top View"},
+        "children": [{
+          "type": "flow-diagram",
+          "props": {
+            "nodes": [
+              {"id": "mill", "label": "Mill", "x": 10, "y": 70},
+              {"id": "hlt", "label": "HLT", "x": 5, "y": 30},
+              {"id": "mlt", "label": "MLT", "x": 15, "y": 30},
+              {"id": "bk", "label": "BK", "x": 25, "y": 30},
+              {"id": "whirl", "label": "WP", "x": 25, "y": 50},
+              {"id": "hx", "label": "HX", "x": 35, "y": 40},
+              {"id": "fv1", "label": "FV1", "x": 45, "y": 20},
+              {"id": "fv2", "label": "FV2", "x": 55, "y": 20},
+              {"id": "fv3", "label": "FV3", "x": 45, "y": 50},
+              {"id": "fv4", "label": "FV4", "x": 55, "y": 50},
+              {"id": "bt1", "label": "BT1", "x": 45, "y": 80},
+              {"id": "bt2", "label": "BT2", "x": 55, "y": 80},
+              {"id": "canner", "label": "Canner", "x": 75, "y": 30}
+            ],
+            "edges": [
+              {"from": "mill", "to": "mlt"},
+              {"from": "hlt", "to": "mlt"},
+              {"from": "mlt", "to": "bk"},
+              {"from": "bk", "to": "whirl"},
+              {"from": "whirl", "to": "hx"},
+              {"from": "hx", "to": "fv1"},
+              {"from": "fv1", "to": "bt1"},
+              {"from": "bt1", "to": "canner"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

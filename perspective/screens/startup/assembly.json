@@ -1,0 +1,94 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Assembly Line Planning",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/facility", "label": "Facility"},
+      {"href": "?screen=startup/facility-3d", "label": "3D View"},
+      {"href": "?screen=startup/assembly", "label": "Assembly Lines", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "card",
+        "props": {"title": "Production Line Configuration"},
+        "children": [{
+          "type": "assembly-line",
+          "props": {
+            "name": "Main Brewing Line",
+            "stations": [
+              {"id": "S1", "name": "Grain Handling", "equipment": ["Silo", "Auger", "Mill"], "time": "30 min", "status": "configured"},
+              {"id": "S2", "name": "Mashing", "equipment": ["MLT", "Pump P1", "Agitator"], "time": "75 min", "status": "configured"},
+              {"id": "S3", "name": "Lautering", "equipment": ["MLT", "Grant", "Pump P2"], "time": "60 min", "status": "configured"},
+              {"id": "S4", "name": "Boiling", "equipment": ["Kettle", "Burner", "Hop Dosing"], "time": "90 min", "status": "configured"},
+              {"id": "S5", "name": "Cooling", "equipment": ["HX", "Pump P3", "O2 Stone"], "time": "30 min", "status": "configured"},
+              {"id": "S6", "name": "Transfer", "equipment": ["Pump P4", "FV"], "time": "20 min", "status": "configured"}
+            ],
+            "totalTime": "5.5 hrs",
+            "capacity": "15 BBL"
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Packaging Line"},
+            "children": [{
+              "type": "assembly-line",
+              "props": {
+                "name": "Canning Line",
+                "stations": [
+                  {"id": "P1", "name": "Depal", "equipment": ["Can Depalletizer"], "time": "cont", "status": "planned"},
+                  {"id": "P2", "name": "Rinse", "equipment": ["Can Rinser"], "time": "cont", "status": "planned"},
+                  {"id": "P3", "name": "Fill", "equipment": ["4-Head Filler"], "time": "25 CPM", "status": "planned"},
+                  {"id": "P4", "name": "Seam", "equipment": ["Seamer"], "time": "25 CPM", "status": "planned"},
+                  {"id": "P5", "name": "Date", "equipment": ["Inkjet Coder"], "time": "cont", "status": "planned"},
+                  {"id": "P6", "name": "Pack", "equipment": ["Tray Packer"], "time": "cont", "status": "planned"}
+                ],
+                "capacity": "25 CPM"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Kegging Line"},
+            "children": [{
+              "type": "assembly-line",
+              "props": {
+                "name": "Keg Line",
+                "stations": [
+                  {"id": "K1", "name": "Wash", "equipment": ["Keg Washer"], "time": "4 min", "status": "planned"},
+                  {"id": "K2", "name": "Sanitize", "equipment": ["Integrated"], "time": "2 min", "status": "planned"},
+                  {"id": "K3", "name": "Purge", "equipment": ["CO2 Purge"], "time": "1 min", "status": "planned"},
+                  {"id": "K4", "name": "Fill", "equipment": ["Counter-P"], "time": "8 min", "status": "planned"}
+                ],
+                "capacity": "4 kegs/hr"
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Throughput Analysis"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 4, "gap": "12px"},
+          "children": [
+            {"type": "stat-card", "props": {"title": "Brews/Week", "value": "4", "color": "#ff6b35"}},
+            {"type": "stat-card", "props": {"title": "BBL/Week", "value": "60", "color": "#0ff"}},
+            {"type": "stat-card", "props": {"title": "Cases/Week", "value": "480", "color": "#0f0"}},
+            {"type": "stat-card", "props": {"title": "Kegs/Week", "value": "20", "color": "#ffa500"}}
+          ]
+        }]
+      }
+    ]
+  }]
+}

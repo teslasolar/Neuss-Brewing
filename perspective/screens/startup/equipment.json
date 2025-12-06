@@ -1,0 +1,120 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Equipment BOM",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/location", "label": "Location"},
+      {"href": "?screen=startup/equipment", "label": "Equipment", "active": true},
+      {"href": "?screen=startup/facility", "label": "Facility"},
+      {"href": "?screen=startup/financials", "label": "Financials"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "280px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Brewhouse Package (15 BBL)"},
+          "children": [{
+            "type": "bom-table",
+            "props": {
+              "category": "Brewhouse",
+              "items": [
+                {"item": "Mash/Lauter Tun", "qty": 1, "vendor": "SS Brewtech", "cost": "$28,000"},
+                {"item": "Brew Kettle/Whirlpool", "qty": 1, "vendor": "SS Brewtech", "cost": "$26,000"},
+                {"item": "Hot Liquor Tank", "qty": 1, "vendor": "SS Brewtech", "cost": "$12,000"},
+                {"item": "Heat Exchanger", "qty": 1, "vendor": "Alfa Laval", "cost": "$4,500"},
+                {"item": "Grain Handling", "qty": 1, "vendor": "RMS Roller", "cost": "$8,000"},
+                {"item": "Pumps (set)", "qty": 1, "vendor": "Xylem", "cost": "$6,500"},
+                {"item": "Control Panel", "qty": 1, "vendor": "ABE", "cost": "$18,000"}
+              ],
+              "subtotal": "$103,000"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Fermentation"},
+          "children": [{
+            "type": "bom-table",
+            "props": {
+              "category": "Fermentation",
+              "items": [
+                {"item": "30 BBL Unitank", "qty": 4, "vendor": "Stout Tanks", "cost": "$52,000"},
+                {"item": "15 BBL Brite Tank", "qty": 2, "vendor": "Stout Tanks", "cost": "$18,000"},
+                {"item": "Glycol Chiller (5 ton)", "qty": 1, "vendor": "G&D", "cost": "$14,000"},
+                {"item": "Glycol Piping", "qty": 1, "vendor": "Local", "cost": "$6,000"}
+              ],
+              "subtotal": "$90,000"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Packaging"},
+          "children": [{
+            "type": "bom-table",
+            "props": {
+              "category": "Packaging",
+              "items": [
+                {"item": "4-Head Canning Line", "qty": 1, "vendor": "Wild Goose", "cost": "$65,000"},
+                {"item": "Keg Washer", "qty": 1, "vendor": "Premier", "cost": "$8,500"},
+                {"item": "Kegs (1/2 BBL)", "qty": 50, "vendor": "Blefa", "cost": "$7,500"},
+                {"item": "Kegs (1/6 BBL)", "qty": 100, "vendor": "Blefa", "cost": "$9,000"}
+              ],
+              "subtotal": "$90,000"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "BOM Summary"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "calc-row", "props": {"label": "Brewhouse", "value": "$103,000"}},
+              {"type": "calc-row", "props": {"label": "Fermentation", "value": "$90,000"}},
+              {"type": "calc-row", "props": {"label": "Packaging", "value": "$90,000"}},
+              {"type": "calc-row", "props": {"label": "Lab/QC", "value": "$8,000"}},
+              {"type": "calc-row", "props": {"label": "Utilities", "value": "$15,000"}},
+              {"type": "calc-row", "props": {"label": "Furniture/Bar", "value": "$25,000"}},
+              {"type": "calc-row", "props": {"label": "Freight/Install", "value": "$18,000"}},
+              {"type": "calc-row", "props": {"label": "Contingency (10%)", "value": "$35,000"}}
+            ]
+          }]
+        },
+        {
+          "type": "stat-card",
+          "props": {"title": "Total Equipment", "value": "384,000", "unit": "$", "color": "#ff6b35"}
+        },
+        {
+          "type": "card",
+          "props": {"title": "Vendor Contacts"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "text", "props": {"value": "SS Brewtech: 530-265-2337"}},
+              {"type": "text", "props": {"value": "Stout Tanks: 503-406-1542"}},
+              {"type": "text", "props": {"value": "Wild Goose: 720-406-7442"}}
+            ]
+          }]
+        },
+        {"type": "button", "props": {"text": "Export BOM", "class": "primary"}},
+        {"type": "button", "props": {"text": "Request Quotes", "class": "secondary"}}
+      ]
+    }]
+  }]
+}

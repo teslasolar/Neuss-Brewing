@@ -1,0 +1,129 @@
+{
+  "type": "page",
+  "props": {
+    "title": "West Coast Template - Modern Brewpub",
+    "nav": [
+      {"href": "?screen=startup/facility", "label": "Overview"},
+      {"href": "?screen=startup/template-northeast", "label": "Northeast"},
+      {"href": "?screen=startup/template-south", "label": "South"},
+      {"href": "?screen=startup/template-west", "label": "West Coast", "active": true},
+      {"href": "?screen=startup/template-dock", "label": "Dock Config"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Sqft", "value": "4,500", "unit": "sf", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Monthly Rent", "value": "11,250", "unit": "$", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Capacity", "value": "2,000", "unit": "BBL/yr", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Buildout", "value": "180K", "unit": "$", "color": "#ff6b35"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "West Coast Modern Brewpub Layout"},
+        "children": [{
+          "type": "facility-map",
+          "props": {
+            "width": 90,
+            "height": 50,
+            "zones": [
+              {"name": "Brewhouse", "x": 0, "y": 0, "w": 25, "h": 25, "color": "#ff6b35"},
+              {"name": "Grain/Mill", "x": 0, "y": 25, "w": 15, "h": 15, "color": "#8b4513"},
+              {"name": "Utilities", "x": 0, "y": 40, "w": 15, "h": 10, "color": "#444"},
+              {"name": "Fermentation", "x": 25, "y": 0, "w": 25, "h": 25, "color": "#0ff"},
+              {"name": "Brite/Cold", "x": 50, "y": 0, "w": 15, "h": 25, "color": "#0f0"},
+              {"name": "Canning", "x": 65, "y": 0, "w": 15, "h": 25, "color": "#ffa500"},
+              {"name": "Dock", "x": 80, "y": 0, "w": 10, "h": 25, "color": "#666"},
+              {"name": "Visible Tanks", "x": 15, "y": 25, "w": 20, "h": 15, "color": "#00ced1"},
+              {"name": "Taproom/Bar", "x": 35, "y": 25, "w": 35, "h": 25, "color": "#9b59b6"},
+              {"name": "Kitchen", "x": 70, "y": 25, "w": 15, "h": 15, "color": "#e74c3c"},
+              {"name": "Office", "x": 15, "y": 40, "w": 10, "h": 10, "color": "#2ecc71"},
+              {"name": "Restrooms", "x": 70, "y": 40, "w": 15, "h": 10, "color": "#888"},
+              {"name": "Patio", "x": 85, "y": 25, "w": 5, "h": 25, "color": "#27ae60"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Zone Allocation"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "zone", "header": "Zone"},
+                  {"field": "sqft", "header": "Sq Ft"},
+                  {"field": "height", "header": "Ceiling"},
+                  {"field": "notes", "header": "Notes"}
+                ],
+                "data": [
+                  {"zone": "Brewhouse", "sqft": "560", "height": "16'", "notes": "Exposed to taproom"},
+                  {"zone": "Fermentation", "sqft": "560", "height": "16'", "notes": "Behind glass wall"},
+                  {"zone": "Visible Tanks", "sqft": "300", "height": "14'", "notes": "Customer-facing"},
+                  {"zone": "Brite/Cold", "sqft": "340", "height": "12'", "notes": "Insulated"},
+                  {"zone": "Canning Line", "sqft": "340", "height": "12'", "notes": "Mobile canner"},
+                  {"zone": "Taproom/Bar", "sqft": "1,400", "height": "14'", "notes": "Industrial chic"},
+                  {"zone": "Kitchen", "sqft": "340", "height": "10'", "notes": "Full service"},
+                  {"zone": "Support", "sqft": "400", "height": "10'", "notes": "Grain/util/office"},
+                  {"zone": "Patio", "sqft": "260", "height": "Open", "notes": "Street-side"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "West Coast Considerations"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "checklist-item", "props": {"text": "Seismic bracing for tanks", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Glass wall for tank visibility", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Industrial aesthetic design", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Outdoor patio seating", "done": true}},
+                {"type": "checklist-item", "props": {"text": "Water recycling system", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Solar panel ready roof", "done": false}},
+                {"type": "checklist-item", "props": {"text": "EV charging stations", "done": false}},
+                {"type": "checklist-item", "props": {"text": "Fire suppression (Type I ABC)", "done": true}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "California Compliance Requirements"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "requirement", "header": "Requirement"},
+              {"field": "agency", "header": "Agency"},
+              {"field": "cost", "header": "Est. Cost"},
+              {"field": "timeline", "header": "Timeline"}
+            ],
+            "data": [
+              {"requirement": "Type 23 License", "agency": "ABC", "cost": "$15,000", "timeline": "6-12 mo"},
+              {"requirement": "Health Permit", "agency": "County", "cost": "$1,500", "timeline": "2-4 wk"},
+              {"requirement": "Building Permit", "agency": "City", "cost": "$8,000", "timeline": "4-8 wk"},
+              {"requirement": "Wastewater Discharge", "agency": "POTW", "cost": "$3,000", "timeline": "6-8 wk"},
+              {"requirement": "Air Quality (VOC)", "agency": "AQMD", "cost": "$2,500", "timeline": "4-6 wk"},
+              {"requirement": "Fire Inspection", "agency": "Fire Dept", "cost": "$500", "timeline": "2 wk"},
+              {"requirement": "ADA Compliance", "agency": "CASp", "cost": "$2,000", "timeline": "2-4 wk"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

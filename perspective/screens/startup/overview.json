@@ -1,0 +1,100 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Brewery Startup Planner",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview", "active": true},
+      {"href": "?screen=startup/location", "label": "Location"},
+      {"href": "?screen=startup/equipment", "label": "Equipment"},
+      {"href": "?screen=startup/facility", "label": "Facility"},
+      {"href": "?screen=startup/financials", "label": "Financials"},
+      {"href": "?screen=startup/timeline", "label": "Timeline"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "card",
+        "props": {"title": "Brewery Business Plan - Executive Summary"},
+        "children": [{
+          "type": "exec-summary",
+          "props": {
+            "name": "Neuss Brewing Company",
+            "concept": "15-BBL craft brewery specializing in German-style lagers and American IPAs",
+            "targetMarket": "Local taproom + regional distribution",
+            "fundingNeeded": "$850,000",
+            "projectedROI": "24-36 months",
+            "status": "Planning Phase"
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Investment", "value": "850K", "unit": "$", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Brewery Size", "value": "15", "unit": "BBL", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Annual Capacity", "value": "3,000", "unit": "BBL", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Break Even", "value": "18", "unit": "mo", "color": "#ffa500"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Startup Checklist"},
+            "children": [{
+              "type": "checklist",
+              "props": {
+                "items": [
+                  {"task": "Business entity formation", "status": "done"},
+                  {"task": "Location scouting", "status": "active"},
+                  {"task": "TTB Brewer's Notice", "status": "pending"},
+                  {"task": "State liquor license", "status": "pending"},
+                  {"task": "Equipment procurement", "status": "pending"},
+                  {"task": "Facility buildout", "status": "pending"},
+                  {"task": "Recipe development", "status": "active"},
+                  {"task": "Staff hiring", "status": "pending"},
+                  {"task": "Soft opening", "status": "pending"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Key Decisions"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "decision-card", "props": {"title": "Location", "options": ["Pennsylvania", "California"], "status": "comparing"}},
+                {"type": "decision-card", "props": {"title": "Brewhouse Size", "options": ["10 BBL", "15 BBL", "20 BBL"], "selected": "15 BBL"}},
+                {"type": "decision-card", "props": {"title": "Distribution", "options": ["Taproom Only", "Self-Dist", "Distributor"], "status": "pending"}},
+                {"type": "decision-card", "props": {"title": "Canning Line", "options": ["Mobile", "In-house", "None"], "status": "pending"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Planning Roadmap"},
+        "children": [{
+          "type": "roadmap",
+          "props": {
+            "phases": [
+              {"name": "Planning", "months": "1-3", "status": "active", "items": ["Business plan", "Location", "Financing"]},
+              {"name": "Licensing", "months": "4-8", "status": "pending", "items": ["TTB", "State", "Local permits"]},
+              {"name": "Buildout", "months": "6-12", "status": "pending", "items": ["Construction", "Equipment", "Utilities"]},
+              {"name": "Launch", "months": "12-14", "status": "pending", "items": ["Brewing", "Soft open", "Grand open"]}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

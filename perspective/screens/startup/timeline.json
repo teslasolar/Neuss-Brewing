@@ -1,0 +1,102 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Build Timeline",
+    "nav": [
+      {"href": "?screen=startup/overview", "label": "Overview"},
+      {"href": "?screen=startup/equipment", "label": "Equipment"},
+      {"href": "?screen=startup/financials", "label": "Financials"},
+      {"href": "?screen=startup/timeline", "label": "Timeline", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "card",
+        "props": {"title": "Project Timeline (14 months)"},
+        "children": [{
+          "type": "project-gantt",
+          "props": {
+            "months": 14,
+            "tasks": [
+              {"name": "Business Planning", "start": 0, "duration": 2, "status": "active", "track": 0},
+              {"name": "Site Selection", "start": 1, "duration": 2, "status": "active", "track": 0},
+              {"name": "Lease Negotiation", "start": 2, "duration": 1, "status": "pending", "track": 0},
+              {"name": "TTB Application", "start": 2, "duration": 5, "status": "pending", "track": 1},
+              {"name": "State License", "start": 3, "duration": 4, "status": "pending", "track": 1},
+              {"name": "Local Permits", "start": 3, "duration": 2, "status": "pending", "track": 1},
+              {"name": "Architect/Design", "start": 3, "duration": 2, "status": "pending", "track": 2},
+              {"name": "Construction", "start": 5, "duration": 4, "status": "pending", "track": 2},
+              {"name": "Utility Install", "start": 6, "duration": 2, "status": "pending", "track": 2},
+              {"name": "Equipment Order", "start": 4, "duration": 3, "status": "pending", "track": 3},
+              {"name": "Equipment Install", "start": 8, "duration": 2, "status": "pending", "track": 3},
+              {"name": "Commissioning", "start": 10, "duration": 1, "status": "pending", "track": 3},
+              {"name": "Recipe Dev", "start": 8, "duration": 3, "status": "pending", "track": 4},
+              {"name": "Staff Hiring", "start": 9, "duration": 2, "status": "pending", "track": 4},
+              {"name": "Soft Opening", "start": 12, "duration": 1, "status": "pending", "track": 5},
+              {"name": "Grand Opening", "start": 13, "duration": 1, "status": "pending", "track": 5}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Current Phase: Planning"},
+            "children": [{
+              "type": "task-list",
+              "props": {
+                "tasks": [
+                  {"task": "Finalize business plan", "due": "Week 2", "status": "active"},
+                  {"task": "Complete location analysis", "due": "Week 3", "status": "active"},
+                  {"task": "Secure financing commitment", "due": "Week 4", "status": "pending"},
+                  {"task": "Sign lease", "due": "Week 6", "status": "pending"},
+                  {"task": "Submit TTB application", "due": "Week 8", "status": "pending"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Critical Path Items"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "alert-item", "props": {"level": "error", "text": "TTB approval (4-6 mo lead)"}},
+                {"type": "alert-item", "props": {"level": "warn", "text": "Equipment lead time (12-16 wk)"}},
+                {"type": "alert-item", "props": {"level": "warn", "text": "Glycol chiller (10-12 wk)"}},
+                {"type": "alert-item", "props": {"level": "info", "text": "Construction permits (4-6 wk)"}},
+                {"type": "alert-item", "props": {"level": "info", "text": "Health dept approval (2-4 wk)"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Milestone Tracker"},
+        "children": [{
+          "type": "milestone-list",
+          "props": {
+            "milestones": [
+              {"name": "Business Plan Complete", "date": "Month 2", "status": "pending"},
+              {"name": "Financing Secured", "date": "Month 3", "status": "pending"},
+              {"name": "Lease Signed", "date": "Month 3", "status": "pending"},
+              {"name": "TTB Approved", "date": "Month 7", "status": "pending"},
+              {"name": "Construction Complete", "date": "Month 9", "status": "pending"},
+              {"name": "Equipment Installed", "date": "Month 10", "status": "pending"},
+              {"name": "First Batch Brewed", "date": "Month 11", "status": "pending"},
+              {"name": "Doors Open", "date": "Month 13", "status": "pending"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}
