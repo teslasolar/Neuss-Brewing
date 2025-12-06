@@ -6,11 +6,12 @@
     "recipe": "{batch.recipe}",
     "state": "{batch.state}",
     "nav": [
-      {"href": "overview.html", "label": "Overview", "active": true},
-      {"href": "brewhouse.html", "label": "Brewhouse"},
-      {"href": "fermentation.html", "label": "Fermentation"},
-      {"href": "recipes.html", "label": "Recipes"},
-      {"href": "history.html", "label": "History"}
+      {"href": "?screen=overview", "label": "Overview", "active": true},
+      {"href": "?screen=levels", "label": "ISA-95"},
+      {"href": "?screen=L2-SCADA/brewhouse", "label": "Brewhouse"},
+      {"href": "?screen=L2-SCADA/fermentation", "label": "Fermentation"},
+      {"href": "?screen=business/dashboard", "label": "Business"},
+      {"href": "?screen=controls/alarms", "label": "Alarms"}
     ],
     "footer": "Neuss Brewing SCADA v1.0",
     "leds": [
@@ -20,54 +21,115 @@
     ]
   },
   "children": [{
-    "type": "sidebar-layout",
-    "props": {"width": "220px"},
-    "children": [{
-      "type": "flex",
-      "props": {"direction": "column", "gap": "15px"},
-      "children": [
-        {
-          "type": "card",
-          "props": {"title": "Brewhouse"},
-          "children": [{
-            "type": "vessel-row",
-            "props": {
-              "mode": "3d",
-              "vessels": [
-                {"name": "HLT", "temp": "{vessels.hlt.temp}", "level": "{vessels.hlt.level}", "color": "#4169e1"},
-                {"name": "MLT", "temp": "{vessels.mlt.temp}", "level": "{vessels.mlt.level}", "color": "#8b4513"},
-                {"name": "BK", "temp": "{vessels.bk.temp}", "level": "{vessels.bk.level}", "color": "#daa520"}
-              ]
-            }
-          }]
-        },
-        {
-          "type": "card",
-          "props": {"title": "Fermenters"},
-          "children": [{
-            "type": "flex",
-            "props": {"gap": "10px", "wrap": "wrap", "justify": "center"},
-            "children": [
-              {"type": "fermenter", "props": {"name": "FV1", "status": "{fv1.status}", "beer": "{fv1.beer}", "temp": "{fv1.temp}", "sg": "{fv1.sg}", "level": "{fv1.level}", "progress": "{fv1.progress}", "days": "{fv1.days}"}},
-              {"type": "fermenter", "props": {"name": "FV2", "status": "{fv2.status}", "beer": "{fv2.beer}", "temp": "{fv2.temp}", "sg": "{fv2.sg}", "level": "{fv2.level}", "progress": "{fv2.progress}", "days": "{fv2.days}"}},
-              {"type": "fermenter", "props": {"name": "FV3", "status": "{fv3.status}", "beer": "{fv3.beer}", "temp": "{fv3.temp}", "sg": "{fv3.sg}", "level": "{fv3.level}", "progress": "{fv3.progress}", "days": "{fv3.days}"}}
-            ]
-          }]
-        }
-      ]
-    }],
-    "sidebar": [{
-      "type": "metrics-panel",
-      "props": {
-        "title": "Live Metrics",
-        "metrics": [
-          {"label": "Batch", "value": "{batch.id}", "color": "#ffa500"},
-          {"label": "Phase", "value": "{batch.phase}", "color": "#0f0"},
-          {"label": "Duration", "value": "{batch.duration}", "unit": "min"},
-          {"label": "Target Temp", "value": "{batch.targetTemp}", "unit": "°F"},
-          {"label": "Efficiency", "value": "{batch.efficiency}", "unit": "%"}
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 6, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Active Batch", "value": "{batch.id}", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Phase", "value": "{batch.phase}", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "In Ferment", "value": "4", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Ready Pack", "value": "2", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Alarms", "value": "{alarms.count}", "color": "{alarms.count>0?'#f00':'#0f0'}"}},
+          {"type": "stat-card", "props": {"title": "OEE", "value": "87", "unit": "%", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Brewhouse"},
+            "children": [{
+              "type": "vessel-row",
+              "props": {
+                "mode": "3d",
+                "vessels": [
+                  {"name": "HLT", "temp": "{vessels.hlt.temp}", "level": "{vessels.hlt.level}", "color": "#4169e1"},
+                  {"name": "MLT", "temp": "{vessels.mlt.temp}", "level": "{vessels.mlt.level}", "color": "#8b4513"},
+                  {"name": "BK", "temp": "{vessels.bk.temp}", "level": "{vessels.bk.level}", "color": "#daa520"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Fermenters"},
+            "children": [{
+              "type": "vessel-row",
+              "props": {
+                "mode": "2d",
+                "vessels": [
+                  {"name": "FV1", "temp": "{fv1.temp}", "level": "{fv1.level}", "color": "#0ff", "batch": "{fv1.batch}"},
+                  {"name": "FV2", "temp": "{fv2.temp}", "level": "{fv2.level}", "color": "#0ff", "batch": "{fv2.batch}"},
+                  {"name": "FV3", "temp": "{fv3.temp}", "level": "{fv3.level}", "color": "#0ff", "batch": "{fv3.batch}"},
+                  {"name": "FV4", "temp": "{fv4.temp}", "level": "{fv4.level}", "color": "#0ff", "batch": "{fv4.batch}"}
+                ]
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "L4 - ERP", "href": "?screen=L4-ERP/finance"},
+            "children": [{"type": "nav-link", "props": {"label": "Finance, Supply Chain, Analytics"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "L3 - MES", "href": "?screen=L3-MES/batch-exec"},
+            "children": [{"type": "nav-link", "props": {"label": "Batch Execution, Scheduling, OEE"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "L2 - SCADA", "href": "?screen=L2-SCADA/brewhouse"},
+            "children": [{"type": "nav-link", "props": {"label": "Brewhouse, Fermentation, Packaging"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "L1 - Control", "href": "?screen=L1-Control/sequences"},
+            "children": [{"type": "nav-link", "props": {"label": "PLC, Sequences, I/O"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "L0 - Field", "href": "?screen=L0-Field/sensors"},
+            "children": [{"type": "nav-link", "props": {"label": "Sensors, Calibration, Devices"}}]
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Business", "href": "?screen=business/dashboard"},
+            "children": [{"type": "nav-link", "props": {"label": "Dashboard, Sales, Inventory, Costs"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Controls", "href": "?screen=controls/pid"},
+            "children": [{"type": "nav-link", "props": {"label": "PID, I/O, Alarms, Historian"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Science", "href": "?screen=science/water"},
+            "children": [{"type": "nav-link", "props": {"label": "Water, Fermentation, Lab, Yeast"}}]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Startup", "href": "?screen=startup/overview"},
+            "children": [{"type": "nav-link", "props": {"label": "Business Plan, Equipment, Facility"}}]
+          }
         ]
       }
-    }]
+    ]
   }]
 }
