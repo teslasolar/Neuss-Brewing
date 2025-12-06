@@ -295,6 +295,86 @@ body{font:12px system-ui,monospace;background:linear-gradient(135deg,var(--p-bg)
 .p-kp{background:#1a0e08;padding:6px;border-radius:4px;font-size:11px}
 .p-kp .lbl{display:block;font-size:9px;color:#888}.p-kp .val{color:var(--p-cyn)}
 
+/* ISA-95 Level Components */
+.p-batch-status{background:var(--p-bg2);border:1px solid var(--p-border);border-radius:8px;padding:12px}
+.p-batch-status.running{border-color:var(--p-grn)}.p-batch-status.hold{border-color:var(--p-yel)}
+.p-bs-header{display:flex;justify-content:space-between;margin-bottom:8px}
+.p-bs-id{font-weight:bold;color:var(--p-accent)}.p-bs-state{background:var(--p-grn);color:#000;padding:2px 8px;border-radius:3px;font-size:10px}
+.p-bs-recipe{font-size:14px;margin-bottom:4px}.p-bs-unit,.p-bs-phase,.p-bs-step{font-size:11px;color:#888;margin:2px 0}
+.p-bs-phase b{color:var(--p-cyn)}.p-bs-time{display:flex;gap:15px;margin-top:8px;font-size:10px;color:#888}
+
+.p-procedure-tree{font-size:11px}.p-proc-name{font-weight:bold;color:var(--p-accent);margin-bottom:8px}
+.p-unit-proc{padding:6px 8px;margin:4px 0;border-radius:4px;border-left:3px solid #333}
+.p-unit-proc.complete{border-color:var(--p-grn);background:rgba(0,255,0,.05)}
+.p-unit-proc.active{border-color:var(--p-yel);background:rgba(255,165,0,.1)}
+.p-up-name{display:block;margin-bottom:4px}.p-up-ops{display:flex;flex-wrap:wrap;gap:4px}
+.p-op{background:#1a0e08;padding:2px 6px;border-radius:3px;font-size:9px}
+
+.p-sfc-viewer{display:flex;flex-direction:column;gap:4px}
+.p-sfc-step{display:flex;align-items:center;gap:8px;padding:6px;border-radius:4px;font-size:11px}
+.p-sfc-step.done{background:rgba(0,255,0,.1)}.p-sfc-step.active{background:rgba(255,165,0,.15);border:1px solid var(--p-yel)}
+.p-sfc-step.pending{background:#1a0e08}
+.p-sfc-num{width:20px;height:20px;background:var(--p-accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}
+.p-sfc-step.done .p-sfc-num{background:var(--p-grn);color:#000}
+.p-sfc-name{flex:1}.p-sfc-timer{color:var(--p-yel);font-size:10px}
+
+.p-seq-status{background:var(--p-bg2);border:1px solid var(--p-border);border-radius:6px;padding:10px;margin-bottom:8px}
+.p-seq-status.run{border-color:var(--p-grn)}.p-seq-header{display:flex;justify-content:space-between;margin-bottom:6px}
+.p-seq-name{font-weight:bold;color:var(--p-cyn)}.p-seq-state{font-size:10px;padding:2px 6px;border-radius:3px;background:var(--p-grn);color:#000}
+.p-seq-status.idle .p-seq-state{background:#666;color:#fff}.p-seq-progress{font-size:10px;color:#888;margin-bottom:4px}
+.p-seq-bar{height:4px;background:#1a0e08;border-radius:2px;overflow:hidden}.p-seq-fill{height:100%;background:var(--p-grn)}
+.p-seq-desc{font-size:10px;color:#888;margin-top:4px}
+
+.p-cond-row{display:flex;align-items:center;gap:8px;padding:4px;font-size:11px}
+.p-cond-dot{width:8px;height:8px;border-radius:50%;background:#f00}.p-cond-row.true .p-cond-dot{background:var(--p-grn)}
+.p-ilk-row{display:flex;align-items:center;gap:8px;padding:4px;font-size:11px}
+.p-ilk-icon{width:8px;height:8px;background:var(--p-grn)}.p-ilk-row.fault .p-ilk-icon{background:var(--p-red)}
+
+.p-plc-card{background:#1a0e08;border-radius:6px;padding:10px;font-size:11px}
+.p-plc-card.run{border-left:3px solid var(--p-grn)}.p-plc-card.stop{border-left:3px solid var(--p-red)}
+.p-plc-header{display:flex;justify-content:space-between;margin-bottom:6px}
+.p-plc-name{font-weight:bold;color:var(--p-cyn)}.p-plc-status{font-size:9px;padding:2px 6px;border-radius:3px;background:var(--p-grn);color:#000}
+.p-plc-model,.p-plc-ip{color:#888;font-size:10px;margin:2px 0}
+.p-plc-metrics{display:flex;gap:10px;margin-top:6px;color:var(--p-cyn)}.p-plc-faults{color:#888;margin-top:4px}
+
+.p-oee-gauge{text-align:center;background:var(--p-bg2);border-radius:8px;padding:15px}
+.p-oee-circle{width:80px;height:80px;border-radius:50%;background:conic-gradient(var(--color) calc(var(--pct)*3.6deg),#333 0);display:flex;align-items:center;justify-content:center;margin:0 auto}
+.p-oee-val{font-size:18px;font-weight:bold;color:#fff}.p-oee-label{margin-top:8px;font-size:12px}
+.p-oee-target{font-size:10px;color:#888}
+
+.p-sensor-health{display:flex;gap:10px;padding:6px;border-radius:4px;font-size:10px;background:#1a0e08}
+.p-sensor-health.fault{border-left:3px solid var(--p-red)}.p-sh-tag{color:var(--p-cyn);width:70px}
+.p-sh-sig{color:var(--p-grn)}.p-sh-noise{color:var(--p-yel)}.p-sh-drift{color:#888}
+.p-sensor-health.fault .p-sh-sig,.p-sensor-health.fault .p-sh-noise{color:var(--p-red)}
+
+.p-device-row{display:flex;gap:10px;padding:6px;border-bottom:1px solid var(--p-border);font-size:11px;align-items:center}
+.p-dev-tag{color:var(--p-cyn);width:40px}.p-dev-desc{flex:1}.p-dev-status{width:50px;text-align:center}
+.p-dev-status.run{color:var(--p-grn)}.p-dev-status.stop{color:#888}.p-dev-status.open{color:var(--p-cyn)}
+
+.p-material-item{display:flex;justify-content:space-between;padding:6px;border-radius:4px;font-size:11px;background:#1a0e08;margin-bottom:4px}
+.p-material-item.staged{border-left:3px solid var(--p-grn)}.p-material-item.pending{border-left:3px solid #666}
+.p-mat-status{font-size:9px;color:#888}
+
+.p-event-log{font-size:10px}.p-event-row{display:flex;gap:10px;padding:4px;border-bottom:1px solid var(--p-border)}
+.p-evt-time{color:#888;width:45px}.p-evt-text{color:var(--p-txt)}
+
+.p-cal-wizard{background:#1a0e08;border-radius:6px;padding:12px;font-size:11px}
+.p-cal-sensor{font-weight:bold;color:var(--p-accent);margin-bottom:8px}
+.p-cal-steps{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.p-cal-step{padding:4px 8px;border-radius:3px}.p-cal-step.done{color:var(--p-grn)}
+.p-cal-step.active{background:var(--p-accent);color:#fff}.p-cal-step.pending{color:#666}
+.p-cal-current{display:flex;flex-direction:column;gap:4px;padding:8px;background:var(--p-bg2);border-radius:4px}
+
+/* Level Navigation */
+.p-level-card{background:var(--p-bg2);border-radius:8px;padding:15px;margin-bottom:10px}
+.p-level-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.p-level-num{padding:4px 10px;border-radius:4px;color:#fff;font-weight:bold;font-size:12px}
+.p-level-name{font-size:16px;font-weight:bold;color:var(--p-txt)}
+.p-level-desc{font-size:12px;color:#888;margin-bottom:10px}
+.p-level-links{display:flex;flex-wrap:wrap;gap:8px}
+.p-level-link{background:#1a0e08;color:var(--p-cyn);padding:6px 12px;border-radius:4px;text-decoration:none;font-size:11px;transition:.2s}
+.p-level-link:hover{background:#2d1810;color:var(--p-accent)}
+
 /* Responsive */
 @media(max-width:768px){
   .p-sidebar-layout,.p-sidebar-template{grid-template-columns:1fr}

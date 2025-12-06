@@ -1,0 +1,80 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L3 - Material Management",
+    "nav": [
+      {"href": "?screen=L3-MES/batch-exec", "label": "Batch Exec"},
+      {"href": "?screen=L3-MES/scheduling", "label": "Scheduling"},
+      {"href": "?screen=L3-MES/materials", "label": "Materials", "active": true},
+      {"href": "?screen=L3-MES/oee", "label": "OEE"},
+      {"href": "?screen=L4-ERP/supply-chain", "label": "↑ Supply Chain"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "240px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Material Consumption - B-042"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "material", "header": "Material"},
+                {"field": "lot", "header": "Lot#"},
+                {"field": "planned", "header": "Planned"},
+                {"field": "actual", "header": "Actual"},
+                {"field": "var", "header": "Var"}
+              ],
+              "data": "{mes.consumption}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Lot Traceability"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "lot", "header": "Lot#"},
+                {"field": "material", "header": "Material"},
+                {"field": "vendor", "header": "Vendor"},
+                {"field": "received", "header": "Received"},
+                {"field": "batches", "header": "Batches"}
+              ],
+              "data": "{mes.lots}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {"type": "button", "props": {"text": "Scan Material", "class": "primary"}},
+        {"type": "button", "props": {"text": "Record Weigh", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Print Label", "class": "secondary"}},
+        {
+          "type": "card",
+          "props": {"title": "Material Queue"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "material-item", "props": {"name": "2-Row Malt", "qty": "450 lb", "status": "staged"}},
+              {"type": "material-item", "props": {"name": "Crystal 40", "qty": "25 lb", "status": "staged"}},
+              {"type": "material-item", "props": {"name": "Cascade", "qty": "6 oz", "status": "pending"}},
+              {"type": "material-item", "props": {"name": "Centennial", "qty": "8 oz", "status": "pending"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

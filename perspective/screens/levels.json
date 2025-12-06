@@ -1,0 +1,91 @@
+{
+  "type": "page",
+  "props": {
+    "title": "ISA-95 Navigation",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=levels", "label": "ISA-95 Levels", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px", "padding": "20px"},
+    "children": [
+      {
+        "type": "level-card",
+        "props": {
+          "level": 4,
+          "name": "ERP - Business Planning",
+          "desc": "Enterprise resource planning, finance, supply chain",
+          "color": "#9b59b6",
+          "links": [
+            {"href": "?screen=L4-ERP/finance", "label": "Finance"},
+            {"href": "?screen=L4-ERP/supply-chain", "label": "Supply Chain"},
+            {"href": "?screen=L4-ERP/customers", "label": "Customers"},
+            {"href": "?screen=L4-ERP/analytics", "label": "Analytics"}
+          ]
+        }
+      },
+      {
+        "type": "level-card",
+        "props": {
+          "level": 3,
+          "name": "MES - Manufacturing Execution",
+          "desc": "Batch execution, scheduling, materials, OEE tracking",
+          "color": "#3498db",
+          "links": [
+            {"href": "?screen=L3-MES/batch-exec", "label": "Batch Execution"},
+            {"href": "?screen=L3-MES/scheduling", "label": "Scheduling"},
+            {"href": "?screen=L3-MES/materials", "label": "Materials"},
+            {"href": "?screen=L3-MES/oee", "label": "OEE"}
+          ]
+        }
+      },
+      {
+        "type": "level-card",
+        "props": {
+          "level": 2,
+          "name": "SCADA - Supervisory Control",
+          "desc": "HMI screens, operator interface, monitoring",
+          "color": "#2ecc71",
+          "links": [
+            {"href": "overview.html", "label": "Overview"},
+            {"href": "brewhouse.html", "label": "Brewhouse"},
+            {"href": "fermentation.html", "label": "Fermentation"},
+            {"href": "?screen=historian", "label": "Historian"},
+            {"href": "?screen=alarms", "label": "Alarms"}
+          ]
+        }
+      },
+      {
+        "type": "level-card",
+        "props": {
+          "level": 1,
+          "name": "Control - PLC/DCS",
+          "desc": "Control loops, sequences, I/O, PLC status",
+          "color": "#f39c12",
+          "links": [
+            {"href": "?screen=L1-Control/sequences", "label": "Sequences"},
+            {"href": "?screen=L1-Control/plc-status", "label": "PLC Status"},
+            {"href": "?screen=pid", "label": "PID Loops"},
+            {"href": "?screen=io", "label": "I/O Status"}
+          ]
+        }
+      },
+      {
+        "type": "level-card",
+        "props": {
+          "level": 0,
+          "name": "Field - Sensors & Devices",
+          "desc": "Field instrumentation, calibration, diagnostics",
+          "color": "#e74c3c",
+          "links": [
+            {"href": "?screen=L0-Field/sensors", "label": "Sensors"},
+            {"href": "?screen=L0-Field/calibration", "label": "Calibration"},
+            {"href": "?screen=L0-Field/devices", "label": "Field Devices"}
+          ]
+        }
+      }
+    ]
+  }]
+}

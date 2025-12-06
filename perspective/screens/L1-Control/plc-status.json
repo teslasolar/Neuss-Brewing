@@ -1,0 +1,114 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L1 - PLC Status",
+    "nav": [
+      {"href": "?screen=L1-Control/sequences", "label": "Sequences"},
+      {"href": "?screen=L1-Control/plc-status", "label": "PLC Status", "active": true},
+      {"href": "?screen=pid", "label": "PID Loops"},
+      {"href": "?screen=io", "label": "I/O Status"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 3, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "PLC-01 (Brewhouse)"},
+            "children": [{
+              "type": "plc-card",
+              "props": {
+                "name": "PLC-01",
+                "model": "Allen-Bradley CompactLogix",
+                "ip": "192.168.1.10",
+                "status": "RUN",
+                "cpu": 32,
+                "mem": 45,
+                "scanTime": "12ms",
+                "faults": 0
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "PLC-02 (Fermentation)"},
+            "children": [{
+              "type": "plc-card",
+              "props": {
+                "name": "PLC-02",
+                "model": "Allen-Bradley CompactLogix",
+                "ip": "192.168.1.11",
+                "status": "RUN",
+                "cpu": 18,
+                "mem": 32,
+                "scanTime": "8ms",
+                "faults": 0
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "PLC-03 (Utilities)"},
+            "children": [{
+              "type": "plc-card",
+              "props": {
+                "name": "PLC-03",
+                "model": "Allen-Bradley Micro850",
+                "ip": "192.168.1.12",
+                "status": "RUN",
+                "cpu": 8,
+                "mem": 22,
+                "scanTime": "20ms",
+                "faults": 0
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Network Topology"},
+            "children": [{
+              "type": "network-diagram",
+              "props": {
+                "nodes": [
+                  {"id": "sw1", "type": "switch", "label": "Main Switch"},
+                  {"id": "plc1", "type": "plc", "label": "PLC-01", "parent": "sw1"},
+                  {"id": "plc2", "type": "plc", "label": "PLC-02", "parent": "sw1"},
+                  {"id": "plc3", "type": "plc", "label": "PLC-03", "parent": "sw1"},
+                  {"id": "hmi", "type": "hmi", "label": "HMI", "parent": "sw1"},
+                  {"id": "srv", "type": "server", "label": "SCADA Server", "parent": "sw1"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Module Status"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "plc", "header": "PLC"},
+                  {"field": "slot", "header": "Slot"},
+                  {"field": "module", "header": "Module"},
+                  {"field": "status", "header": "Status"}
+                ],
+                "data": "{plc.modules}"
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

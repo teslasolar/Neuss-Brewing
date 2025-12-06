@@ -1,0 +1,107 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L3 - Batch Execution",
+    "nav": [
+      {"href": "?screen=L3-MES/batch-exec", "label": "Batch Exec", "active": true},
+      {"href": "?screen=L3-MES/scheduling", "label": "Scheduling"},
+      {"href": "?screen=L3-MES/materials", "label": "Materials"},
+      {"href": "?screen=L3-MES/oee", "label": "OEE"},
+      {"href": "?screen=L4-ERP/finance", "label": "↑ L4 ERP"},
+      {"href": "?screen=L2-SCADA/overview", "label": "↓ L2 SCADA"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "260px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Active Batch: B-042"},
+          "children": [{
+            "type": "batch-status",
+            "props": {
+              "id": "B-042",
+              "recipe": "West Coast IPA",
+              "unit": "BH-01",
+              "phase": "BOIL",
+              "step": "Hop Addition 2",
+              "elapsed": "3:45:22",
+              "remaining": "0:15:38",
+              "state": "RUNNING"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "ISA-88 Procedure"},
+          "children": [{
+            "type": "procedure-tree",
+            "props": {
+              "procedure": "Brew IPA",
+              "unitProcedures": [
+                {"name": "Mash", "status": "complete", "operations": ["Fill HLT", "Heat Strike", "Mash In", "Rest", "Mash Out"]},
+                {"name": "Lauter", "status": "complete", "operations": ["Vorlauf", "Runoff", "Sparge"]},
+                {"name": "Boil", "status": "active", "operations": ["Heat to Boil", "Hop Add 1", "Hop Add 2", "Whirlpool"]},
+                {"name": "Cool", "status": "pending", "operations": ["Chill", "Transfer"]}
+              ]
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Batch Controls"},
+          "children": [{
+            "type": "grid",
+            "props": {"columns": 2, "gap": "8px"},
+            "children": [
+              {"type": "button", "props": {"text": "HOLD", "class": "warn"}},
+              {"type": "button", "props": {"text": "RESUME", "class": "secondary"}},
+              {"type": "button", "props": {"text": "ABORT", "class": "danger"}},
+              {"type": "button", "props": {"text": "RESTART", "class": "secondary"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Phase Params"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "calc-row", "props": {"label": "Boil Time", "value": "60 min"}},
+              {"type": "calc-row", "props": {"label": "Target Vol", "value": "17 BBL"}},
+              {"type": "calc-row", "props": {"label": "Hop 1", "value": "2oz @60"}},
+              {"type": "calc-row", "props": {"label": "Hop 2", "value": "3oz @15"}},
+              {"type": "calc-row", "props": {"label": "Hop 3", "value": "4oz @0"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Batch Events"},
+          "children": [{
+            "type": "event-log",
+            "props": {
+              "events": [
+                {"time": "09:15", "event": "Hop Add 2 started"},
+                {"time": "09:00", "event": "Boil reached"},
+                {"time": "08:45", "event": "Sparge complete"},
+                {"time": "07:30", "event": "Mash complete"}
+              ]
+            }
+          }]
+        }
+      ]
+    }]
+  }]
+}

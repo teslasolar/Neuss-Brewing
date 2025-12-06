@@ -1,0 +1,77 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L4 - Financial Dashboard",
+    "nav": [
+      {"href": "?screen=L4-ERP/finance", "label": "Finance", "active": true},
+      {"href": "?screen=L4-ERP/supply-chain", "label": "Supply Chain"},
+      {"href": "?screen=L4-ERP/customers", "label": "Customers"},
+      {"href": "?screen=L4-ERP/analytics", "label": "Analytics"},
+      {"href": "?screen=L3-MES/batch-exec", "label": "↓ L3 MES"}
+    ],
+    "leds": [{"label": "ERP", "state": "grn"}, {"label": "SAP", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "YTD Revenue", "value": "284,500", "unit": "$", "trend": "+18%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "YTD COGS", "value": "142,200", "unit": "$", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Gross Profit", "value": "142,300", "unit": "$", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Margin", "value": "50.1", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "EBITDA", "value": "68,400", "unit": "$", "color": "#ffa500"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "P&L Summary"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "line", "header": "Line Item"},
+                  {"field": "mtd", "header": "MTD"},
+                  {"field": "ytd", "header": "YTD"},
+                  {"field": "budget", "header": "Budget"},
+                  {"field": "var", "header": "Var %"}
+                ],
+                "data": "{erp.pnl}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Cash Flow"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "item", "header": "Item"},
+                  {"field": "in", "header": "Inflow"},
+                  {"field": "out", "header": "Outflow"},
+                  {"field": "net", "header": "Net"}
+                ],
+                "data": "{erp.cashflow}"
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Monthly Revenue vs COGS"},
+        "children": [{
+          "type": "trend", "props": {"data": "{erp.revTrend}", "height": 100, "color": "#0f0"}
+        }]
+      }
+    ]
+  }]
+}

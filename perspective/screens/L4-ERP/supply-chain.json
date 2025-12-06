@@ -1,0 +1,91 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L4 - Supply Chain",
+    "nav": [
+      {"href": "?screen=L4-ERP/finance", "label": "Finance"},
+      {"href": "?screen=L4-ERP/supply-chain", "label": "Supply Chain", "active": true},
+      {"href": "?screen=L4-ERP/customers", "label": "Customers"},
+      {"href": "?screen=L3-MES/materials", "label": "↓ L3 Materials"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "240px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Purchase Orders"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "po", "header": "PO#"},
+                {"field": "vendor", "header": "Vendor"},
+                {"field": "items", "header": "Items"},
+                {"field": "total", "header": "Total"},
+                {"field": "eta", "header": "ETA"},
+                {"field": "status", "header": "Status"}
+              ],
+              "data": "{erp.purchaseOrders}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Vendor Performance"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "vendor", "header": "Vendor"},
+                {"field": "onTime", "header": "On-Time%"},
+                {"field": "quality", "header": "Quality"},
+                {"field": "ytdSpend", "header": "YTD Spend"}
+              ],
+              "data": "{erp.vendors}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {"type": "button", "props": {"text": "New PO", "class": "primary"}},
+        {"type": "button", "props": {"text": "Receive Shipment", "class": "secondary"}},
+        {
+          "type": "card",
+          "props": {"title": "Reorder Alerts"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "alert-item", "props": {"level": "warn", "text": "2-Row Malt < min"}},
+              {"type": "alert-item", "props": {"level": "warn", "text": "Cascade hops low"}},
+              {"type": "alert-item", "props": {"level": "info", "text": "Yeast order due"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Lead Times"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "calc-row", "props": {"label": "Grain", "value": "5-7 days"}},
+              {"type": "calc-row", "props": {"label": "Hops", "value": "3-5 days"}},
+              {"type": "calc-row", "props": {"label": "Yeast", "value": "2-3 days"}},
+              {"type": "calc-row", "props": {"label": "Packaging", "value": "7-10 days"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

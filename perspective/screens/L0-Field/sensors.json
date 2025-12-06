@@ -1,0 +1,83 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L0 - Sensor Diagnostics",
+    "nav": [
+      {"href": "?screen=L0-Field/sensors", "label": "Sensors", "active": true},
+      {"href": "?screen=L0-Field/calibration", "label": "Calibration"},
+      {"href": "?screen=L0-Field/devices", "label": "Field Devices"},
+      {"href": "?screen=L1-Control/sequences", "label": "↑ L1 Control"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Sensors", "value": "24", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Online", "value": "23", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Fault", "value": "1", "color": "#f00"}},
+          {"type": "stat-card", "props": {"title": "Cal Due", "value": "3", "color": "#ffa500"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Sensor Status"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "tag", "header": "Tag"},
+              {"field": "desc", "header": "Description"},
+              {"field": "type", "header": "Type"},
+              {"field": "range", "header": "Range"},
+              {"field": "value", "header": "Value"},
+              {"field": "status", "header": "Status"},
+              {"field": "lastCal", "header": "Last Cal"}
+            ],
+            "data": "{field.sensors}"
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Sensor Health"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "sensor-health", "props": {"tag": "HLT_TT01", "signal": 95, "noise": 2, "drift": 0.1}},
+                {"type": "sensor-health", "props": {"tag": "MLT_TT01", "signal": 98, "noise": 1, "drift": 0.05}},
+                {"type": "sensor-health", "props": {"tag": "PH_AT01", "signal": 88, "noise": 5, "drift": 0.3}},
+                {"type": "sensor-health", "props": {"tag": "FLOW_FT01", "signal": 45, "noise": 12, "drift": 2.1, "fault": true}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Calibration Schedule"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "tag", "header": "Tag"},
+                  {"field": "due", "header": "Due Date"},
+                  {"field": "interval", "header": "Interval"},
+                  {"field": "status", "header": "Status"}
+                ],
+                "data": "{field.calSchedule}"
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

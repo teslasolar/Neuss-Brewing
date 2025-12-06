@@ -1,0 +1,103 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L1 - Sequence Control",
+    "nav": [
+      {"href": "?screen=L1-Control/sequences", "label": "Sequences", "active": true},
+      {"href": "?screen=L1-Control/plc-status", "label": "PLC Status"},
+      {"href": "?screen=pid", "label": "PID Loops"},
+      {"href": "?screen=io", "label": "I/O Status"},
+      {"href": "?screen=L3-MES/batch-exec", "label": "↑ L3 Batch"},
+      {"href": "?screen=L0-Field/sensors", "label": "↓ L0 Field"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "280px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Active Sequences"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "8px"},
+            "children": [
+              {"type": "sequence-status", "props": {"name": "SEQ_BOIL", "step": 4, "total": 8, "state": "RUN", "desc": "Hop Addition"}},
+              {"type": "sequence-status", "props": {"name": "SEQ_GLYCOL", "step": 2, "total": 3, "state": "RUN", "desc": "Temp Control"}},
+              {"type": "sequence-status", "props": {"name": "SEQ_CIP", "step": 0, "total": 12, "state": "IDLE", "desc": "Ready"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "SEQ_BOIL - Step Detail"},
+          "children": [{
+            "type": "sfc-viewer",
+            "props": {
+              "steps": [
+                {"num": 1, "name": "Init", "status": "done"},
+                {"num": 2, "name": "Heat to Boil", "status": "done"},
+                {"num": 3, "name": "Hop Add 1", "status": "done"},
+                {"num": 4, "name": "Hop Add 2", "status": "active", "timer": "12:45"},
+                {"num": 5, "name": "Hop Add 3", "status": "pending"},
+                {"num": 6, "name": "Whirlpool", "status": "pending"},
+                {"num": 7, "name": "Rest", "status": "pending"},
+                {"num": 8, "name": "Complete", "status": "pending"}
+              ]
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Sequence Controls"},
+          "children": [{
+            "type": "grid",
+            "props": {"columns": 2, "gap": "8px"},
+            "children": [
+              {"type": "button", "props": {"text": "START", "class": "primary"}},
+              {"type": "button", "props": {"text": "STOP", "class": "danger"}},
+              {"type": "button", "props": {"text": "PAUSE", "class": "warn"}},
+              {"type": "button", "props": {"text": "STEP", "class": "secondary"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Transition Conditions"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "condition-row", "props": {"cond": "Timer >= 15min", "status": false}},
+              {"type": "condition-row", "props": {"cond": "BK_TT01 >= 212", "status": true}},
+              {"type": "condition-row", "props": {"cond": "P1_RUN = TRUE", "status": true}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Interlocks"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "interlock-row", "props": {"name": "E-Stop", "status": "ok"}},
+              {"type": "interlock-row", "props": {"name": "High Level", "status": "ok"}},
+              {"type": "interlock-row", "props": {"name": "Low Press", "status": "ok"}},
+              {"type": "interlock-row", "props": {"name": "Door Closed", "status": "ok"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

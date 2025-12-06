@@ -1,0 +1,74 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L3 - Production Scheduling",
+    "nav": [
+      {"href": "?screen=L3-MES/batch-exec", "label": "Batch Exec"},
+      {"href": "?screen=L3-MES/scheduling", "label": "Scheduling", "active": true},
+      {"href": "?screen=L3-MES/materials", "label": "Materials"},
+      {"href": "?screen=L3-MES/oee", "label": "OEE"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "card",
+        "props": {"title": "Production Schedule (Week View)"},
+        "children": [{
+          "type": "schedule-gantt",
+          "props": {
+            "units": ["BH-01", "FV-01", "FV-02", "FV-03", "BBT-01"],
+            "tasks": [
+              {"unit": "BH-01", "batch": "B-042", "start": 0, "duration": 8, "recipe": "IPA"},
+              {"unit": "BH-01", "batch": "B-043", "start": 24, "duration": 8, "recipe": "Pilsner"},
+              {"unit": "FV-01", "batch": "B-040", "start": 0, "duration": 168, "recipe": "Stout"},
+              {"unit": "FV-02", "batch": "B-041", "start": 0, "duration": 120, "recipe": "Hefe"},
+              {"unit": "FV-03", "batch": "B-042", "start": 8, "duration": 168, "recipe": "IPA"},
+              {"unit": "BBT-01", "batch": "B-039", "start": 0, "duration": 72, "recipe": "Pale Ale"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Pending Batches"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "batch", "header": "Batch"},
+                  {"field": "recipe", "header": "Recipe"},
+                  {"field": "size", "header": "Size"},
+                  {"field": "scheduled", "header": "Scheduled"},
+                  {"field": "priority", "header": "Pri"}
+                ],
+                "data": "{mes.pending}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Resource Availability"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "resource-bar", "props": {"name": "Brewhouse", "status": "in-use", "batch": "B-042"}},
+                {"type": "resource-bar", "props": {"name": "FV-01", "status": "in-use", "days": 8}},
+                {"type": "resource-bar", "props": {"name": "FV-02", "status": "in-use", "days": 3}},
+                {"type": "resource-bar", "props": {"name": "FV-03", "status": "available"}},
+                {"type": "resource-bar", "props": {"name": "BBT-01", "status": "ready"}}
+              ]
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

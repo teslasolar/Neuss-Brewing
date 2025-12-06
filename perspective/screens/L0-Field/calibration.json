@@ -1,0 +1,79 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L0 - Calibration",
+    "nav": [
+      {"href": "?screen=L0-Field/sensors", "label": "Sensors"},
+      {"href": "?screen=L0-Field/calibration", "label": "Calibration", "active": true},
+      {"href": "?screen=L0-Field/devices", "label": "Field Devices"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "280px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Calibration Wizard"},
+          "children": [{
+            "type": "cal-wizard",
+            "props": {
+              "sensor": "PH_AT01",
+              "type": "pH",
+              "step": 2,
+              "steps": ["Select Sensor", "Zero Cal (pH 7)", "Span Cal (pH 4)", "Verify", "Complete"],
+              "currentRef": 7.0,
+              "currentRead": 7.02,
+              "offset": 0.02
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Recent Calibrations"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "date", "header": "Date"},
+                {"field": "tag", "header": "Tag"},
+                {"field": "tech", "header": "Tech"},
+                {"field": "result", "header": "Result"}
+              ],
+              "data": "{field.calHistory}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Sensor Details"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "calc-row", "props": {"label": "Tag", "value": "PH_AT01"}},
+              {"type": "calc-row", "props": {"label": "Type", "value": "pH Electrode"}},
+              {"type": "calc-row", "props": {"label": "Mfr", "value": "Endress+Hauser"}},
+              {"type": "calc-row", "props": {"label": "Model", "value": "Orbisint CPS11D"}},
+              {"type": "calc-row", "props": {"label": "Range", "value": "0-14 pH"}},
+              {"type": "calc-row", "props": {"label": "Last Cal", "value": "2024-01-05"}},
+              {"type": "calc-row", "props": {"label": "Next Cal", "value": "2024-02-05"}}
+            ]
+          }]
+        },
+        {"type": "button", "props": {"text": "Start Calibration", "class": "primary"}},
+        {"type": "button", "props": {"text": "Skip to Verify", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Print Report", "class": "secondary"}}
+      ]
+    }]
+  }]
+}

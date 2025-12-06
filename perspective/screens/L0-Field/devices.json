@@ -1,0 +1,82 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L0 - Field Devices",
+    "nav": [
+      {"href": "?screen=L0-Field/sensors", "label": "Sensors"},
+      {"href": "?screen=L0-Field/calibration", "label": "Calibration"},
+      {"href": "?screen=L0-Field/devices", "label": "Field Devices", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 3, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Pumps"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "device-row", "props": {"tag": "P1", "desc": "Mash Pump", "status": "RUN", "runtime": "1,245 hr", "health": 92}},
+                {"type": "device-row", "props": {"tag": "P2", "desc": "Transfer Pump", "status": "STOP", "runtime": "982 hr", "health": 95}},
+                {"type": "device-row", "props": {"tag": "P3", "desc": "CIP Pump", "status": "STOP", "runtime": "456 hr", "health": 98}},
+                {"type": "device-row", "props": {"tag": "P4", "desc": "Glycol Pump", "status": "RUN", "runtime": "2,100 hr", "health": 88}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Valves"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "device-row", "props": {"tag": "V1", "desc": "HLT Outlet", "status": "OPEN", "cycles": "12,450", "health": 94}},
+                {"type": "device-row", "props": {"tag": "V2", "desc": "MLT Inlet", "status": "CLOSED", "cycles": "11,200", "health": 96}},
+                {"type": "device-row", "props": {"tag": "V3", "desc": "BK Drain", "status": "CLOSED", "cycles": "8,900", "health": 98}},
+                {"type": "device-row", "props": {"tag": "CV1", "desc": "Glycol Control", "status": "42%", "cycles": "45,000", "health": 85}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Motors/VFDs"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "device-row", "props": {"tag": "VFD1", "desc": "Mill VFD", "status": "STOP", "runtime": "520 hr", "health": 100}},
+                {"type": "device-row", "props": {"tag": "VFD2", "desc": "Pump 1 VFD", "status": "80%", "runtime": "1,245 hr", "health": 92}},
+                {"type": "device-row", "props": {"tag": "M1", "desc": "Agitator", "status": "RUN", "runtime": "890 hr", "health": 96}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Device Inventory"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "tag", "header": "Tag"},
+              {"field": "type", "header": "Type"},
+              {"field": "mfr", "header": "Manufacturer"},
+              {"field": "model", "header": "Model"},
+              {"field": "installed", "header": "Installed"},
+              {"field": "warranty", "header": "Warranty"}
+            ],
+            "data": "{field.inventory}"
+          }
+        }]
+      }
+    ]
+  }]
+}

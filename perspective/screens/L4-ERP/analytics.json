@@ -1,0 +1,95 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L4 - Business Analytics",
+    "nav": [
+      {"href": "?screen=L4-ERP/finance", "label": "Finance"},
+      {"href": "?screen=L4-ERP/supply-chain", "label": "Supply Chain"},
+      {"href": "?screen=L4-ERP/customers", "label": "Customers"},
+      {"href": "?screen=L4-ERP/analytics", "label": "Analytics", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 3, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Production KPIs"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "BBL Produced YTD", "value": "1,245"}},
+                {"type": "calc-row", "props": {"label": "Capacity Util", "value": "72%"}},
+                {"type": "calc-row", "props": {"label": "Avg Batch Size", "value": "15 BBL"}},
+                {"type": "calc-row", "props": {"label": "Batch Cycle Time", "value": "18 days"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Quality KPIs"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "First Pass Yield", "value": "96.2%"}},
+                {"type": "calc-row", "props": {"label": "Batches in Spec", "value": "94%"}},
+                {"type": "calc-row", "props": {"label": "Customer Returns", "value": "0.2%"}},
+                {"type": "calc-row", "props": {"label": "Sensory Score", "value": "4.2/5"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Financial KPIs"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Revenue/BBL", "value": "$228"}},
+                {"type": "calc-row", "props": {"label": "COGS/BBL", "value": "$114"}},
+                {"type": "calc-row", "props": {"label": "Gross Margin", "value": "50%"}},
+                {"type": "calc-row", "props": {"label": "Inventory Turns", "value": "8.2x"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Trend Analysis"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 2, "gap": "15px"},
+          "children": [
+            {"type": "trend", "props": {"title": "Monthly BBL", "data": "{erp.bblTrend}", "height": 80, "color": "#ff6b35"}},
+            {"type": "trend", "props": {"title": "Revenue/BBL", "data": "{erp.revPerBbl}", "height": 80, "color": "#0f0"}}
+          ]
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Product Mix Analysis"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "style", "header": "Style"},
+              {"field": "bbl", "header": "BBL"},
+              {"field": "pct", "header": "% Mix"},
+              {"field": "margin", "header": "Margin"},
+              {"field": "growth", "header": "YoY Growth"}
+            ],
+            "data": "{erp.productMix}"
+          }
+        }]
+      }
+    ]
+  }]
+}

@@ -1,0 +1,71 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L3 - OEE Dashboard",
+    "nav": [
+      {"href": "?screen=L3-MES/batch-exec", "label": "Batch Exec"},
+      {"href": "?screen=L3-MES/scheduling", "label": "Scheduling"},
+      {"href": "?screen=L3-MES/materials", "label": "Materials"},
+      {"href": "?screen=L3-MES/oee", "label": "OEE", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "oee-gauge", "props": {"label": "OEE", "value": 72, "target": 85, "color": "#ffa500"}},
+          {"type": "oee-gauge", "props": {"label": "Availability", "value": 88, "target": 90, "color": "#0f0"}},
+          {"type": "oee-gauge", "props": {"label": "Performance", "value": 92, "target": 95, "color": "#0f0"}},
+          {"type": "oee-gauge", "props": {"label": "Quality", "value": 89, "target": 98, "color": "#ffa500"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Downtime Analysis"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "reason", "header": "Reason"},
+                  {"field": "events", "header": "Events"},
+                  {"field": "duration", "header": "Duration"},
+                  {"field": "pct", "header": "% Total"}
+                ],
+                "data": "{mes.downtime}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Loss Categories"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "labeled-bar", "props": {"label": "Planned DT", "value": 8, "min": 0, "max": 100, "unit": "%", "color": "#666"}},
+                {"type": "labeled-bar", "props": {"label": "Unplanned DT", "value": 4, "min": 0, "max": 100, "unit": "%", "color": "#f00"}},
+                {"type": "labeled-bar", "props": {"label": "Speed Loss", "value": 5, "min": 0, "max": 100, "unit": "%", "color": "#ffa500"}},
+                {"type": "labeled-bar", "props": {"label": "Quality Loss", "value": 3, "min": 0, "max": 100, "unit": "%", "color": "#ff0"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "OEE Trend (30 days)"},
+        "children": [{
+          "type": "trend", "props": {"data": "{mes.oeeTrend}", "height": 100, "color": "#ffa500", "target": 85}
+        }]
+      }
+    ]
+  }]
+}
