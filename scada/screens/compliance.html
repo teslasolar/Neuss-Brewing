@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>21 CFR 11 - Compliance</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+.cfr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:15px;padding:15px}
+.cfr-card{background:#0d0704;border:1px solid #3d2418;border-radius:8px;padding:15px}
+.cfr-card h3{color:#ff6b35;margin-bottom:10px;font-size:14px}
+.cfr-stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #3d2418}
+.cfr-stat:last-child{border:none}
+.cfr-lbl{color:#888;font-size:11px}
+.cfr-val{color:#0ff;font-size:12px}
+.cfr-val.ok{color:#0f0}
+.cfr-val.warn{color:#ffa500}
+.cfr-val.err{color:#f00}
+.audit-log{max-height:300px;overflow-y:auto;font-size:10px;font-family:monospace}
+.audit-entry{padding:5px;border-bottom:1px solid #3d2418}
+.audit-entry:nth-child(even){background:#1a0e08}
+.sig-form{display:grid;gap:10px;margin-top:10px}
+.sig-form input,.sig-form select{background:#1a0e08;border:1px solid #3d2418;color:#fff;padding:8px;border-radius:4px}
+.sig-btn{background:#ff6b35;border:none;color:#fff;padding:10px;border-radius:4px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <header class="hdr"><h1>21 CFR Part 11 Compliance</h1></header>
+  <nav class="nav">
+    <a href="../../index.html">Overview</a>
+    <a href="brewhouse.html">Brewhouse</a>
+    <a href="fermentation.html">Fermentation</a>
+    <a href="recipes.html">Recipes</a>
+    <a href="compliance.html" class="active">Compliance</a>
+  </nav>
+  <main class="cfr-grid">
+    <div class="cfr-card">
+      <h3>System Status</h3>
+      <div class="cfr-stat"><span class="cfr-lbl">Audit Trail</span><span class="cfr-val ok" id="auditStatus">ENABLED</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">Chain Integrity</span><span class="cfr-val ok" id="chainStatus">VALID</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">Total Records</span><span class="cfr-val" id="recordCount">0</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">Last Entry</span><span class="cfr-val" id="lastEntry">-</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">System Hash</span><span class="cfr-val" id="sysHash">-</span></div>
+    </div>
+    <div class="cfr-card">
+      <h3>Electronic Signature</h3>
+      <div class="sig-form">
+        <input type="text" id="sigUser" placeholder="Username">
+        <input type="password" id="sigPwd" placeholder="Password">
+        <select id="sigReason">
+          <option>Batch Release</option>
+          <option>Recipe Approval</option>
+          <option>Deviation Review</option>
+          <option>Equipment Verification</option>
+          <option>Quality Hold</option>
+        </select>
+        <button class="sig-btn" onclick="sign()">Apply Signature</button>
+      </div>
+    </div>
+    <div class="cfr-card">
+      <h3>Access Control</h3>
+      <div class="cfr-stat"><span class="cfr-lbl">Operator (L1)</span><span class="cfr-val">View, Monitor</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">Supervisor (L2)</span><span class="cfr-val">Control, Adjust</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">QA (L3)</span><span class="cfr-val">Release, Hold</span></div>
+      <div class="cfr-stat"><span class="cfr-lbl">Admin (L4)</span><span class="cfr-val">Configure, Audit</span></div>
+    </div>
+    <div class="cfr-card" style="grid-column:1/-1">
+      <h3>Audit Trail</h3>
+      <div class="audit-log" id="auditLog"></div>
+    </div>
+  </main>
+  <footer class="ftr"><span>21 CFR Part 11 | ISA-88 | FDA Compliant</span></footer>
+  <script type="module">
+import CFR11 from '../core/cfr11.js';
+window.CFR11=CFR11;
+function update(){
+  const s=CFR11.check();
+  document.getElementById('auditStatus').textContent=s.auditTrail?'ENABLED':'DISABLED';
+  document.getElementById('chainStatus').textContent=s.chainValid?'VALID':'INVALID';
+  document.getElementById('chainStatus').className='cfr-val '+(s.chainValid?'ok':'err');
+  document.getElementById('recordCount').textContent=s.totalRecords;
+  document.getElementById('lastEntry').textContent=s.lastEntry||'-';
+  document.getElementById('sysHash').textContent=CFR11.audit[CFR11.audit.length-1]?.hash||'-';
+  document.getElementById('auditLog').innerHTML=CFR11.audit.slice(-50).reverse()
+    .map(e=>`<div class="audit-entry">${e.ts} | ${e.usr} | ${e.act} | ${JSON.stringify(e.data)}</div>`).join('');
+}
+window.sign=()=>{
+  const u=document.getElementById('sigUser').value;
+  const p=document.getElementById('sigPwd').value;
+  const r=document.getElementById('sigReason').value;
+  if(!u||!p)return alert('Enter credentials');
+  const sig=CFR11.sign(u,p,r);
+  CFR11.log(u,'ESIG',{reason:r},sig);
+  update();
+  alert('Signature applied: '+sig.sig);
+};
+CFR11.log('SYSTEM','INIT',{page:'compliance'});
+update();
+  </script>
+</body>
+</html>

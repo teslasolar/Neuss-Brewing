@@ -1,0 +1,12 @@
+.bh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;padding:15px}
+.vessel-card{background:#0d0704;border:1px solid #3d2418;border-radius:8px;padding:15px;text-align:center}
+.vessel-card h3{color:#ff6b35;margin-bottom:10px}
+.vessel-svg{width:100%;height:150px}
+.ctrl-panel{background:#1a0e08;padding:10px;border-radius:4px;margin-top:10px}
+.ctrl-btn{background:#2d1810;border:1px solid #ff6b35;color:#ff6b35;padding:5px 10px;margin:2px;border-radius:4px;cursor:pointer}
+.ctrl-btn:hover{background:#ff6b35;color:#fff}
+.ctrl-btn.active{background:#0f0;color:#000;border-color:#0f0}
+.phase-list{text-align:left;margin-top:15px}
+.phase{padding:5px;border-left:3px solid #333;margin:5px 0;padding-left:10px}
+.phase.active{border-color:#0f0;background:rgba(0,255,0,.1)}
+.phase.done{border-color:#666;color:#666}

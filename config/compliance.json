@@ -1,0 +1,40 @@
+{
+  "cfr11": {
+    "enabled": true,
+    "auditRetention": 365,
+    "signatureTimeout": 300,
+    "sessionTimeout": 1800,
+    "passwordPolicy": {
+      "minLength": 8,
+      "requireUpper": true,
+      "requireNumber": true,
+      "maxAge": 90
+    }
+  },
+  "isa88": {
+    "enabled": true,
+    "states": ["IDLE","CHARGE","HEAT","MASH","SPARGE","BOIL","COOL","FERM","DONE"],
+    "stateChangeAuth": true
+  },
+  "isa95": {
+    "enabled": true,
+    "levels": [0,1,2,3,4],
+    "integration": "REST"
+  },
+  "isa101": {
+    "enabled": true,
+    "colorCoding": {
+      "normal": "#0f0",
+      "warning": "#ffa500",
+      "critical": "#f00",
+      "inactive": "#666"
+    },
+    "alarmPriorities": 4
+  },
+  "users": [
+    {"id": "oper1", "name": "Operator 1", "acl": 1},
+    {"id": "super1", "name": "Supervisor 1", "acl": 2},
+    {"id": "qa1", "name": "QA Manager", "acl": 3},
+    {"id": "admin", "name": "Administrator", "acl": 4}
+  ]
+}

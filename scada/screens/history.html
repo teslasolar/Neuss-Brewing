@@ -3,190 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>📊 History - SCADA</title>
+  <title>History - SCADA</title>
   <link rel="stylesheet" href="../../assets/style.css">
-  <style>
-    .hist-container{padding:15px}
-    .hist-filters{display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap}
-    .hist-filter{background:#1a0e08;border:1px solid #3d2418;color:#fff;padding:6px 12px;border-radius:4px}
-    .hist-table{width:100%;border-collapse:collapse;background:#0d0704;border-radius:8px;overflow:hidden}
-    .hist-table th,.hist-table td{padding:10px 12px;text-align:left;border-bottom:1px solid #3d2418}
-    .hist-table th{background:#1a0e08;color:#888;font-weight:normal;font-size:11px;text-transform:uppercase}
-    .hist-table tr:hover{background:#1a0e08}
-    .hist-batch{color:#ff6b35;font-weight:bold}
-    .hist-status{padding:2px 8px;border-radius:4px;font-size:10px}
-    .hist-status.done{background:#0f0;color:#000}
-    .hist-status.ferm{background:#0ff;color:#000}
-    .hist-status.pkg{background:#ffa500;color:#000}
-    .hist-chart{background:#0d0704;border:1px solid #3d2418;border-radius:8px;padding:15px;margin-top:15px}
-    .hist-chart h4{color:#ff6b35;margin-bottom:10px}
-    .chart-svg{width:100%;height:200px}
-    .trend-line{fill:none;stroke:#0ff;stroke-width:2}
-    .trend-area{fill:rgba(0,255,255,0.1)}
-    .chart-grid{stroke:#3d2418;stroke-width:1}
-    .chart-label{fill:#888;font-size:10px}
-    .hist-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-top:15px}
-    .hist-stat{background:#0d0704;border:1px solid #3d2418;border-radius:8px;padding:15px;text-align:center}
-    .hist-stat-val{font-size:24px;color:#0ff}
-    .hist-stat-lbl{font-size:10px;color:#888;margin-top:5px}
-    .pagination{display:flex;justify-content:center;gap:5px;margin-top:15px}
-    .page-btn{background:#1a0e08;border:1px solid #3d2418;color:#fff;padding:5px 10px;border-radius:4px;cursor:pointer}
-    .page-btn.active{background:#ff6b35;border-color:#ff6b35}
-  </style>
+  <link rel="stylesheet" href="../../assets/history.css">
 </head>
 <body>
-  <div class="scada-grid">
-    <header class="hdr"><h1>📊 Batch History</h1></header>
-    <nav class="nav">
-      <a href="../../index.html">Overview</a>
-      <a href="brewhouse.html">Brewhouse</a>
-      <a href="fermentation.html">Fermentation</a>
-      <a href="recipes.html">Recipes</a>
-      <a href="history.html" class="active">History</a>
-    </nav>
-    <div class="alm-banner"></div>
-    <main class="main" style="grid-column:1/-1">
-      <div class="hist-container">
-        <!-- Filters -->
-        <div class="hist-filters">
-          <input type="date" class="hist-filter" value="2024-01-01">
-          <input type="date" class="hist-filter" value="2024-12-06">
-          <select class="hist-filter">
-            <option>All Recipes</option>
-            <option>West Coast IPA</option>
-            <option>Oatmeal Stout</option>
-            <option>Pilsner</option>
-          </select>
-          <select class="hist-filter">
-            <option>All Status</option>
-            <option>Completed</option>
-            <option>Fermenting</option>
-            <option>Packaging</option>
-          </select>
-          <button class="hist-filter" style="background:#ff6b35;border-color:#ff6b35;cursor:pointer">Search</button>
-        </div>
-        <!-- Stats -->
-        <div class="hist-stats">
-          <div class="hist-stat"><div class="hist-stat-val">42</div><div class="hist-stat-lbl">Total Batches (2024)</div></div>
-          <div class="hist-stat"><div class="hist-stat-val">15,800L</div><div class="hist-stat-lbl">Total Volume</div></div>
-          <div class="hist-stat"><div class="hist-stat-val">98.2%</div><div class="hist-stat-lbl">Success Rate</div></div>
-          <div class="hist-stat"><div class="hist-stat-val">5.8%</div><div class="hist-stat-lbl">Avg ABV</div></div>
-        </div>
-        <!-- Table -->
-        <table class="hist-table" style="margin-top:15px">
-          <thead>
-            <tr>
-              <th>Batch ID</th>
-              <th>Recipe</th>
-              <th>Brew Date</th>
-              <th>Volume</th>
-              <th>OG</th>
-              <th>FG</th>
-              <th>ABV</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="hist-batch">#2024-042</span></td>
-              <td>West Coast IPA</td>
-              <td>2024-12-01</td>
-              <td>400L</td>
-              <td>1.065</td>
-              <td>-</td>
-              <td>-</td>
-              <td><span class="hist-status ferm">FERMENTING</span></td>
-              <td><a href="#" style="color:#ff6b35">View</a></td>
-            </tr>
-            <tr>
-              <td><span class="hist-batch">#2024-041</span></td>
-              <td>Oatmeal Stout</td>
-              <td>2024-11-24</td>
-              <td>400L</td>
-              <td>1.058</td>
-              <td>-</td>
-              <td>-</td>
-              <td><span class="hist-status ferm">FERMENTING</span></td>
-              <td><a href="#" style="color:#ff6b35">View</a></td>
-            </tr>
-            <tr>
-              <td><span class="hist-batch">#2024-040</span></td>
-              <td>Pilsner</td>
-              <td>2024-11-08</td>
-              <td>400L</td>
-              <td>1.048</td>
-              <td>1.008</td>
-              <td>5.2%</td>
-              <td><span class="hist-status pkg">PACKAGING</span></td>
-              <td><a href="#" style="color:#ff6b35">View</a></td>
-            </tr>
-            <tr>
-              <td><span class="hist-batch">#2024-039</span></td>
-              <td>West Coast IPA</td>
-              <td>2024-11-01</td>
-              <td>400L</td>
-              <td>1.064</td>
-              <td>1.009</td>
-              <td>7.2%</td>
-              <td><span class="hist-status done">COMPLETED</span></td>
-              <td><a href="#" style="color:#ff6b35">View</a></td>
-            </tr>
-            <tr>
-              <td><span class="hist-batch">#2024-038</span></td>
-              <td>Belgian Wit</td>
-              <td>2024-10-25</td>
-              <td>400L</td>
-              <td>1.045</td>
-              <td>1.008</td>
-              <td>4.8%</td>
-              <td><span class="hist-status done">COMPLETED</span></td>
-              <td><a href="#" style="color:#ff6b35">View</a></td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- Pagination -->
-        <div class="pagination">
-          <button class="page-btn">«</button>
-          <button class="page-btn active">1</button>
-          <button class="page-btn">2</button>
-          <button class="page-btn">3</button>
-          <button class="page-btn">»</button>
-        </div>
-        <!-- Trend Chart -->
-        <div class="hist-chart">
-          <h4>Production Trend (2024)</h4>
-          <svg class="chart-svg" viewBox="0 0 700 180">
-            <!-- Grid -->
-            <line x1="50" y1="20" x2="50" y2="150" class="chart-grid"/>
-            <line x1="50" y1="150" x2="680" y2="150" class="chart-grid"/>
-            <!-- Y Labels -->
-            <text x="40" y="25" class="chart-label" text-anchor="end">500L</text>
-            <text x="40" y="90" class="chart-label" text-anchor="end">250L</text>
-            <text x="40" y="150" class="chart-label" text-anchor="end">0L</text>
-            <!-- X Labels -->
-            <text x="100" y="165" class="chart-label" text-anchor="middle">Jan</text>
-            <text x="200" y="165" class="chart-label" text-anchor="middle">Mar</text>
-            <text x="300" y="165" class="chart-label" text-anchor="middle">May</text>
-            <text x="400" y="165" class="chart-label" text-anchor="middle">Jul</text>
-            <text x="500" y="165" class="chart-label" text-anchor="middle">Sep</text>
-            <text x="600" y="165" class="chart-label" text-anchor="middle">Nov</text>
-            <!-- Area -->
-            <path class="trend-area" d="M50,150 L100,100 L150,80 L200,90 L250,70 L300,60 L350,75 L400,55 L450,50 L500,65 L550,45 L600,40 L650,50 L650,150 Z"/>
-            <!-- Line -->
-            <path class="trend-line" d="M50,150 L100,100 L150,80 L200,90 L250,70 L300,60 L350,75 L400,55 L450,50 L500,65 L550,45 L600,40 L650,50"/>
-            <!-- Points -->
-            <circle cx="100" cy="100" r="4" fill="#0ff"/>
-            <circle cx="200" cy="90" r="4" fill="#0ff"/>
-            <circle cx="300" cy="60" r="4" fill="#0ff"/>
-            <circle cx="400" cy="55" r="4" fill="#0ff"/>
-            <circle cx="500" cy="65" r="4" fill="#0ff"/>
-            <circle cx="600" cy="40" r="4" fill="#0ff"/>
-          </svg>
-        </div>
-      </div>
-    </main>
-    <footer class="ftr"><span>ISA-88 Batch History | 42 Batches Recorded</span></footer>
-  </div>
+  <header class="hdr"><h1>Batch History</h1></header>
+  <nav class="nav">
+    <a href="../../index.html">Overview</a>
+    <a href="brewhouse.html">Brewhouse</a>
+    <a href="fermentation.html">Fermentation</a>
+    <a href="recipes.html">Recipes</a>
+    <a href="history.html" class="active">History</a>
+  </nav>
+  <main class="hist-container">
+    <div class="hist-filters">
+      <input type="date" class="hist-filter" value="2024-01-01">
+      <input type="date" class="hist-filter" value="2024-12-06">
+      <select class="hist-filter"><option>All</option></select>
+      <button class="hist-filter" style="background:#ff6b35;cursor:pointer">Search</button>
+    </div>
+    <div class="hist-stats">
+      <div class="hist-stat"><div class="hist-stat-val">42</div><div class="hist-stat-lbl">Batches</div></div>
+      <div class="hist-stat"><div class="hist-stat-val">15.8kL</div><div class="hist-stat-lbl">Volume</div></div>
+      <div class="hist-stat"><div class="hist-stat-val">98%</div><div class="hist-stat-lbl">Success</div></div>
+      <div class="hist-stat"><div class="hist-stat-val">5.8%</div><div class="hist-stat-lbl">Avg ABV</div></div>
+    </div>
+    <table class="hist-table" style="margin-top:15px">
+      <thead><tr><th>ID</th><th>Recipe</th><th>Date</th><th>Vol</th><th>OG</th><th>FG</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="hist-batch">#042</td><td>IPA</td><td>Dec 01</td><td>400L</td><td>1.065</td><td>-</td><td><span class="hist-status ferm">FERM</span></td></tr>
+        <tr><td class="hist-batch">#041</td><td>Stout</td><td>Nov 24</td><td>400L</td><td>1.058</td><td>-</td><td><span class="hist-status ferm">FERM</span></td></tr>
+        <tr><td class="hist-batch">#040</td><td>Pils</td><td>Nov 08</td><td>400L</td><td>1.048</td><td>1.008</td><td><span class="hist-status pkg">PKG</span></td></tr>
+        <tr><td class="hist-batch">#039</td><td>IPA</td><td>Nov 01</td><td>400L</td><td>1.064</td><td>1.009</td><td><span class="hist-status done">DONE</span></td></tr>
+        <tr><td class="hist-batch">#038</td><td>Wit</td><td>Oct 25</td><td>400L</td><td>1.045</td><td>1.008</td><td><span class="hist-status done">DONE</span></td></tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button class="page-btn">«</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">»</button>
+    </div>
+    <div class="hist-chart">
+      <h4>Production Trend</h4>
+      <svg class="chart-svg" viewBox="0 0 700 180">
+        <line x1="50" y1="150" x2="680" y2="150" class="chart-grid"/>
+        <path class="trend-area" d="M50,150 L100,100 L200,90 L300,60 L400,55 L500,65 L600,40 L650,50 L650,150 Z"/>
+        <path class="trend-line" d="M50,150 L100,100 L200,90 L300,60 L400,55 L500,65 L600,40 L650,50"/>
+      </svg>
+    </div>
+  </main>
+  <footer class="ftr"><span>ISA-88 | 21 CFR 11 | Audit Trail</span></footer>
 </body>
 </html>
