@@ -1,0 +1,112 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L2 - Packaging Operations",
+    "nav": [
+      {"href": "?screen=L2-SCADA/brewhouse", "label": "Brewhouse"},
+      {"href": "?screen=L2-SCADA/fermentation", "label": "Fermentation"},
+      {"href": "?screen=L2-SCADA/packaging", "label": "Packaging", "active": true},
+      {"href": "?screen=L2-SCADA/utilities", "label": "Utilities"},
+      {"href": "?screen=L2-SCADA/recipes", "label": "Recipes"},
+      {"href": "?screen=L3-MES/batch-exec", "label": "↑ L3 MES"},
+      {"href": "?screen=L1-Control/sequences", "label": "↓ L1 Control"}
+    ],
+    "leds": [{"label": "Canner", "state": "{canner.run?'grn':'off'}"}, {"label": "Filler", "state": "{filler.run?'grn':'off'}"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Today Output", "value": "48", "unit": "cases", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Cans/Min", "value": "24", "unit": "CPM", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "DO Level", "value": "18", "unit": "ppb", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Fill Accuracy", "value": "99.2", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Rejects", "value": "3", "unit": "cans", "color": "#f00"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 3, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Brite Tanks"},
+            "children": [{
+              "type": "vessel-row",
+              "props": {
+                "mode": "2d",
+                "vessels": [
+                  {"name": "BT1", "level": "{bt1.level}", "color": "#ffa500", "batch": "{bt1.batch}"},
+                  {"name": "BT2", "level": "{bt2.level}", "color": "#ffa500", "batch": "{bt2.batch}"},
+                  {"name": "BT3", "level": "{bt3.level}", "color": "#444", "empty": true}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Canning Line"},
+            "children": [{
+              "type": "flow-diagram",
+              "props": {
+                "nodes": [
+                  {"id": "bt", "label": "BT", "x": 10, "y": 50, "status": "run"},
+                  {"id": "depal", "label": "Depal", "x": 25, "y": 50, "status": "run"},
+                  {"id": "rinse", "label": "Rinse", "x": 40, "y": 50, "status": "run"},
+                  {"id": "fill", "label": "Fill", "x": 55, "y": 50, "status": "run"},
+                  {"id": "seam", "label": "Seam", "x": 70, "y": 50, "status": "run"},
+                  {"id": "date", "label": "Date", "x": 85, "y": 50, "status": "run"}
+                ],
+                "edges": [
+                  {"from": "bt", "to": "depal"},
+                  {"from": "depal", "to": "rinse"},
+                  {"from": "rinse", "to": "fill"},
+                  {"from": "fill", "to": "seam"},
+                  {"from": "seam", "to": "date"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Quality Checks"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "CO2 Volume", "value": "{pkg.co2} vols"}},
+                {"type": "calc-row", "props": {"label": "Fill Volume", "value": "{pkg.fill} oz"}},
+                {"type": "calc-row", "props": {"label": "Seam Width", "value": "{pkg.seam} mm"}},
+                {"type": "calc-row", "props": {"label": "Seam Height", "value": "{pkg.seamH} mm"}},
+                {"type": "calc-row", "props": {"label": "DO (pre-fill)", "value": "{pkg.doIn} ppb"}},
+                {"type": "calc-row", "props": {"label": "DO (post-fill)", "value": "{pkg.doOut} ppb"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Packaging Schedule"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "time", "header": "Time"},
+              {"field": "batch", "header": "Batch"},
+              {"field": "recipe", "header": "Recipe"},
+              {"field": "format", "header": "Format"},
+              {"field": "qty", "header": "Qty"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": "{pkg.schedule}"
+          }
+        }]
+      }
+    ]
+  }]
+}

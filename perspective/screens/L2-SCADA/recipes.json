@@ -1,0 +1,104 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L2 - Recipe Management",
+    "nav": [
+      {"href": "?screen=L2-SCADA/brewhouse", "label": "Brewhouse"},
+      {"href": "?screen=L2-SCADA/fermentation", "label": "Fermentation"},
+      {"href": "?screen=L2-SCADA/packaging", "label": "Packaging"},
+      {"href": "?screen=L2-SCADA/utilities", "label": "Utilities"},
+      {"href": "?screen=L2-SCADA/recipes", "label": "Recipes", "active": true},
+      {"href": "?screen=L3-MES/batch-exec", "label": "↑ L3 MES"},
+      {"href": "?screen=L1-Control/sequences", "label": "↓ L1 Control"}
+    ],
+    "leds": [{"label": "Recipes", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Active Recipes", "value": "12", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Draft", "value": "3", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Approved", "value": "9", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Retired", "value": "24", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Recipe Library"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "name", "header": "Recipe"},
+                  {"field": "style", "header": "Style"},
+                  {"field": "og", "header": "OG"},
+                  {"field": "ibu", "header": "IBU"},
+                  {"field": "version", "header": "Ver"},
+                  {"field": "status", "header": "Status"},
+                  {"field": "batches", "header": "Batches"}
+                ],
+                "data": [
+                  {"name": "Flagship IPA", "style": "American IPA", "og": "1.065", "ibu": "65", "version": "3.2", "status": "Active", "batches": "47"},
+                  {"name": "Session Pale", "style": "Pale Ale", "og": "1.048", "ibu": "38", "version": "2.1", "status": "Active", "batches": "32"},
+                  {"name": "Hazy Days", "style": "NEIPA", "og": "1.068", "ibu": "45", "version": "1.4", "status": "Active", "batches": "28"},
+                  {"name": "Dark Roast Stout", "style": "Stout", "og": "1.072", "ibu": "42", "version": "2.0", "status": "Active", "batches": "19"},
+                  {"name": "Pilsner Classic", "style": "Pilsner", "og": "1.050", "ibu": "32", "version": "1.1", "status": "Active", "batches": "15"},
+                  {"name": "Wheat Summer", "style": "Hefeweizen", "og": "1.052", "ibu": "14", "version": "1.0", "status": "Draft", "batches": "2"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Selected Recipe: Flagship IPA"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "10px"},
+              "children": [
+                {"type": "label", "props": {"text": "Grain Bill", "style": "bold"}},
+                {"type": "calc-row", "props": {"label": "2-Row Pale", "value": "85%"}},
+                {"type": "calc-row", "props": {"label": "Munich", "value": "8%"}},
+                {"type": "calc-row", "props": {"label": "Crystal 40", "value": "5%"}},
+                {"type": "calc-row", "props": {"label": "Carapils", "value": "2%"}},
+                {"type": "label", "props": {"text": "Hops", "style": "bold"}},
+                {"type": "calc-row", "props": {"label": "Centennial (60m)", "value": "1.5 oz"}},
+                {"type": "calc-row", "props": {"label": "Cascade (15m)", "value": "1.0 oz"}},
+                {"type": "calc-row", "props": {"label": "Citra (WP)", "value": "2.0 oz"}},
+                {"type": "calc-row", "props": {"label": "Simcoe (DH)", "value": "3.0 oz"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Mash Profile: Flagship IPA"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "step", "header": "Step"},
+              {"field": "temp", "header": "Temp (°F)"},
+              {"field": "time", "header": "Time (min)"},
+              {"field": "notes", "header": "Notes"}
+            ],
+            "data": [
+              {"step": "Protein Rest", "temp": "122", "time": "10", "notes": "Optional for well-modified malt"},
+              {"step": "Sacch Rest", "temp": "152", "time": "60", "notes": "Main conversion"},
+              {"step": "Mash Out", "temp": "168", "time": "10", "notes": "Stop enzyme activity"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

@@ -1,0 +1,68 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Inventory Management",
+    "nav": [
+      {"href": "?screen=business/dashboard", "label": "Dashboard"},
+      {"href": "?screen=business/inventory", "label": "Inventory", "active": true},
+      {"href": "?screen=business/sales", "label": "Sales"},
+      {"href": "?screen=business/production", "label": "Production"},
+      {"href": "?screen=business/costs", "label": "Costs"},
+      {"href": "?screen=business/maintenance", "label": "Maintenance"}
+    ],
+    "leds": [{"label": "Inv", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Value", "value": "28,400", "unit": "$", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Raw Materials", "value": "12,800", "unit": "$", "color": "#8b4513"}},
+          {"type": "stat-card", "props": {"title": "WIP", "value": "8,200", "unit": "$", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Finished Goods", "value": "7,400", "unit": "$", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Low Stock Items", "value": "3", "color": "#f00"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Raw Materials"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "item", "header": "Item"},
+              {"field": "onhand", "header": "On Hand"},
+              {"field": "unit", "header": "Unit"},
+              {"field": "reorder", "header": "Reorder Pt"},
+              {"field": "status", "header": "Status"},
+              {"field": "value", "header": "Value"}
+            ],
+            "data": "{inv.raw}"
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Finished Goods Inventory"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "sku", "header": "SKU"},
+              {"field": "product", "header": "Product"},
+              {"field": "cases", "header": "Cases"},
+              {"field": "kegs", "header": "1/2 bbl"},
+              {"field": "packDate", "header": "Pack Date"},
+              {"field": "bbDate", "header": "Best By"}
+            ],
+            "data": "{inv.finished}"
+          }
+        }]
+      }
+    ]
+  }]
+}

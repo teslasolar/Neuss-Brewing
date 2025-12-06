@@ -1,0 +1,70 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Production Planning",
+    "nav": [
+      {"href": "?screen=business/dashboard", "label": "Dashboard"},
+      {"href": "?screen=business/inventory", "label": "Inventory"},
+      {"href": "?screen=business/sales", "label": "Sales"},
+      {"href": "?screen=business/production", "label": "Production", "active": true},
+      {"href": "?screen=business/costs", "label": "Costs"},
+      {"href": "?screen=business/maintenance", "label": "Maintenance"}
+    ],
+    "leds": [{"label": "Prod", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "MTD Production", "value": "86", "unit": "bbl", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Capacity Used", "value": "72", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Scheduled", "value": "4", "unit": "batches", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "In Ferment", "value": "4", "color": "#9b59b6"}},
+          {"type": "stat-card", "props": {"title": "Ready to Pack", "value": "2", "color": "#0f0"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Production Schedule"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "date", "header": "Brew Date"},
+              {"field": "batch", "header": "Batch"},
+              {"field": "recipe", "header": "Recipe"},
+              {"field": "size", "header": "Size"},
+              {"field": "fv", "header": "Target FV"},
+              {"field": "packDate", "header": "Est Pack"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": "{prod.schedule}"
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Fermentation Schedule"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "fv", "header": "FV"},
+              {"field": "batch", "header": "Batch"},
+              {"field": "recipe", "header": "Recipe"},
+              {"field": "day", "header": "Day"},
+              {"field": "sg", "header": "SG"},
+              {"field": "estReady", "header": "Est Ready"},
+              {"field": "action", "header": "Next Action"}
+            ],
+            "data": "{prod.fermentation}"
+          }
+        }]
+      }
+    ]
+  }]
+}

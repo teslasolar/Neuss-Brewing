@@ -1,0 +1,66 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Alarm Management",
+    "nav": [
+      {"href": "?screen=controls/pid", "label": "PID Loops"},
+      {"href": "?screen=controls/io", "label": "I/O Status"},
+      {"href": "?screen=controls/alarms", "label": "Alarms", "active": true},
+      {"href": "?screen=controls/historian", "label": "Historian"},
+      {"href": "?screen=controls/plc", "label": "PLC Status"}
+    ],
+    "leds": [{"label": "Alarms", "state": "{alarms.active>0?'red':'grn'}"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Active", "value": "{alarms.active}", "color": "#f00"}},
+          {"type": "stat-card", "props": {"title": "Unacked", "value": "{alarms.unacked}", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Today", "value": "{alarms.today}", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "This Week", "value": "{alarms.week}", "color": "#888"}},
+          {"type": "stat-card", "props": {"title": "Avg/Day", "value": "{alarms.avgDay}", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Active Alarms"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "time", "header": "Time"},
+              {"field": "tag", "header": "Tag"},
+              {"field": "message", "header": "Message"},
+              {"field": "priority", "header": "Priority"},
+              {"field": "state", "header": "State"}
+            ],
+            "data": "{alarms.active}"
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Alarm History (Last 24h)"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "time", "header": "Time"},
+              {"field": "tag", "header": "Tag"},
+              {"field": "message", "header": "Message"},
+              {"field": "priority", "header": "Priority"},
+              {"field": "duration", "header": "Duration"},
+              {"field": "ackBy", "header": "Ack By"}
+            ],
+            "data": "{alarms.history}"
+          }
+        }]
+      }
+    ]
+  }]
+}

@@ -1,0 +1,99 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Sensory Analysis",
+    "nav": [
+      {"href": "?screen=science/water", "label": "Water"},
+      {"href": "?screen=science/ferm-kinetics", "label": "Ferm Kinetics"},
+      {"href": "?screen=science/lab", "label": "Lab/QC"},
+      {"href": "?screen=science/yeast", "label": "Yeast Mgmt"},
+      {"href": "?screen=science/sensory", "label": "Sensory", "active": true}
+    ],
+    "leds": [{"label": "Sensory", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Pending Evals", "value": "3", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "This Week", "value": "8", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Avg Score", "value": "4.2", "unit": "/5", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Off-Flavors", "value": "0", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "True-to-Style", "value": "95", "unit": "%", "color": "#0f0"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Recent Sensory Evaluations"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "date", "header": "Date"},
+              {"field": "batch", "header": "Batch"},
+              {"field": "product", "header": "Product"},
+              {"field": "aroma", "header": "Aroma"},
+              {"field": "appearance", "header": "Appear"},
+              {"field": "flavor", "header": "Flavor"},
+              {"field": "mouth", "header": "Mouth"},
+              {"field": "overall", "header": "Overall"},
+              {"field": "notes", "header": "Notes"}
+            ],
+            "data": [
+              {"date": "12/05", "batch": "IPA-047", "product": "Flagship IPA", "aroma": "4.5", "appearance": "4.0", "flavor": "4.5", "mouth": "4.0", "overall": "4.3", "notes": "True to style"},
+              {"date": "12/04", "batch": "HAZY-028", "product": "Hazy Days", "aroma": "4.5", "appearance": "4.5", "flavor": "4.0", "mouth": "4.5", "overall": "4.4", "notes": "Great haze"},
+              {"date": "12/03", "batch": "PALE-032", "product": "Session Pale", "aroma": "4.0", "appearance": "4.5", "flavor": "4.0", "mouth": "4.0", "overall": "4.1", "notes": "Balanced"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Off-Flavor Detection"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "flavor", "header": "Off-Flavor"},
+                  {"field": "cause", "header": "Common Cause"},
+                  {"field": "threshold", "header": "Threshold"},
+                  {"field": "lastSeen", "header": "Last Seen"}
+                ],
+                "data": [
+                  {"flavor": "Diacetyl", "cause": "Incomplete fermentation", "threshold": "10-15 ppb", "lastSeen": "Never"},
+                  {"flavor": "Acetaldehyde", "cause": "Young beer", "threshold": "5-10 ppm", "lastSeen": "Never"},
+                  {"flavor": "DMS", "cause": "Poor boil/chill", "threshold": "30-50 ppb", "lastSeen": "Never"},
+                  {"flavor": "Oxidation", "cause": "O2 exposure", "threshold": "Variable", "lastSeen": "Sep 2024"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Flavor Wheel Stats"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Fruity/Estery", "value": "High"}},
+                {"type": "calc-row", "props": {"label": "Hoppy/Resinous", "value": "High"}},
+                {"type": "calc-row", "props": {"label": "Malty/Sweet", "value": "Medium"}},
+                {"type": "calc-row", "props": {"label": "Roasted", "value": "Low"}},
+                {"type": "calc-row", "props": {"label": "Phenolic", "value": "None"}},
+                {"type": "calc-row", "props": {"label": "Sulfur", "value": "None"}}
+              ]
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

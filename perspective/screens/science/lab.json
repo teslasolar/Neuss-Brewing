@@ -1,0 +1,97 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Lab & Quality Control",
+    "nav": [
+      {"href": "?screen=science/water", "label": "Water"},
+      {"href": "?screen=science/ferm-kinetics", "label": "Ferm Kinetics"},
+      {"href": "?screen=science/lab", "label": "Lab/QC", "active": true},
+      {"href": "?screen=science/yeast", "label": "Yeast Mgmt"},
+      {"href": "?screen=science/sensory", "label": "Sensory"}
+    ],
+    "leds": [{"label": "Lab", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Pending Tests", "value": "6", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Completed Today", "value": "12", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Out of Spec", "value": "0", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Micro Issues", "value": "0", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Hold/Quarantine", "value": "0", "color": "#0f0"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Recent Lab Results"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "date", "header": "Date"},
+              {"field": "batch", "header": "Batch"},
+              {"field": "test", "header": "Test"},
+              {"field": "result", "header": "Result"},
+              {"field": "spec", "header": "Spec"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": "{lab.results}"
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Microbiology"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "sample", "header": "Sample"},
+                  {"field": "test", "header": "Test"},
+                  {"field": "result", "header": "Result"},
+                  {"field": "date", "header": "Date"}
+                ],
+                "data": [
+                  {"sample": "FV1 - Hazy IPA", "test": "Total Plate Count", "result": "<10 CFU/mL", "date": "Today"},
+                  {"sample": "BT1 - Pale Ale", "test": "Wild Yeast", "result": "ND", "date": "Today"},
+                  {"sample": "Canning Line", "test": "ATP Swab", "result": "42 RLU", "date": "Today"},
+                  {"sample": "Packaging - 6pk", "test": "DO", "result": "18 ppb", "date": "Today"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Analytical"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "batch", "header": "Batch"},
+                  {"field": "abv", "header": "ABV"},
+                  {"field": "ibu", "header": "IBU"},
+                  {"field": "color", "header": "SRM"},
+                  {"field": "co2", "header": "CO2"}
+                ],
+                "data": [
+                  {"batch": "IPA-2024-047", "abv": "6.5%", "ibu": "62", "color": "7.2", "co2": "2.45"},
+                  {"batch": "PALE-2024-032", "abv": "5.2%", "ibu": "38", "color": "5.8", "co2": "2.50"},
+                  {"batch": "HAZY-2024-028", "abv": "6.8%", "ibu": "42", "color": "4.5", "co2": "2.40"}
+                ]
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

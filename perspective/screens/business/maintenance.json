@@ -1,0 +1,68 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Maintenance Management",
+    "nav": [
+      {"href": "?screen=business/dashboard", "label": "Dashboard"},
+      {"href": "?screen=business/inventory", "label": "Inventory"},
+      {"href": "?screen=business/sales", "label": "Sales"},
+      {"href": "?screen=business/production", "label": "Production"},
+      {"href": "?screen=business/costs", "label": "Costs"},
+      {"href": "?screen=business/maintenance", "label": "Maintenance", "active": true}
+    ],
+    "leds": [{"label": "Maint", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Open WOs", "value": "4", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Overdue", "value": "1", "color": "#f00"}},
+          {"type": "stat-card", "props": {"title": "Completed MTD", "value": "12", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "PM Due Soon", "value": "3", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "MTD Cost", "value": "2,400", "unit": "$", "color": "#ff6b35"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Open Work Orders"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "wo", "header": "WO #"},
+              {"field": "equipment", "header": "Equipment"},
+              {"field": "issue", "header": "Issue"},
+              {"field": "priority", "header": "Priority"},
+              {"field": "assigned", "header": "Assigned"},
+              {"field": "due", "header": "Due Date"}
+            ],
+            "data": "{maint.open}"
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Preventive Maintenance Schedule"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "equipment", "header": "Equipment"},
+              {"field": "task", "header": "PM Task"},
+              {"field": "frequency", "header": "Frequency"},
+              {"field": "lastDone", "header": "Last Done"},
+              {"field": "nextDue", "header": "Next Due"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": "{maint.pm}"
+          }
+        }]
+      }
+    ]
+  }]
+}

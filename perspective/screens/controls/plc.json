@@ -1,0 +1,92 @@
+{
+  "type": "page",
+  "props": {
+    "title": "PLC Status",
+    "nav": [
+      {"href": "?screen=controls/pid", "label": "PID Loops"},
+      {"href": "?screen=controls/io", "label": "I/O Status"},
+      {"href": "?screen=controls/alarms", "label": "Alarms"},
+      {"href": "?screen=controls/historian", "label": "Historian"},
+      {"href": "?screen=controls/plc", "label": "PLC Status", "active": true}
+    ],
+    "leds": [{"label": "PLC", "state": "grn"}, {"label": "Comms", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Main PLC - CompactLogix L33ER"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Status", "value": "RUN"}},
+                {"type": "calc-row", "props": {"label": "IP Address", "value": "192.168.1.10"}},
+                {"type": "calc-row", "props": {"label": "CPU Load", "value": "{plc.cpu}%"}},
+                {"type": "calc-row", "props": {"label": "Memory Used", "value": "{plc.mem}%"}},
+                {"type": "calc-row", "props": {"label": "Scan Time", "value": "{plc.scan} ms"}},
+                {"type": "calc-row", "props": {"label": "Uptime", "value": "{plc.uptime}"}},
+                {"type": "calc-row", "props": {"label": "Firmware", "value": "33.011"}},
+                {"type": "calc-row", "props": {"label": "Last Config", "value": "{plc.lastConfig}"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "I/O Modules"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "slot", "header": "Slot"},
+                  {"field": "module", "header": "Module"},
+                  {"field": "type", "header": "Type"},
+                  {"field": "status", "header": "Status"}
+                ],
+                "data": [
+                  {"slot": "0", "module": "1769-L33ER", "type": "CPU", "status": "OK"},
+                  {"slot": "1", "module": "1769-IQ16", "type": "16 DI", "status": "OK"},
+                  {"slot": "2", "module": "1769-IQ16", "type": "16 DI", "status": "OK"},
+                  {"slot": "3", "module": "1769-OB16", "type": "16 DO", "status": "OK"},
+                  {"slot": "4", "module": "1769-IF8", "type": "8 AI", "status": "OK"},
+                  {"slot": "5", "module": "1769-IF8", "type": "8 AI", "status": "OK"},
+                  {"slot": "6", "module": "1769-OF4", "type": "4 AO", "status": "OK"},
+                  {"slot": "7", "module": "1769-OF4", "type": "4 AO", "status": "OK"}
+                ]
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Communication Status"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "device", "header": "Device"},
+              {"field": "protocol", "header": "Protocol"},
+              {"field": "address", "header": "Address"},
+              {"field": "status", "header": "Status"},
+              {"field": "errors", "header": "Errors"},
+              {"field": "lastComm", "header": "Last Comm"}
+            ],
+            "data": [
+              {"device": "Ignition Gateway", "protocol": "EtherNet/IP", "address": "192.168.1.5", "status": "OK", "errors": "0", "lastComm": "< 1s"},
+              {"device": "HMI Panel", "protocol": "EtherNet/IP", "address": "192.168.1.20", "status": "OK", "errors": "0", "lastComm": "< 1s"},
+              {"device": "VFD - P1", "protocol": "Modbus TCP", "address": "192.168.1.101", "status": "OK", "errors": "2", "lastComm": "< 1s"},
+              {"device": "VFD - P2", "protocol": "Modbus TCP", "address": "192.168.1.102", "status": "OK", "errors": "0", "lastComm": "< 1s"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

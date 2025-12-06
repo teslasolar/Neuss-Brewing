@@ -1,0 +1,97 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Yeast Management",
+    "nav": [
+      {"href": "?screen=science/water", "label": "Water"},
+      {"href": "?screen=science/ferm-kinetics", "label": "Ferm Kinetics"},
+      {"href": "?screen=science/lab", "label": "Lab/QC"},
+      {"href": "?screen=science/yeast", "label": "Yeast Mgmt", "active": true},
+      {"href": "?screen=science/sensory", "label": "Sensory"}
+    ],
+    "leds": [{"label": "Yeast", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Active Strains", "value": "4", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Total Inventory", "value": "12", "unit": "L", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Avg Viability", "value": "94", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Harvest Ready", "value": "2", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "At Max Gen", "value": "1", "color": "#f00"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Yeast Inventory"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "strain", "header": "Strain"},
+              {"field": "vendor", "header": "Source"},
+              {"field": "gen", "header": "Gen"},
+              {"field": "maxGen", "header": "Max"},
+              {"field": "volume", "header": "Volume"},
+              {"field": "viability", "header": "Viability"},
+              {"field": "harvested", "header": "Harvested"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": [
+              {"strain": "US-05 / Chico", "vendor": "Fermentis", "gen": "4", "maxGen": "8", "volume": "4L", "viability": "96%", "harvested": "2024-12-02", "status": "Good"},
+              {"strain": "WLP001 / California", "vendor": "White Labs", "gen": "6", "maxGen": "8", "volume": "3L", "viability": "92%", "harvested": "2024-11-28", "status": "Good"},
+              {"strain": "London III", "vendor": "Imperial", "gen": "3", "maxGen": "6", "volume": "2L", "viability": "94%", "harvested": "2024-12-01", "status": "Good"},
+              {"strain": "Saflager W-34/70", "vendor": "Fermentis", "gen": "8", "maxGen": "8", "volume": "3L", "viability": "88%", "harvested": "2024-11-25", "status": "Max Gen"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Pitch Rate Calculator"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Batch Size", "value": "{pitch.batchSize} gal"}},
+                {"type": "calc-row", "props": {"label": "Target OG", "value": "{pitch.og} °P"}},
+                {"type": "calc-row", "props": {"label": "Pitch Rate", "value": "{pitch.rate} M cells/mL/°P"}},
+                {"type": "calc-row", "props": {"label": "Cells Needed", "value": "{pitch.cellsNeeded} B"}},
+                {"type": "calc-row", "props": {"label": "Slurry Volume", "value": "{pitch.slurry} mL"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Upcoming Actions"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "action", "header": "Action"},
+                  {"field": "strain", "header": "Strain"},
+                  {"field": "date", "header": "Date"}
+                ],
+                "data": [
+                  {"action": "Harvest", "strain": "US-05", "date": "Tomorrow"},
+                  {"action": "Harvest", "strain": "London III", "date": "Dec 10"},
+                  {"action": "Order New", "strain": "W-34/70", "date": "ASAP"},
+                  {"action": "Viability Check", "strain": "WLP001", "date": "Dec 8"}
+                ]
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

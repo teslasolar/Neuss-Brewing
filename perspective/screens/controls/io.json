@@ -1,0 +1,108 @@
+{
+  "type": "page",
+  "props": {
+    "title": "I/O Status",
+    "nav": [
+      {"href": "?screen=controls/pid", "label": "PID Loops"},
+      {"href": "?screen=controls/io", "label": "I/O Status", "active": true},
+      {"href": "?screen=controls/alarms", "label": "Alarms"},
+      {"href": "?screen=controls/historian", "label": "Historian"},
+      {"href": "?screen=controls/plc", "label": "PLC Status"}
+    ],
+    "leds": [{"label": "DI", "state": "grn"}, {"label": "DO", "state": "grn"}, {"label": "AI", "state": "grn"}, {"label": "AO", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Digital In", "value": "24/32", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Digital Out", "value": "18/24", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Analog In", "value": "16/16", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Analog Out", "value": "8/8", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Digital Inputs"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "addr", "header": "Address"},
+                  {"field": "tag", "header": "Tag"},
+                  {"field": "desc", "header": "Description"},
+                  {"field": "state", "header": "State"}
+                ],
+                "data": "{io.di}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Digital Outputs"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "addr", "header": "Address"},
+                  {"field": "tag", "header": "Tag"},
+                  {"field": "desc", "header": "Description"},
+                  {"field": "state", "header": "State"}
+                ],
+                "data": "{io.do}"
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Analog Inputs"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "addr", "header": "Address"},
+                  {"field": "tag", "header": "Tag"},
+                  {"field": "desc", "header": "Description"},
+                  {"field": "raw", "header": "Raw"},
+                  {"field": "eng", "header": "Eng Value"}
+                ],
+                "data": "{io.ai}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Analog Outputs"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "addr", "header": "Address"},
+                  {"field": "tag", "header": "Tag"},
+                  {"field": "desc", "header": "Description"},
+                  {"field": "value", "header": "Value"},
+                  {"field": "pct", "header": "%"}
+                ],
+                "data": "{io.ao}"
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

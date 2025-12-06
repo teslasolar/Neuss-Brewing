@@ -1,0 +1,59 @@
+{
+  "type": "page",
+  "props": {
+    "title": "PID Control Loops",
+    "nav": [
+      {"href": "?screen=controls/pid", "label": "PID Loops", "active": true},
+      {"href": "?screen=controls/io", "label": "I/O Status"},
+      {"href": "?screen=controls/alarms", "label": "Alarms"},
+      {"href": "?screen=controls/historian", "label": "Historian"},
+      {"href": "?screen=controls/plc", "label": "PLC Status"}
+    ],
+    "leds": [{"label": "PLC", "state": "grn"}, {"label": "PIDs", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Active Loops", "value": "8", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "In Auto", "value": "7", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Manual", "value": "1", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Alarms", "value": "0", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Avg IAE", "value": "2.4", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Temperature Control Loops"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 4, "gap": "12px"},
+          "children": [
+            {"type": "pid-faceplate", "props": {"name": "HLT Temp", "pv": "{hlt.temp}", "sp": "{hlt.sp}", "out": "{hlt.out}", "mode": "{hlt.mode}", "unit": "°F"}},
+            {"type": "pid-faceplate", "props": {"name": "Mash Temp", "pv": "{mash.temp}", "sp": "{mash.sp}", "out": "{mash.out}", "mode": "{mash.mode}", "unit": "°F"}},
+            {"type": "pid-faceplate", "props": {"name": "BK Temp", "pv": "{bk.temp}", "sp": "{bk.sp}", "out": "{bk.out}", "mode": "{bk.mode}", "unit": "°F"}},
+            {"type": "pid-faceplate", "props": {"name": "Glycol Supply", "pv": "{glycol.temp}", "sp": "{glycol.sp}", "out": "{glycol.out}", "mode": "{glycol.mode}", "unit": "°F"}}
+          ]
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Fermenter Temperature Loops"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 4, "gap": "12px"},
+          "children": [
+            {"type": "pid-faceplate", "props": {"name": "FV1", "pv": "{fv1.temp}", "sp": "{fv1.sp}", "out": "{fv1.out}", "mode": "{fv1.mode}", "unit": "°F"}},
+            {"type": "pid-faceplate", "props": {"name": "FV2", "pv": "{fv2.temp}", "sp": "{fv2.sp}", "out": "{fv2.out}", "mode": "{fv2.mode}", "unit": "°F"}},
+            {"type": "pid-faceplate", "props": {"name": "FV3", "pv": "{fv3.temp}", "sp": "{fv3.sp}", "out": "{fv3.out}", "mode": "{fv3.mode}", "unit": "°F"}},
+            {"type": "pid-faceplate", "props": {"name": "FV4", "pv": "{fv4.temp}", "sp": "{fv4.sp}", "out": "{fv4.out}", "mode": "{fv4.mode}", "unit": "°F"}}
+          ]
+        }]
+      }
+    ]
+  }]
+}

@@ -1,0 +1,92 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Sales & Orders",
+    "nav": [
+      {"href": "?screen=business/dashboard", "label": "Dashboard"},
+      {"href": "?screen=business/inventory", "label": "Inventory"},
+      {"href": "?screen=business/sales", "label": "Sales", "active": true},
+      {"href": "?screen=business/production", "label": "Production"},
+      {"href": "?screen=business/costs", "label": "Costs"},
+      {"href": "?screen=business/maintenance", "label": "Maintenance"}
+    ],
+    "leds": [{"label": "Orders", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Open Orders", "value": "14", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Ships Today", "value": "3", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Backorders", "value": "1", "color": "#f00"}},
+          {"type": "stat-card", "props": {"title": "MTD Orders", "value": "68", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Avg Order", "value": "630", "unit": "$", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Open Orders"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "order", "header": "Order #"},
+              {"field": "customer", "header": "Customer"},
+              {"field": "items", "header": "Items"},
+              {"field": "total", "header": "Total"},
+              {"field": "shipDate", "header": "Ship Date"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": "{sales.orders}"
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Top Accounts (YTD)"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "account", "header": "Account"},
+                  {"field": "orders", "header": "Orders"},
+                  {"field": "revenue", "header": "Revenue"},
+                  {"field": "lastOrder", "header": "Last Order"}
+                ],
+                "data": "{sales.topAccounts}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Sales by Region"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "region", "header": "Region"},
+                  {"field": "accounts", "header": "Accounts"},
+                  {"field": "mtd", "header": "MTD"},
+                  {"field": "ytd", "header": "YTD"}
+                ],
+                "data": [
+                  {"region": "Local (25mi)", "accounts": "28", "mtd": "$18,400", "ytd": "$148,200"},
+                  {"region": "Regional (100mi)", "accounts": "14", "mtd": "$8,200", "ytd": "$68,400"},
+                  {"region": "Statewide", "accounts": "6", "mtd": "$4,100", "ytd": "$32,800"}
+                ]
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

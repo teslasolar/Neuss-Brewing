@@ -1,10 +1,13 @@
 {
   "type": "page",
   "props": {
-    "title": "ISA-95 Navigation",
+    "title": "ISA-95 Navigation Hub",
     "nav": [
-      {"href": "overview.html", "label": "Overview"},
-      {"href": "?screen=levels", "label": "ISA-95 Levels", "active": true}
+      {"href": "?screen=levels", "label": "ISA-95 Levels", "active": true},
+      {"href": "?screen=business/dashboard", "label": "Business"},
+      {"href": "?screen=startup/overview", "label": "Startup"},
+      {"href": "?screen=science/water", "label": "Science"},
+      {"href": "?screen=controls/pid", "label": "Controls"}
     ]
   },
   "children": [{
@@ -46,14 +49,14 @@
         "props": {
           "level": 2,
           "name": "SCADA - Supervisory Control",
-          "desc": "HMI screens, operator interface, monitoring",
+          "desc": "HMI screens, operator interface, process monitoring",
           "color": "#2ecc71",
           "links": [
-            {"href": "overview.html", "label": "Overview"},
-            {"href": "brewhouse.html", "label": "Brewhouse"},
-            {"href": "fermentation.html", "label": "Fermentation"},
-            {"href": "?screen=historian", "label": "Historian"},
-            {"href": "?screen=alarms", "label": "Alarms"}
+            {"href": "?screen=L2-SCADA/brewhouse", "label": "Brewhouse"},
+            {"href": "?screen=L2-SCADA/fermentation", "label": "Fermentation"},
+            {"href": "?screen=L2-SCADA/packaging", "label": "Packaging"},
+            {"href": "?screen=L2-SCADA/utilities", "label": "Utilities"},
+            {"href": "?screen=L2-SCADA/recipes", "label": "Recipes"}
           ]
         }
       },
@@ -67,8 +70,8 @@
           "links": [
             {"href": "?screen=L1-Control/sequences", "label": "Sequences"},
             {"href": "?screen=L1-Control/plc-status", "label": "PLC Status"},
-            {"href": "?screen=pid", "label": "PID Loops"},
-            {"href": "?screen=io", "label": "I/O Status"}
+            {"href": "?screen=controls/pid", "label": "PID Loops"},
+            {"href": "?screen=controls/io", "label": "I/O Status"}
           ]
         }
       },
@@ -85,6 +88,59 @@
             {"href": "?screen=L0-Field/devices", "label": "Field Devices"}
           ]
         }
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 3, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Business Operations"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "nav-link", "props": {"href": "?screen=business/dashboard", "label": "Dashboard"}},
+                {"type": "nav-link", "props": {"href": "?screen=business/inventory", "label": "Inventory"}},
+                {"type": "nav-link", "props": {"href": "?screen=business/sales", "label": "Sales & Orders"}},
+                {"type": "nav-link", "props": {"href": "?screen=business/production", "label": "Production"}},
+                {"type": "nav-link", "props": {"href": "?screen=business/costs", "label": "Costs"}},
+                {"type": "nav-link", "props": {"href": "?screen=business/maintenance", "label": "Maintenance"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Brewing Science"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "nav-link", "props": {"href": "?screen=science/water", "label": "Water Chemistry"}},
+                {"type": "nav-link", "props": {"href": "?screen=science/ferm-kinetics", "label": "Ferm Kinetics"}},
+                {"type": "nav-link", "props": {"href": "?screen=science/lab", "label": "Lab/QC"}},
+                {"type": "nav-link", "props": {"href": "?screen=science/yeast", "label": "Yeast Mgmt"}},
+                {"type": "nav-link", "props": {"href": "?screen=science/sensory", "label": "Sensory"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Startup Planning"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "nav-link", "props": {"href": "?screen=startup/overview", "label": "Overview"}},
+                {"type": "nav-link", "props": {"href": "?screen=startup/location", "label": "Location"}},
+                {"type": "nav-link", "props": {"href": "?screen=startup/equipment", "label": "Equipment"}},
+                {"type": "nav-link", "props": {"href": "?screen=startup/facility", "label": "Facility"}},
+                {"type": "nav-link", "props": {"href": "?screen=startup/financials", "label": "Financials"}},
+                {"type": "nav-link", "props": {"href": "?screen=startup/timeline", "label": "Timeline"}}
+              ]
+            }]
+          }
+        ]
       }
     ]
   }]

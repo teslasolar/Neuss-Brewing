@@ -1,0 +1,88 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Business Dashboard",
+    "nav": [
+      {"href": "?screen=business/dashboard", "label": "Dashboard", "active": true},
+      {"href": "?screen=business/inventory", "label": "Inventory"},
+      {"href": "?screen=business/sales", "label": "Sales"},
+      {"href": "?screen=business/production", "label": "Production"},
+      {"href": "?screen=business/costs", "label": "Costs"},
+      {"href": "?screen=business/maintenance", "label": "Maintenance"}
+    ],
+    "leds": [{"label": "ERP", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "MTD Revenue", "value": "42,850", "unit": "$", "trend": "+12%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "BBL Produced", "value": "86", "unit": "bbl", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Active SKUs", "value": "8", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Inventory Value", "value": "28,400", "unit": "$", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Open Orders", "value": "14", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Revenue by Channel"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "channel", "header": "Channel"},
+                  {"field": "mtd", "header": "MTD"},
+                  {"field": "ytd", "header": "YTD"},
+                  {"field": "pct", "header": "% Mix"}
+                ],
+                "data": [
+                  {"channel": "Taproom", "mtd": "$18,200", "ytd": "$142,500", "pct": "42%"},
+                  {"channel": "Distribution", "mtd": "$14,800", "ytd": "$98,200", "pct": "34%"},
+                  {"channel": "On-Premise", "mtd": "$6,200", "ytd": "$52,800", "pct": "15%"},
+                  {"channel": "Events", "mtd": "$3,650", "ytd": "$28,400", "pct": "9%"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Top Products (MTD)"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "product", "header": "Product"},
+                  {"field": "sold", "header": "Cases"},
+                  {"field": "rev", "header": "Revenue"},
+                  {"field": "margin", "header": "Margin"}
+                ],
+                "data": [
+                  {"product": "Flagship IPA 16oz 4pk", "sold": "124", "rev": "$6,200", "margin": "52%"},
+                  {"product": "Hazy Days 16oz 4pk", "sold": "98", "rev": "$5,880", "margin": "48%"},
+                  {"product": "Session Pale 12oz 6pk", "sold": "86", "rev": "$3,440", "margin": "55%"},
+                  {"product": "Pilsner 16oz Draft", "sold": "42 bbl", "rev": "$8,400", "margin": "68%"}
+                ]
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Weekly Revenue Trend"},
+        "children": [{
+          "type": "trend",
+          "props": {"data": "{biz.revTrend}", "height": 120, "color": "#0f0"}
+        }]
+      }
+    ]
+  }]
+}

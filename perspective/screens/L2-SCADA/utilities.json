@@ -1,0 +1,127 @@
+{
+  "type": "page",
+  "props": {
+    "title": "L2 - Utilities & CIP",
+    "nav": [
+      {"href": "?screen=L2-SCADA/brewhouse", "label": "Brewhouse"},
+      {"href": "?screen=L2-SCADA/fermentation", "label": "Fermentation"},
+      {"href": "?screen=L2-SCADA/packaging", "label": "Packaging"},
+      {"href": "?screen=L2-SCADA/utilities", "label": "Utilities", "active": true},
+      {"href": "?screen=L2-SCADA/recipes", "label": "Recipes"},
+      {"href": "?screen=L3-MES/batch-exec", "label": "↑ L3 MES"},
+      {"href": "?screen=L1-Control/sequences", "label": "↓ L1 Control"}
+    ],
+    "leds": [{"label": "Steam", "state": "{steam.run?'grn':'off'}"}, {"label": "Glycol", "state": "grn"}, {"label": "CIP", "state": "{cip.run?'yel':'off'}"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 6, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Steam Press", "value": "12", "unit": "PSI", "color": "#f00"}},
+          {"type": "stat-card", "props": {"title": "Glycol Temp", "value": "28", "unit": "°F", "color": "#00f"}},
+          {"type": "stat-card", "props": {"title": "Hot Water", "value": "180", "unit": "°F", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Cold Water", "value": "55", "unit": "°F", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "CO2 Tank", "value": "85", "unit": "%", "color": "#888"}},
+          {"type": "stat-card", "props": {"title": "Compressed Air", "value": "95", "unit": "PSI", "color": "#0f0"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Glycol System"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "10px"},
+              "children": [
+                {
+                  "type": "grid",
+                  "props": {"columns": 2, "gap": "8px"},
+                  "children": [
+                    {"type": "pump", "props": {"name": "GP1", "state": "{glycol.p1}", "label": "Primary"}},
+                    {"type": "pump", "props": {"name": "GP2", "state": "{glycol.p2}", "label": "Secondary"}}
+                  ]
+                },
+                {"type": "calc-row", "props": {"label": "Supply Temp", "value": "{glycol.supply}°F"}},
+                {"type": "calc-row", "props": {"label": "Return Temp", "value": "{glycol.return}°F"}},
+                {"type": "calc-row", "props": {"label": "Delta T", "value": "{glycol.deltaT}°F"}},
+                {"type": "calc-row", "props": {"label": "Chiller Load", "value": "{glycol.load}%"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Steam Boiler"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "10px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Boiler Status", "value": "{steam.status}"}},
+                {"type": "calc-row", "props": {"label": "Pressure", "value": "{steam.press} PSI"}},
+                {"type": "calc-row", "props": {"label": "Feedwater Temp", "value": "{steam.feedT}°F"}},
+                {"type": "calc-row", "props": {"label": "Gas Consumption", "value": "{steam.gas} CFH"}},
+                {"type": "calc-row", "props": {"label": "Runtime Today", "value": "{steam.runtime} hrs"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "CIP System"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 4, "gap": "12px"},
+          "children": [
+            {
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "label", "props": {"text": "Caustic Tank", "style": "bold"}},
+                {"type": "calc-row", "props": {"label": "Temp", "value": "{cip.causticT}°F"}},
+                {"type": "calc-row", "props": {"label": "Conc", "value": "{cip.causticC}%"}},
+                {"type": "calc-row", "props": {"label": "Level", "value": "{cip.causticL}%"}}
+              ]
+            },
+            {
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "label", "props": {"text": "Acid Tank", "style": "bold"}},
+                {"type": "calc-row", "props": {"label": "Temp", "value": "{cip.acidT}°F"}},
+                {"type": "calc-row", "props": {"label": "Conc", "value": "{cip.acidC}%"}},
+                {"type": "calc-row", "props": {"label": "Level", "value": "{cip.acidL}%"}}
+              ]
+            },
+            {
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "label", "props": {"text": "Sanitizer Tank", "style": "bold"}},
+                {"type": "calc-row", "props": {"label": "Temp", "value": "{cip.sanT}°F"}},
+                {"type": "calc-row", "props": {"label": "Conc", "value": "{cip.sanC} ppm"}},
+                {"type": "calc-row", "props": {"label": "Level", "value": "{cip.sanL}%"}}
+              ]
+            },
+            {
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "label", "props": {"text": "Active Cycle", "style": "bold"}},
+                {"type": "calc-row", "props": {"label": "Target", "value": "{cip.target}"}},
+                {"type": "calc-row", "props": {"label": "Step", "value": "{cip.step}"}},
+                {"type": "calc-row", "props": {"label": "Time Left", "value": "{cip.remaining}"}}
+              ]
+            }
+          ]
+        }]
+      }
+    ]
+  }]
+}

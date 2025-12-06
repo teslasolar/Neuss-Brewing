@@ -1,0 +1,101 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Water Chemistry",
+    "nav": [
+      {"href": "?screen=science/water", "label": "Water", "active": true},
+      {"href": "?screen=science/ferm-kinetics", "label": "Ferm Kinetics"},
+      {"href": "?screen=science/lab", "label": "Lab/QC"},
+      {"href": "?screen=science/yeast", "label": "Yeast Mgmt"},
+      {"href": "?screen=science/sensory", "label": "Sensory"}
+    ],
+    "leds": [{"label": "Water", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 6, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "pH", "value": "7.2", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Calcium", "value": "48", "unit": "ppm", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Magnesium", "value": "12", "unit": "ppm", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Sulfate", "value": "32", "unit": "ppm", "color": "#9b59b6"}},
+          {"type": "stat-card", "props": {"title": "Chloride", "value": "28", "unit": "ppm", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Alkalinity", "value": "85", "unit": "ppm", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Source Water Profile"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "ion", "header": "Ion"},
+                  {"field": "source", "header": "Source"},
+                  {"field": "target", "header": "Target"},
+                  {"field": "adjust", "header": "Adjustment"}
+                ],
+                "data": [
+                  {"ion": "Calcium (Ca)", "source": "48 ppm", "target": "75 ppm", "adjust": "+27 ppm"},
+                  {"ion": "Magnesium (Mg)", "source": "12 ppm", "target": "15 ppm", "adjust": "+3 ppm"},
+                  {"ion": "Sodium (Na)", "source": "18 ppm", "target": "25 ppm", "adjust": "+7 ppm"},
+                  {"ion": "Sulfate (SO4)", "source": "32 ppm", "target": "150 ppm", "adjust": "+118 ppm"},
+                  {"ion": "Chloride (Cl)", "source": "28 ppm", "target": "75 ppm", "adjust": "+47 ppm"},
+                  {"ion": "Bicarbonate", "source": "104 ppm", "target": "50 ppm", "adjust": "-54 ppm"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Salt Additions (per BBL)"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Gypsum (CaSO4)", "value": "4.2 g"}},
+                {"type": "calc-row", "props": {"label": "Calcium Chloride", "value": "2.8 g"}},
+                {"type": "calc-row", "props": {"label": "Epsom Salt", "value": "0.8 g"}},
+                {"type": "calc-row", "props": {"label": "Baking Soda", "value": "0.0 g"}},
+                {"type": "calc-row", "props": {"label": "Lactic Acid (88%)", "value": "2.4 mL"}},
+                {"type": "calc-row", "props": {"label": "SO4:Cl Ratio", "value": "2.0:1"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Style Profiles"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "style", "header": "Style"},
+              {"field": "ca", "header": "Ca"},
+              {"field": "mg", "header": "Mg"},
+              {"field": "so4", "header": "SO4"},
+              {"field": "cl", "header": "Cl"},
+              {"field": "ratio", "header": "SO4:Cl"},
+              {"field": "notes", "header": "Notes"}
+            ],
+            "data": [
+              {"style": "IPA / Pale Ale", "ca": "75", "mg": "15", "so4": "150", "cl": "75", "ratio": "2:1", "notes": "Hop forward, crisp"},
+              {"style": "Stout / Porter", "ca": "50", "mg": "10", "so4": "50", "cl": "100", "ratio": "1:2", "notes": "Smooth, malty"},
+              {"style": "Pilsner", "ca": "40", "mg": "5", "so4": "40", "cl": "40", "ratio": "1:1", "notes": "Soft, balanced"},
+              {"style": "Hefeweizen", "ca": "50", "mg": "10", "so4": "50", "cl": "50", "ratio": "1:1", "notes": "Malt character"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

@@ -1,0 +1,91 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Cost Analysis",
+    "nav": [
+      {"href": "?screen=business/dashboard", "label": "Dashboard"},
+      {"href": "?screen=business/inventory", "label": "Inventory"},
+      {"href": "?screen=business/sales", "label": "Sales"},
+      {"href": "?screen=business/production", "label": "Production"},
+      {"href": "?screen=business/costs", "label": "Costs", "active": true},
+      {"href": "?screen=business/maintenance", "label": "Maintenance"}
+    ],
+    "leds": [{"label": "COGS", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Avg COGS/BBL", "value": "142", "unit": "$", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Raw Materials", "value": "68", "unit": "$/bbl", "color": "#8b4513"}},
+          {"type": "stat-card", "props": {"title": "Labor", "value": "38", "unit": "$/bbl", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Packaging", "value": "24", "unit": "$/bbl", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Overhead", "value": "12", "unit": "$/bbl", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Cost per BBL by Recipe"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "recipe", "header": "Recipe"},
+                  {"field": "grain", "header": "Grain"},
+                  {"field": "hops", "header": "Hops"},
+                  {"field": "yeast", "header": "Yeast"},
+                  {"field": "other", "header": "Other"},
+                  {"field": "total", "header": "Total"}
+                ],
+                "data": [
+                  {"recipe": "Flagship IPA", "grain": "$42", "hops": "$28", "yeast": "$8", "other": "$4", "total": "$82"},
+                  {"recipe": "Hazy Days", "grain": "$48", "hops": "$38", "yeast": "$12", "other": "$6", "total": "$104"},
+                  {"recipe": "Session Pale", "grain": "$32", "hops": "$18", "yeast": "$6", "other": "$2", "total": "$58"},
+                  {"recipe": "Pilsner", "grain": "$36", "hops": "$12", "yeast": "$8", "other": "$2", "total": "$58"}
+                ]
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Monthly Cost Trend"},
+            "children": [{
+              "type": "trend",
+              "props": {"data": "{costs.trend}", "height": 150, "color": "#ff6b35"}
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Utility Costs (MTD)"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "utility", "header": "Utility"},
+              {"field": "usage", "header": "Usage"},
+              {"field": "rate", "header": "Rate"},
+              {"field": "cost", "header": "Cost"},
+              {"field": "perBbl", "header": "$/BBL"}
+            ],
+            "data": [
+              {"utility": "Electricity", "usage": "4,200 kWh", "rate": "$0.12/kWh", "cost": "$504", "perBbl": "$5.86"},
+              {"utility": "Natural Gas", "usage": "1,800 therms", "rate": "$1.05/therm", "cost": "$1,890", "perBbl": "$21.98"},
+              {"utility": "Water", "usage": "18,000 gal", "rate": "$0.008/gal", "cost": "$144", "perBbl": "$1.67"},
+              {"utility": "Sewer", "usage": "14,400 gal", "rate": "$0.012/gal", "cost": "$173", "perBbl": "$2.01"}
+            ]
+          }
+        }]
+      }
+    ]
+  }]
+}

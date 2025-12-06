@@ -1,0 +1,94 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Fermentation Kinetics",
+    "nav": [
+      {"href": "?screen=science/water", "label": "Water"},
+      {"href": "?screen=science/ferm-kinetics", "label": "Ferm Kinetics", "active": true},
+      {"href": "?screen=science/lab", "label": "Lab/QC"},
+      {"href": "?screen=science/yeast", "label": "Yeast Mgmt"},
+      {"href": "?screen=science/sensory", "label": "Sensory"}
+    ],
+    "leds": [{"label": "Ferm", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Active Batches", "value": "4", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Avg Attenuation", "value": "78", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Avg ABV", "value": "6.2", "unit": "%", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "VDK Issues", "value": "0", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Ready Soon", "value": "2", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Fermentation Progress"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "fv", "header": "FV"},
+              {"field": "batch", "header": "Batch"},
+              {"field": "og", "header": "OG"},
+              {"field": "sg", "header": "Current SG"},
+              {"field": "fg", "header": "Target FG"},
+              {"field": "att", "header": "Att%"},
+              {"field": "abv", "header": "ABV"},
+              {"field": "phase", "header": "Phase"},
+              {"field": "vdk", "header": "VDK"}
+            ],
+            "data": "{ferm.kinetics}"
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Gravity Curves"},
+        "children": [{
+          "type": "trend",
+          "props": {"data": "{ferm.gravityTrend}", "height": 200, "multiColor": true}
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Yeast Health Metrics"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Cell Count", "value": "{yeast.count} B cells/mL"}},
+                {"type": "calc-row", "props": {"label": "Viability", "value": "{yeast.viability}%"}},
+                {"type": "calc-row", "props": {"label": "Pitch Rate", "value": "{yeast.pitchRate} M/mL/°P"}},
+                {"type": "calc-row", "props": {"label": "Generations", "value": "{yeast.gen}"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Fermentation Predictions"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Est FG", "value": "{pred.fg}"}},
+                {"type": "calc-row", "props": {"label": "Est ABV", "value": "{pred.abv}%"}},
+                {"type": "calc-row", "props": {"label": "Days to FG", "value": "{pred.daysToFg}"}},
+                {"type": "calc-row", "props": {"label": "D-Rest Start", "value": "{pred.drest}"}}
+              ]
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

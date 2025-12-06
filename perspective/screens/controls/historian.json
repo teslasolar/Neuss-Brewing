@@ -1,0 +1,64 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Historian & Trends",
+    "nav": [
+      {"href": "?screen=controls/pid", "label": "PID Loops"},
+      {"href": "?screen=controls/io", "label": "I/O Status"},
+      {"href": "?screen=controls/alarms", "label": "Alarms"},
+      {"href": "?screen=controls/historian", "label": "Historian", "active": true},
+      {"href": "?screen=controls/plc", "label": "PLC Status"}
+    ],
+    "leds": [{"label": "Historian", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Tags Logged", "value": "142", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Samples/min", "value": "8,520", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "DB Size", "value": "2.4", "unit": "GB", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Retention", "value": "365", "unit": "days", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Trend Viewer"},
+        "children": [{
+          "type": "flex",
+          "props": {"direction": "column", "gap": "10px"},
+          "children": [
+            {
+              "type": "grid",
+              "props": {"columns": 4, "gap": "8px"},
+              "children": [
+                {"type": "tag-select", "props": {"label": "Tag 1", "value": "{trend.tag1}", "color": "#0ff"}},
+                {"type": "tag-select", "props": {"label": "Tag 2", "value": "{trend.tag2}", "color": "#0f0"}},
+                {"type": "tag-select", "props": {"label": "Tag 3", "value": "{trend.tag3}", "color": "#ffa500"}},
+                {"type": "tag-select", "props": {"label": "Tag 4", "value": "{trend.tag4}", "color": "#f0f"}}
+              ]
+            },
+            {"type": "trend", "props": {"data": "{trend.data}", "height": 250, "multiColor": true}}
+          ]
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Quick Trends"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 3, "gap": "12px"},
+          "children": [
+            {"type": "mini-trend", "props": {"title": "Brewhouse Temps", "href": "?trend=brewhouse"}},
+            {"type": "mini-trend", "props": {"title": "Fermentation", "href": "?trend=ferm"}},
+            {"type": "mini-trend", "props": {"title": "Glycol System", "href": "?trend=glycol"}}
+          ]
+        }]
+      }
+    ]
+  }]
+}
