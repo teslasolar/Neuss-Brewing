@@ -1,0 +1,93 @@
+{
+  "type": "page",
+  "props": {
+    "title": "📊 Performance",
+    "nav": [
+      {"href": "?screen=models/inference", "label": "Inference"},
+      {"href": "?screen=models/tensors", "label": "Tensors"},
+      {"href": "?screen=models/shards", "label": "Shards"},
+      {"href": "?screen=models/kernels", "label": "Kernels"},
+      {"href": "?screen=models/performance", "label": "Performance", "active": true}
+    ],
+    "leds": [{"label": "Monitor", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 6, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Tokens/sec", "value": "{perf.tps}", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "First Token", "value": "{perf.ttft}", "unit": "ms", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "GPU Util", "value": "{perf.gpuUtil}", "unit": "%", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Memory", "value": "{perf.memory}", "unit": "MB", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "GFLOPS", "value": "{perf.gflops}", "color": "#9b59b6"}},
+          {"type": "stat-card", "props": {"title": "Batches", "value": "{perf.batches}", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Tokens/sec Over Time"},
+            "children": [{
+              "type": "trend",
+              "props": {"data": "{perf.tpsTrend}", "height": 200, "color": "#0f0"}
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Memory Usage"},
+            "children": [{
+              "type": "trend",
+              "props": {"data": "{perf.memTrend}", "height": 200, "color": "#ff6b35"}
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "🎯 Performance Targets"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "metric", "header": "Metric"},
+              {"field": "target", "header": "Target"},
+              {"field": "current", "header": "Current"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": [
+              {"metric": "WebGPU Compute", "target": ">100 GFLOPS", "current": "{perf.gflops} GFLOPS", "status": "✓"},
+              {"metric": "Shard Loading", "target": "<500ms/50MB", "current": "{perf.shardLoad}ms", "status": "✓"},
+              {"metric": "First Token", "target": "<100ms", "current": "{perf.ttft}ms", "status": "✓"},
+              {"metric": "Streaming", "target": "Real-time", "current": "Active", "status": "✓"},
+              {"metric": "Cache Hit Rate", "target": ">90%", "current": "{perf.cacheHit}%", "status": "✓"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Kernel Timings"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "kernel", "header": "Kernel"},
+              {"field": "calls", "header": "Calls"},
+              {"field": "avgTime", "header": "Avg Time"},
+              {"field": "totalTime", "header": "Total Time"},
+              {"field": "pct", "header": "% Total"}
+            ],
+            "data": "{perf.kernelTimings}"
+          }
+        }]
+      }
+    ]
+  }]
+}

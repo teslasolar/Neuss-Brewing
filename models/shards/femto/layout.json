@@ -1,0 +1,77 @@
+{
+  "shardSize": 52428800,
+  "layout": {
+    "embeddings.weight": {
+      "offset": 0,
+      "size": 131072,
+      "shape": [256, 128],
+      "dtype": "float32"
+    },
+    "layers.0.attn.qkv": {
+      "offset": 131072,
+      "size": 196608,
+      "shape": [128, 384],
+      "dtype": "float32"
+    },
+    "layers.0.attn.out": {
+      "offset": 327680,
+      "size": 65536,
+      "shape": [128, 128],
+      "dtype": "float32"
+    },
+    "layers.0.ffn.up": {
+      "offset": 393216,
+      "size": 262144,
+      "shape": [128, 512],
+      "dtype": "float32"
+    },
+    "layers.0.ffn.down": {
+      "offset": 655360,
+      "size": 262144,
+      "shape": [512, 128],
+      "dtype": "float32"
+    },
+    "layers.0.norm1.weight": {
+      "offset": 917504,
+      "size": 512,
+      "shape": [128],
+      "dtype": "float32"
+    },
+    "layers.0.norm1.bias": {
+      "offset": 918016,
+      "size": 512,
+      "shape": [128],
+      "dtype": "float32"
+    },
+    "layers.0.norm2.weight": {
+      "offset": 918528,
+      "size": 512,
+      "shape": [128],
+      "dtype": "float32"
+    },
+    "layers.0.norm2.bias": {
+      "offset": 919040,
+      "size": 512,
+      "shape": [128],
+      "dtype": "float32"
+    },
+    "final_norm.weight": {
+      "offset": 919552,
+      "size": 512,
+      "shape": [128],
+      "dtype": "float32"
+    },
+    "final_norm.bias": {
+      "offset": 920064,
+      "size": 512,
+      "shape": [128],
+      "dtype": "float32"
+    },
+    "lm_head.weight": {
+      "offset": 920576,
+      "size": 131072,
+      "shape": [128, 256],
+      "dtype": "float32"
+    }
+  }
+}

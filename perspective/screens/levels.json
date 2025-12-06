@@ -7,7 +7,8 @@
       {"href": "?screen=business/dashboard", "label": "Business"},
       {"href": "?screen=startup/overview", "label": "Startup"},
       {"href": "?screen=science/water", "label": "Science"},
-      {"href": "?screen=controls/pid", "label": "Controls"}
+      {"href": "?screen=controls/pid", "label": "Controls"},
+      {"href": "?screen=models/inference", "label": "🧬 Models"}
     ]
   },
   "children": [{

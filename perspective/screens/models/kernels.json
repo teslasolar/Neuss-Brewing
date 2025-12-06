@@ -1,0 +1,83 @@
+{
+  "type": "page",
+  "props": {
+    "title": "🎲 Compute Kernels",
+    "nav": [
+      {"href": "?screen=models/inference", "label": "Inference"},
+      {"href": "?screen=models/tensors", "label": "Tensors"},
+      {"href": "?screen=models/shards", "label": "Shards"},
+      {"href": "?screen=models/kernels", "label": "Kernels", "active": true},
+      {"href": "?screen=models/performance", "label": "Performance"}
+    ],
+    "leds": [{"label": "WGSL", "state": "grn"}, {"label": "Compiled", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Kernels", "value": "7", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Compiled", "value": "7", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Workgroups", "value": "256", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "GFLOPS", "value": "{gpu.gflops}", "color": "#ff6b35"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "⚡ WGSL Compute Kernels"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "name", "header": "Kernel"},
+              {"field": "type", "header": "Type"},
+              {"field": "workgroup", "header": "Workgroup"},
+              {"field": "bindings", "header": "Bindings"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": [
+              {"name": "matmul", "type": "Compute", "workgroup": "16x16", "bindings": "4", "status": "Compiled"},
+              {"name": "matmul_tiled", "type": "Compute", "workgroup": "16x16", "bindings": "4", "status": "Compiled"},
+              {"name": "attention", "type": "Compute", "workgroup": "16x16", "bindings": "5", "status": "Compiled"},
+              {"name": "gelu", "type": "Compute", "workgroup": "256", "bindings": "2", "status": "Compiled"},
+              {"name": "layernorm", "type": "Compute", "workgroup": "256", "bindings": "4", "status": "Compiled"},
+              {"name": "rms_norm", "type": "Compute", "workgroup": "256", "bindings": "3", "status": "Compiled"},
+              {"name": "softmax", "type": "Compute", "workgroup": "256", "bindings": "2", "status": "Compiled"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Matrix Multiply (matmul.wgsl)"},
+            "children": [{
+              "type": "code-block",
+              "props": {
+                "language": "wgsl",
+                "code": "@compute @workgroup_size(16,16)\nfn matmul(@builtin(global_invocation_id) gid: vec3<u32>) {\n  let row = gid.x;\n  let col = gid.y;\n  var sum = 0.0;\n  for (var k = 0u; k < dims.K; k++) {\n    sum += a[row * dims.K + k] * b[k * dims.N + col];\n  }\n  c[row * dims.N + col] = sum;\n}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "GELU Activation (activations.wgsl)"},
+            "children": [{
+              "type": "code-block",
+              "props": {
+                "language": "wgsl",
+                "code": "@compute @workgroup_size(256)\nfn gelu(@builtin(global_invocation_id) gid: vec3<u32>) {\n  let i = gid.x;\n  let x = input[i];\n  let inner = 0.7978845608 * (x + 0.044715 * x * x * x);\n  output[i] = 0.5 * x * (1.0 + tanh(inner));\n}"
+              }
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

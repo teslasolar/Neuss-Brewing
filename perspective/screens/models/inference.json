@@ -1,0 +1,83 @@
+{
+  "type": "page",
+  "props": {
+    "title": "🧬 Model Inference",
+    "nav": [
+      {"href": "?screen=models/inference", "label": "Inference", "active": true},
+      {"href": "?screen=models/tensors", "label": "Tensors"},
+      {"href": "?screen=models/shards", "label": "Shards"},
+      {"href": "?screen=models/kernels", "label": "Kernels"},
+      {"href": "?screen=models/performance", "label": "Performance"}
+    ],
+    "leds": [{"label": "GPU", "state": "{gpu.ready?'grn':'off'}"}, {"label": "Model", "state": "{model.loaded?'grn':'off'}"}, {"label": "Infer", "state": "{infer.active?'yel':'off'}"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "GPU", "value": "{gpu.name}", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Model", "value": "{model.name}", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Tokens/sec", "value": "{infer.tps}", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Memory", "value": "{gpu.memory}", "unit": "MB", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Latency", "value": "{infer.latency}", "unit": "ms", "color": "#9b59b6"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": "1fr 300px", "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "🔥 Inference"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "10px", "height": "400px"},
+              "children": [
+                {"type": "chat-output", "props": {"id": "output", "messages": "{chat.messages}"}},
+                {"type": "chat-input", "props": {"id": "input", "placeholder": "Enter prompt...", "onSubmit": "runInference"}}
+              ]
+            }]
+          },
+          {
+            "type": "flex",
+            "props": {"direction": "column", "gap": "15px"},
+            "children": [
+              {
+                "type": "card",
+                "props": {"title": "🎯 Model Select"},
+                "children": [{
+                  "type": "model-list",
+                  "props": {
+                    "models": [
+                      {"id": "femto", "name": "FemtoLLM", "size": "50KB", "active": true},
+                      {"id": "bert-tiny", "name": "BERT-Tiny", "size": "17MB"},
+                      {"id": "gpt2", "name": "GPT-2 Small", "size": "124MB"},
+                      {"id": "llama", "name": "LLaMA 7B", "size": "7GB"}
+                    ]
+                  }
+                }]
+              },
+              {
+                "type": "card",
+                "props": {"title": "⚙️ Settings"},
+                "children": [{
+                  "type": "flex",
+                  "props": {"direction": "column", "gap": "8px"},
+                  "children": [
+                    {"type": "slider", "props": {"label": "Temperature", "min": 0, "max": 2, "step": 0.1, "value": "{settings.temperature}"}},
+                    {"type": "slider", "props": {"label": "Top-K", "min": 1, "max": 100, "step": 1, "value": "{settings.topK}"}},
+                    {"type": "number-input", "props": {"label": "Max Tokens", "min": 1, "max": 2048, "value": "{settings.maxTokens}"}}
+                  ]
+                }]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }]
+}

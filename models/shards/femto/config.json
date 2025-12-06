@@ -1,0 +1,16 @@
+{
+  "name": "FemtoLLM",
+  "version": "1.0.0",
+  "description": "Ultra-tiny language model for WebGPU demo",
+  "architecture": "transformer",
+  "numLayers": 4,
+  "numHeads": 4,
+  "hiddenSize": 128,
+  "intermediateSize": 512,
+  "vocabSize": 256,
+  "maxSeqLen": 512,
+  "dtype": "float32",
+  "shardSize": 52428800,
+  "totalParams": 250000,
+  "totalSize": "1MB"
+}

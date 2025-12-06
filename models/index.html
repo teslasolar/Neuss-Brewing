@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧬 Konomi WebGPU Model Runner</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #000;
+      color: #0f0;
+      font: 12px/1.4 'Courier New', monospace;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 300px 1fr 300px;
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+      gap: 1px;
+      background: #0f03;
+    }
+
+    header {
+      grid-column: 1 / -1;
+      background: #111;
+      padding: 10px 15px;
+      border-bottom: 1px solid #0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { font-size: 16px; font-weight: bold; }
+    .status { display: flex; gap: 15px; }
+    .led { display: inline-flex; align-items: center; gap: 5px; }
+    .led::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color, #666);
+      box-shadow: 0 0 4px var(--color, #666);
+    }
+    .led.on::before { --color: #0f0; }
+    .led.warn::before { --color: #ffa500; }
+    .led.err::before { --color: #f00; }
+
+    .panel {
+      background: #0a0a0a;
+      border: 1px solid #0f03;
+      overflow: auto;
+    }
+
+    .panel-header {
+      background: #111;
+      padding: 8px 12px;
+      border-bottom: 1px solid #0f03;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+    }
+
+    .panel-content {
+      padding: 12px;
+    }
+
+    /* GPU Panel */
+    #gpu-panel .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid #0f01;
+    }
+    #gpu-panel .stat:last-child { border: none; }
+
+    /* Tensor Visualization */
+    #tensor-viz {
+      width: 100%;
+      height: 200px;
+      background: #050505;
+      border: 1px solid #0f03;
+      margin-top: 10px;
+    }
+
+    /* Main Chat Area */
+    #chat-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #output {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    .msg { margin-bottom: 15px; }
+    .msg.user { color: #0ff; }
+    .msg.user::before { content: '> '; color: #0ff; }
+    .msg.assistant { color: #0f0; }
+    .msg.system { color: #888; font-style: italic; }
+    .msg.error { color: #f00; }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: #0f0;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    #input-area {
+      padding: 12px;
+      border-top: 1px solid #0f03;
+      display: flex;
+      gap: 10px;
+    }
+
+    #input {
+      flex: 1;
+      background: #111;
+      border: 1px solid #0f03;
+      color: #0f0;
+      padding: 10px;
+      font: inherit;
+      resize: none;
+      height: 60px;
+    }
+    #input:focus { outline: 1px solid #0f0; }
+
+    button {
+      background: #0f03;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 10px 20px;
+      cursor: pointer;
+      font: inherit;
+    }
+    button:hover { background: #0f05; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.stop { border-color: #f00; color: #f00; }
+
+    /* Stats Panel */
+    #stats-panel .metric {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+    }
+    #stats-panel .value { color: #0ff; }
+
+    .progress {
+      height: 4px;
+      background: #222;
+      margin-top: 4px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: #0f0;
+      transition: width 0.3s;
+    }
+
+    /* Model Selector */
+    .model-list {
+      list-style: none;
+    }
+    .model-list li {
+      padding: 8px;
+      border-bottom: 1px solid #0f02;
+      cursor: pointer;
+    }
+    .model-list li:hover { background: #0f02; }
+    .model-list li.active { background: #0f03; border-left: 2px solid #0f0; }
+    .model-size { color: #888; font-size: 10px; }
+
+    /* 3D Navigation */
+    .nav-3d {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-top: 10px;
+    }
+    .nav-3d button {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    footer {
+      grid-column: 1 / -1;
+      background: #111;
+      padding: 8px 15px;
+      border-top: 1px solid #0f0;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <header>
+      <div class="logo">🧬 KONOMI WebGPU</div>
+      <div class="status">
+        <span class="led" id="led-gpu">GPU</span>
+        <span class="led" id="led-model">Model</span>
+        <span class="led" id="led-infer">Inference</span>
+      </div>
+    </header>
+
+    <!-- Left Panel: GPU & Model -->
+    <div class="panel" id="gpu-panel">
+      <div class="panel-header">⚡ GPU Status</div>
+      <div class="panel-content">
+        <div id="gpu-info">Initializing...</div>
+        <canvas id="tensor-viz"></canvas>
+
+        <div class="panel-header" style="margin-top:15px">🎯 Models</div>
+        <ul class="model-list" id="model-list">
+          <li class="active" data-model="femto">
+            FemtoLLM <span class="model-size">50KB</span>
+          </li>
+          <li data-model="bert-tiny">
+            BERT-Tiny <span class="model-size">17MB</span>
+          </li>
+          <li data-model="gpt2-small">
+            GPT-2 Small <span class="model-size">124MB</span>
+          </li>
+          <li data-model="llama-7b">
+            LLaMA 7B <span class="model-size">7GB</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Chat Panel -->
+    <div class="panel" id="chat-panel">
+      <div class="panel-header">🔥 Inference</div>
+      <div id="output">
+        <div class="msg system">Welcome to Konomi WebGPU Model Runner</div>
+        <div class="msg system">Select a model and enter a prompt to begin</div>
+      </div>
+      <div id="input-area">
+        <textarea id="input" placeholder="Enter prompt..."></textarea>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <button id="run-btn" onclick="run()">Generate</button>
+          <button id="stop-btn" class="stop" onclick="stop()" disabled>Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Stats -->
+    <div class="panel" id="stats-panel">
+      <div class="panel-header">📊 Performance</div>
+      <div class="panel-content">
+        <div class="metric">
+          <span>Tokens/sec</span>
+          <span class="value" id="stat-tps">-</span>
+        </div>
+        <div class="metric">
+          <span>First Token</span>
+          <span class="value" id="stat-latency">-</span>
+        </div>
+        <div class="metric">
+          <span>Total Tokens</span>
+          <span class="value" id="stat-tokens">0</span>
+        </div>
+        <div class="metric">
+          <span>Memory</span>
+          <span class="value" id="stat-memory">-</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progress" style="width:0%"></div>
+        </div>
+
+        <div class="panel-header" style="margin-top:15px">🧊 Tensor Space</div>
+        <div class="nav-3d">
+          <button onclick="nav(-1,0,0)">←L</button>
+          <button onclick="nav(0,-1,0)">↑H</button>
+          <button onclick="nav(1,0,0)">L→</button>
+          <button onclick="nav(0,0,-1)">-D</button>
+          <button onclick="nav(0,1,0)">↓H</button>
+          <button onclick="nav(0,0,1)">D+</button>
+        </div>
+        <div id="nav-pos" style="margin-top:8px;text-align:center">
+          Layer: 0 | Head: 0 | Dim: 0
+        </div>
+
+        <div class="panel-header" style="margin-top:15px">⚙️ Settings</div>
+        <div class="metric">
+          <span>Temperature</span>
+          <input type="range" id="temp" min="0" max="2" step="0.1" value="0.8" style="width:80px">
+        </div>
+        <div class="metric">
+          <span>Max Tokens</span>
+          <input type="number" id="max-tokens" value="100" min="1" max="2048" style="width:60px;background:#111;border:1px solid #0f03;color:#0f0">
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>🏭 Neuss Brewing SCADA | Model Runner v1.0</span>
+      <span id="footer-stats"></span>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { getGPU } from './core/gpu.js';
+    import TensorCube from './core/tensor.js';
+    import Pipeline from './core/pipeline.js';
+
+    // Global state
+    let gpu = null;
+    let tensor = null;
+    let pipeline = null;
+    let currentModel = 'femto';
+    let navPos = { layer: 0, head: 0, dim: 0 };
+
+    // Initialize GPU
+    async function init() {
+      try {
+        gpu = await getGPU();
+        document.getElementById('led-gpu').classList.add('on');
+
+        const info = gpu.info();
+        document.getElementById('gpu-info').innerHTML = `
+          <div class="stat"><span>Adapter</span><span>${info.name}</span></div>
+          <div class="stat"><span>Max Buffer</span><span>${(info.limits.maxBuffer/1e9).toFixed(1)}GB</span></div>
+          <div class="stat"><span>Max Compute</span><span>${info.limits.maxCompute}</span></div>
+        `;
+
+        // Initialize tensor cube
+        tensor = await TensorCube.create([12, 12, 768]);
+
+        log('system', 'WebGPU initialized successfully');
+        log('system', `GPU: ${info.name}`);
+
+      } catch (e) {
+        document.getElementById('led-gpu').classList.add('err');
+        log('error', `GPU init failed: ${e.message}`);
+        console.error(e);
+      }
+    }
+
+    // Load model
+    async function loadModel(name) {
+      document.getElementById('led-model').classList.remove('on');
+      document.getElementById('led-model').classList.add('warn');
+
+      try {
+        const modelUrl = `./shards/${name}`;
+        pipeline = await Pipeline.create(modelUrl);
+
+        document.getElementById('led-model').classList.remove('warn');
+        document.getElementById('led-model').classList.add('on');
+
+        log('system', `Model loaded: ${name}`);
+
+      } catch (e) {
+        document.getElementById('led-model').classList.remove('warn');
+        document.getElementById('led-model').classList.add('err');
+        log('error', `Model load failed: ${e.message}`);
+
+        // Use mock pipeline for demo
+        pipeline = createMockPipeline();
+        document.getElementById('led-model').classList.add('on');
+        log('system', 'Using demo mode (no model weights)');
+      }
+    }
+
+    // Mock pipeline for demo without actual model
+    function createMockPipeline() {
+      return {
+        generate: async function*(prompt, options) {
+          const words = 'The brewery SCADA system monitors temperature pressure flow and level across all vessels ensuring optimal fermentation conditions and product quality through real-time data analysis and automated control loops'.split(' ');
+          for (const word of words.slice(0, options.maxTokens || 50)) {
+            await new Promise(r => setTimeout(r, 50 + Math.random() * 100));
+            yield word + ' ';
+          }
+        },
+        stop: () => {}
+      };
+    }
+
+    // Run inference
+    window.run = async function() {
+      const input = document.getElementById('input').value.trim();
+      if (!input) return;
+
+      document.getElementById('run-btn').disabled = true;
+      document.getElementById('stop-btn').disabled = false;
+      document.getElementById('led-infer').classList.add('on');
+
+      log('user', input);
+      document.getElementById('input').value = '';
+
+      const output = document.getElementById('output');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'msg assistant';
+      output.appendChild(msgDiv);
+
+      const temp = parseFloat(document.getElementById('temp').value);
+      const maxTokens = parseInt(document.getElementById('max-tokens').value);
+
+      const startTime = performance.now();
+      let tokens = 0;
+
+      try {
+        for await (const token of pipeline.generate(input, { temperature: temp, maxTokens })) {
+          msgDiv.textContent += token;
+          tokens++;
+
+          const elapsed = (performance.now() - startTime) / 1000;
+          updateStats(tokens, elapsed);
+
+          output.scrollTop = output.scrollHeight;
+        }
+      } catch (e) {
+        log('error', e.message);
+      }
+
+      document.getElementById('run-btn').disabled = false;
+      document.getElementById('stop-btn').disabled = true;
+      document.getElementById('led-infer').classList.remove('on');
+    };
+
+    // Stop generation
+    window.stop = function() {
+      if (pipeline) pipeline.stop();
+      document.getElementById('stop-btn').disabled = true;
+    };
+
+    // Update stats display
+    function updateStats(tokens, elapsed) {
+      const tps = tokens / elapsed;
+      document.getElementById('stat-tps').textContent = tps.toFixed(1);
+      document.getElementById('stat-tokens').textContent = tokens;
+
+      if (tokens === 1) {
+        document.getElementById('stat-latency').textContent = (elapsed * 1000).toFixed(0) + 'ms';
+      }
+
+      if (performance.memory) {
+        const mb = performance.memory.usedJSHeapSize / 1e6;
+        document.getElementById('stat-memory').textContent = mb.toFixed(1) + 'MB';
+      }
+
+      const progress = Math.min(100, tokens);
+      document.getElementById('progress').style.width = progress + '%';
+    }
+
+    // Tensor space navigation
+    window.nav = function(dl, dh, dd) {
+      navPos.layer = Math.max(0, Math.min(11, navPos.layer + dl));
+      navPos.head = Math.max(0, Math.min(11, navPos.head + dh));
+      navPos.dim = Math.max(0, Math.min(767, navPos.dim + dd * 64));
+
+      document.getElementById('nav-pos').textContent =
+        `Layer: ${navPos.layer} | Head: ${navPos.head} | Dim: ${navPos.dim}`;
+
+      visualizeTensor();
+    };
+
+    // Visualize tensor weights
+    function visualizeTensor() {
+      const canvas = document.getElementById('tensor-viz');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.offsetWidth;
+      const h = canvas.height = 200;
+
+      // Generate fake tensor data for visualization
+      const data = new Float32Array(w * h);
+      for (let i = 0; i < data.length; i++) {
+        data[i] = Math.sin(i * 0.01 + navPos.layer) *
+                  Math.cos(i * 0.02 + navPos.head) * 0.5 + 0.5;
+      }
+
+      const imgData = ctx.createImageData(w, h);
+      for (let i = 0; i < w * h; i++) {
+        const v = Math.floor(data[i] * 255);
+        imgData.data[i * 4] = 0;
+        imgData.data[i * 4 + 1] = v;
+        imgData.data[i * 4 + 2] = 0;
+        imgData.data[i * 4 + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+
+    // Log message to output
+    function log(type, text) {
+      const output = document.getElementById('output');
+      const div = document.createElement('div');
+      div.className = `msg ${type}`;
+      div.textContent = text;
+      output.appendChild(div);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    // Model selection
+    document.getElementById('model-list').addEventListener('click', async (e) => {
+      const li = e.target.closest('li');
+      if (!li) return;
+
+      document.querySelectorAll('#model-list li').forEach(el => el.classList.remove('active'));
+      li.classList.add('active');
+
+      currentModel = li.dataset.model;
+      await loadModel(currentModel);
+    });
+
+    // Enter key to submit
+    document.getElementById('input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        run();
+      }
+    });
+
+    // Initialize on load
+    init().then(() => {
+      loadModel(currentModel);
+      visualizeTensor();
+    });
+  </script>
+</body>
+</html>

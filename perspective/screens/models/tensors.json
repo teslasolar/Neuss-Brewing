@@ -1,0 +1,115 @@
+{
+  "type": "page",
+  "props": {
+    "title": "🧊 Tensor Cube",
+    "nav": [
+      {"href": "?screen=models/inference", "label": "Inference"},
+      {"href": "?screen=models/tensors", "label": "Tensors", "active": true},
+      {"href": "?screen=models/shards", "label": "Shards"},
+      {"href": "?screen=models/kernels", "label": "Kernels"},
+      {"href": "?screen=models/performance", "label": "Performance"}
+    ],
+    "leds": [{"label": "GPU", "state": "grn"}, {"label": "Cube", "state": "grn"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 6, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Layers", "value": "{tensor.layers}", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Heads", "value": "{tensor.heads}", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Hidden Dim", "value": "{tensor.hidden}", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Params", "value": "{tensor.params}", "unit": "M", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Buffers", "value": "{tensor.buffers}", "color": "#9b59b6"}},
+          {"type": "stat-card", "props": {"title": "Cache", "value": "{tensor.cacheSize}", "unit": "MB", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": "1fr 300px", "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "3D Tensor Visualization"},
+            "children": [{
+              "type": "tensor-viz",
+              "props": {
+                "width": "100%",
+                "height": "400px",
+                "layer": "{nav.layer}",
+                "head": "{nav.head}",
+                "dim": "{nav.dim}"
+              }
+            }]
+          },
+          {
+            "type": "flex",
+            "props": {"direction": "column", "gap": "15px"},
+            "children": [
+              {
+                "type": "card",
+                "props": {"title": "🗺️ Navigation"},
+                "children": [{
+                  "type": "flex",
+                  "props": {"direction": "column", "gap": "10px"},
+                  "children": [
+                    {"type": "calc-row", "props": {"label": "Layer", "value": "{nav.layer} / {tensor.layers}"}},
+                    {"type": "calc-row", "props": {"label": "Head", "value": "{nav.head} / {tensor.heads}"}},
+                    {"type": "calc-row", "props": {"label": "Dimension", "value": "{nav.dim} / {tensor.hidden}"}},
+                    {
+                      "type": "grid",
+                      "props": {"columns": 3, "gap": "5px"},
+                      "children": [
+                        {"type": "nav-btn", "props": {"label": "←L", "action": "nav(-1,0,0)"}},
+                        {"type": "nav-btn", "props": {"label": "↑H", "action": "nav(0,-1,0)"}},
+                        {"type": "nav-btn", "props": {"label": "L→", "action": "nav(1,0,0)"}},
+                        {"type": "nav-btn", "props": {"label": "-D", "action": "nav(0,0,-64)"}},
+                        {"type": "nav-btn", "props": {"label": "↓H", "action": "nav(0,1,0)"}},
+                        {"type": "nav-btn", "props": {"label": "D+", "action": "nav(0,0,64)"}}
+                      ]
+                    }
+                  ]
+                }]
+              },
+              {
+                "type": "card",
+                "props": {"title": "📊 Stats"},
+                "children": [{
+                  "type": "flex",
+                  "props": {"direction": "column", "gap": "6px"},
+                  "children": [
+                    {"type": "calc-row", "props": {"label": "Mean", "value": "{viz.mean}"}},
+                    {"type": "calc-row", "props": {"label": "Std", "value": "{viz.std}"}},
+                    {"type": "calc-row", "props": {"label": "Min", "value": "{viz.min}"}},
+                    {"type": "calc-row", "props": {"label": "Max", "value": "{viz.max}"}},
+                    {"type": "calc-row", "props": {"label": "Sparsity", "value": "{viz.sparsity}%"}}
+                  ]
+                }]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Layer Weights"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "name", "header": "Weight"},
+              {"field": "shape", "header": "Shape"},
+              {"field": "dtype", "header": "Type"},
+              {"field": "size", "header": "Size"},
+              {"field": "shard", "header": "Shard"}
+            ],
+            "data": "{layer.weights}"
+          }
+        }]
+      }
+    ]
+  }]
+}

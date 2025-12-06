@@ -1,0 +1,92 @@
+{
+  "type": "page",
+  "props": {
+    "title": "📊 Model Shards",
+    "nav": [
+      {"href": "?screen=models/inference", "label": "Inference"},
+      {"href": "?screen=models/tensors", "label": "Tensors"},
+      {"href": "?screen=models/shards", "label": "Shards", "active": true},
+      {"href": "?screen=models/kernels", "label": "Kernels"},
+      {"href": "?screen=models/performance", "label": "Performance"}
+    ],
+    "leds": [{"label": "LFS", "state": "grn"}, {"label": "Cache", "state": "{cache.active?'grn':'off'}"}]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 5, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Total Shards", "value": "{shards.total}", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Loaded", "value": "{shards.loaded}", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Cached", "value": "{shards.cached}", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "Model Size", "value": "{shards.totalSize}", "unit": "MB", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Shard Size", "value": "50", "unit": "MB", "color": "#888"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "🗂️ Shard Status"},
+            "children": [{
+              "type": "shard-grid",
+              "props": {
+                "shards": "{shards.list}",
+                "columns": 10
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "💾 Cache Stats"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Memory Cache", "value": "{cache.memory} MB"}},
+                {"type": "calc-row", "props": {"label": "IndexedDB", "value": "{cache.idb} MB"}},
+                {"type": "calc-row", "props": {"label": "Hit Rate", "value": "{cache.hitRate}%"}},
+                {"type": "calc-row", "props": {"label": "Avg Load Time", "value": "{cache.avgLoad} ms"}},
+                {"type": "progress-bar", "props": {"label": "Cache Usage", "value": "{cache.usage}", "max": 100}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Git LFS Structure"},
+        "children": [{
+          "type": "code-block",
+          "props": {
+            "language": "text",
+            "code": "/models/\n  config.json           # Model architecture\n  tokenizer.json        # Tokenizer config\n  layout.json           # Weight layout\n  shard_000.bin         # Weights 0-50MB\n  shard_001.bin         # Weights 50-100MB\n  shard_002.bin         # Weights 100-150MB\n  ...\n  kernels/\n    attention.wgsl      # Attention kernel\n    matmul.wgsl         # Matrix multiply\n    layernorm.wgsl      # Layer norm"
+          }
+        }]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Shard Details"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "id", "header": "Shard"},
+              {"field": "size", "header": "Size"},
+              {"field": "layers", "header": "Layers"},
+              {"field": "status", "header": "Status"},
+              {"field": "loadTime", "header": "Load Time"},
+              {"field": "lastAccess", "header": "Last Access"}
+            ],
+            "data": "{shards.details}"
+          }
+        }]
+      }
+    ]
+  }]
+}
