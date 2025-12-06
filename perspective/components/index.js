@@ -5,6 +5,7 @@ import './vessel.js';
 import './display.js';
 import './input.js';
 import './python.js';
+import './business.js';
 
 // Page template components (atomic structure)
 

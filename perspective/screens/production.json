@@ -1,0 +1,81 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Production Planning",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=business", "label": "Business"},
+      {"href": "?screen=inventory", "label": "Inventory"},
+      {"href": "?screen=production", "label": "Production", "active": true},
+      {"href": "?screen=sales", "label": "Sales"},
+      {"href": "?screen=maintenance", "label": "Maintenance"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "card",
+        "props": {"title": "Brew Schedule"},
+        "children": [{
+          "type": "table",
+          "props": {
+            "columns": [
+              {"field": "date", "header": "Date"},
+              {"field": "recipe", "header": "Recipe"},
+              {"field": "batch", "header": "Batch#"},
+              {"field": "vessel", "header": "Vessel"},
+              {"field": "status", "header": "Status"}
+            ],
+            "data": "{prod.schedule}"
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Vessel Availability"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "resource-bar", "props": {"name": "HLT", "status": "available"}},
+                {"type": "resource-bar", "props": {"name": "MLT", "status": "available"}},
+                {"type": "resource-bar", "props": {"name": "BK", "status": "in-use", "batch": "B-042"}},
+                {"type": "resource-bar", "props": {"name": "FV1", "status": "in-use", "days": 5}},
+                {"type": "resource-bar", "props": {"name": "FV2", "status": "in-use", "days": 12}},
+                {"type": "resource-bar", "props": {"name": "FV3", "status": "available"}},
+                {"type": "resource-bar", "props": {"name": "BBT1", "status": "ready"}}
+              ]
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Queue"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "6px"},
+              "children": [
+                {"type": "queue-item", "props": {"recipe": "Pilsner", "priority": 1, "need": "FV available"}},
+                {"type": "queue-item", "props": {"recipe": "Stout", "priority": 2, "need": "Grain order"}},
+                {"type": "queue-item", "props": {"recipe": "IPA", "priority": 3, "need": "Scheduled"}}
+              ]
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Capacity Forecast"},
+        "children": [{
+          "type": "gantt",
+          "props": {"data": "{prod.gantt}", "weeks": 4}
+        }]
+      }
+    ]
+  }]
+}

@@ -1,0 +1,106 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Equipment Maintenance",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=business", "label": "Business"},
+      {"href": "?screen=production", "label": "Production"},
+      {"href": "?screen=maintenance", "label": "Maintenance", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "220px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Equipment Status"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "equip", "header": "Equipment"},
+                {"field": "status", "header": "Status"},
+                {"field": "hours", "header": "Hours"},
+                {"field": "nextPM", "header": "Next PM"}
+              ],
+              "data": "{maint.equipment}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Scheduled Maintenance"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "date", "header": "Date"},
+                {"field": "equip", "header": "Equipment"},
+                {"field": "task", "header": "Task"},
+                {"field": "assigned", "header": "Assigned"}
+              ],
+              "data": "{maint.schedule}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Work Orders"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "id", "header": "WO#"},
+                {"field": "equip", "header": "Equipment"},
+                {"field": "issue", "header": "Issue"},
+                {"field": "priority", "header": "Pri"},
+                {"field": "status", "header": "Status"}
+              ],
+              "data": "{maint.workOrders}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {"type": "button", "props": {"text": "New Work Order", "class": "primary"}},
+        {"type": "button", "props": {"text": "Log Maintenance", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Parts Inventory", "class": "secondary"}},
+        {
+          "type": "card",
+          "props": {"title": "Upcoming"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "alert-item", "props": {"level": "warn", "text": "Pump P1: Seal replace due"}},
+              {"type": "alert-item", "props": {"level": "info", "text": "Glycol: Filter change"}},
+              {"type": "alert-item", "props": {"level": "info", "text": "FV1-3: CIP scheduled"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Spare Parts"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "text", "props": {"value": "Pump seals: 4"}},
+              {"type": "text", "props": {"value": "Gaskets: 12"}},
+              {"type": "text", "props": {"value": "Valves: 2"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

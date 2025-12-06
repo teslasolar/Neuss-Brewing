@@ -1,0 +1,104 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Inventory Management",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=business", "label": "Business"},
+      {"href": "?screen=inventory", "label": "Inventory", "active": true},
+      {"href": "?screen=production", "label": "Production"},
+      {"href": "?screen=sales", "label": "Sales"},
+      {"href": "?screen=costs", "label": "Costs"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "220px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Grain Stock"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "item", "header": "Item"},
+                {"field": "qty", "header": "Qty (lb)"},
+                {"field": "status", "header": "Status"}
+              ],
+              "data": "{inv.grains}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Hops Stock"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "item", "header": "Variety"},
+                {"field": "qty", "header": "Qty (oz)"},
+                {"field": "aa", "header": "AA%"}
+              ],
+              "data": "{inv.hops}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Yeast Bank"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "strain", "header": "Strain"},
+                {"field": "gen", "header": "Gen"},
+                {"field": "date", "header": "Date"}
+              ],
+              "data": "{inv.yeast}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {"type": "button", "props": {"text": "Add Item", "class": "primary"}},
+        {"type": "button", "props": {"text": "Receive Order", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Audit Count", "class": "secondary"}},
+        {
+          "type": "card",
+          "props": {"title": "Low Stock Alerts"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "alert-item", "props": {"level": "warn", "text": "Cascade hops < 16oz"}},
+              {"type": "alert-item", "props": {"level": "warn", "text": "Pilsner malt < 50lb"}},
+              {"type": "alert-item", "props": {"level": "info", "text": "Order due: 3 days"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Suppliers"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "text", "props": {"value": "BSG Craft Brewing"}},
+              {"type": "text", "props": {"value": "Yakima Valley Hops"}},
+              {"type": "text", "props": {"value": "White Labs"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

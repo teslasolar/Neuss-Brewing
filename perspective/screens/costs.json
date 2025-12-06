@@ -1,0 +1,78 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Cost Analysis",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=business", "label": "Business"},
+      {"href": "?screen=inventory", "label": "Inventory"},
+      {"href": "?screen=production", "label": "Production"},
+      {"href": "?screen=sales", "label": "Sales"},
+      {"href": "?screen=costs", "label": "Costs", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Avg Cost/BBL", "value": "{costs.perBbl}", "unit": "$", "color": "#ff6b35"}},
+          {"type": "stat-card", "props": {"title": "Grain Cost", "value": "{costs.grain}", "unit": "%", "color": "#8b4513"}},
+          {"type": "stat-card", "props": {"title": "Hops Cost", "value": "{costs.hops}", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Gross Margin", "value": "{costs.margin}", "unit": "%", "color": "#0ff"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Cost Breakdown by Recipe"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "recipe", "header": "Recipe"},
+                  {"field": "grain", "header": "Grain"},
+                  {"field": "hops", "header": "Hops"},
+                  {"field": "yeast", "header": "Yeast"},
+                  {"field": "other", "header": "Other"},
+                  {"field": "total", "header": "Total"}
+                ],
+                "data": "{costs.byRecipe}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Monthly Expenses"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "category", "header": "Category"},
+                  {"field": "budget", "header": "Budget"},
+                  {"field": "actual", "header": "Actual"},
+                  {"field": "var", "header": "Variance"}
+                ],
+                "data": "{costs.expenses}"
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Cost Trend (12 mo)"},
+        "children": [{
+          "type": "trend",
+          "props": {"data": "{costs.trend}", "height": 100, "color": "#ff6b35"}
+        }]
+      }
+    ]
+  }]
+}

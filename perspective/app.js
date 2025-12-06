@@ -30,6 +30,83 @@ const Store = {
       { id: 'B-040', recipe: 'Pale Ale', date: '2024-01-08', og: 1.052, fg: 1.010, abv: '5.5%', status: 'Kegged' }
     ],
     tempTrend: [64, 65, 64, 63, 64, 64, 63, 62, 61, 60, 58, 55, 52, 48, 45, 42, 40, 38, 36, 34]
+  },
+  // Business data
+  biz: {
+    revenue: '18,450', batchesMtd: 6, kegsSold: 42, margin: 62,
+    revenueTrend: [12, 14, 11, 16, 15, 18, 17, 19, 16, 18, 20, 18],
+    topSellers: [
+      { beer: 'IPA', kegs: 18, rev: '$4,500' },
+      { beer: 'Pilsner', kegs: 12, rev: '$2,880' },
+      { beer: 'Hefeweizen', kegs: 8, rev: '$1,920' }
+    ]
+  },
+  inv: {
+    grains: [
+      { item: '2-Row Pale', qty: 250, status: 'OK' },
+      { item: 'Pilsner Malt', qty: 45, status: 'Low' },
+      { item: 'Munich', qty: 80, status: 'OK' },
+      { item: 'Crystal 40L', qty: 30, status: 'OK' }
+    ],
+    hops: [
+      { item: 'Cascade', qty: 12, aa: '5.5%' },
+      { item: 'Centennial', qty: 24, aa: '10%' },
+      { item: 'Saaz', qty: 16, aa: '3.5%' }
+    ],
+    yeast: [
+      { strain: 'WLP001', gen: 3, date: '2024-01-10' },
+      { strain: 'WLP300', gen: 2, date: '2024-01-15' },
+      { strain: 'WLP830', gen: 1, date: '2024-01-18' }
+    ]
+  },
+  prod: {
+    schedule: [
+      { date: '01/22', recipe: 'Pilsner', batch: 'B-043', vessel: 'FV3', status: 'Scheduled' },
+      { date: '01/25', recipe: 'Stout', batch: 'B-044', vessel: 'FV1', status: 'Pending' },
+      { date: '01/29', recipe: 'IPA', batch: 'B-045', vessel: 'FV2', status: 'Pending' }
+    ]
+  },
+  sales: {
+    kegsStock: 24, openOrders: 5, pending: 3,
+    kegInv: [
+      { beer: 'IPA', half: 4, sixth: 8, case: 12 },
+      { beer: 'Pilsner', half: 2, sixth: 6, case: 24 },
+      { beer: 'Hefeweizen', half: 1, sixth: 4, case: 6 }
+    ],
+    orders: [
+      { id: 'ORD-112', customer: 'Local Taproom', items: '2x IPA', status: 'Ready' },
+      { id: 'ORD-113', customer: 'Downtown Bar', items: '1x Pils', status: 'Pending' }
+    ]
+  },
+  costs: {
+    perBbl: 85, grain: 42, hops: 18, margin: 62,
+    byRecipe: [
+      { recipe: 'IPA', grain: '$32', hops: '$28', yeast: '$8', other: '$12', total: '$80' },
+      { recipe: 'Pilsner', grain: '$28', hops: '$12', yeast: '$8', other: '$10', total: '$58' },
+      { recipe: 'Stout', grain: '$35', hops: '$15', yeast: '$8', other: '$12', total: '$70' }
+    ],
+    expenses: [
+      { category: 'Ingredients', budget: '$2,500', actual: '$2,340', var: '-$160' },
+      { category: 'Utilities', budget: '$800', actual: '$785', var: '-$15' },
+      { category: 'Labor', budget: '$3,000', actual: '$3,100', var: '+$100' }
+    ],
+    trend: [82, 84, 81, 85, 83, 86, 84, 85, 83, 85, 84, 85]
+  },
+  maint: {
+    equipment: [
+      { equip: 'Pump P1', status: 'OK', hours: 1240, nextPM: '02/01' },
+      { equip: 'Pump P2', status: 'OK', hours: 980, nextPM: '02/15' },
+      { equip: 'Glycol', status: 'OK', hours: 2100, nextPM: '01/25' },
+      { equip: 'Mill', status: 'Due', hours: 520, nextPM: '01/20' }
+    ],
+    schedule: [
+      { date: '01/20', equip: 'Mill', task: 'Roller gap adjustment', assigned: 'Mike' },
+      { date: '01/25', equip: 'Glycol', task: 'Filter change', assigned: 'Joe' }
+    ],
+    workOrders: [
+      { id: 'WO-45', equip: 'FV2', issue: 'Temp probe drift', priority: 2, status: 'Open' },
+      { id: 'WO-44', equip: 'P1', issue: 'Seal leak', priority: 1, status: 'Parts ordered' }
+    ]
   }
 };
 

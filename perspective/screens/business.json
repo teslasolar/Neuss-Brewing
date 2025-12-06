@@ -1,0 +1,89 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Business Dashboard",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "brewhouse.html", "label": "Brewhouse"},
+      {"href": "fermentation.html", "label": "Fermentation"},
+      {"href": "recipes.html", "label": "Recipes"},
+      {"href": "?screen=business", "label": "Business", "active": true},
+      {"href": "?screen=inventory", "label": "Inventory"},
+      {"href": "?screen=production", "label": "Production"},
+      {"href": "?screen=sales", "label": "Sales"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "240px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "grid",
+          "props": {"columns": 2, "gap": "12px"},
+          "children": [
+            {"type": "stat-card", "props": {"title": "Monthly Revenue", "value": "{biz.revenue}", "unit": "$", "trend": "+12%", "color": "#0f0"}},
+            {"type": "stat-card", "props": {"title": "Batches MTD", "value": "{biz.batchesMtd}", "trend": "+3", "color": "#0ff"}},
+            {"type": "stat-card", "props": {"title": "Kegs Sold", "value": "{biz.kegsSold}", "trend": "+8%", "color": "#ffa500"}},
+            {"type": "stat-card", "props": {"title": "Avg Margin", "value": "{biz.margin}", "unit": "%", "color": "#ff6b35"}}
+          ]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Revenue Trend"},
+          "children": [{"type": "trend", "props": {"data": "{biz.revenueTrend}", "height": 80, "color": "#0f0"}}]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Top Sellers"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "beer", "header": "Beer"},
+                {"field": "kegs", "header": "Kegs"},
+                {"field": "rev", "header": "Revenue"}
+              ],
+              "data": "{biz.topSellers}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Quick Actions"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "8px"},
+            "children": [
+              {"type": "button", "props": {"text": "New Batch", "class": "primary"}},
+              {"type": "button", "props": {"text": "Add Inventory", "class": "secondary"}},
+              {"type": "button", "props": {"text": "Create Invoice", "class": "secondary"}},
+              {"type": "button", "props": {"text": "Schedule Delivery", "class": "secondary"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Alerts"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "alert-item", "props": {"level": "warn", "text": "Low hops inventory"}},
+              {"type": "alert-item", "props": {"level": "info", "text": "FV2 ready for transfer"}},
+              {"type": "alert-item", "props": {"level": "info", "text": "3 orders pending"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

@@ -1,0 +1,100 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Sales & Distribution",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=business", "label": "Business"},
+      {"href": "?screen=inventory", "label": "Inventory"},
+      {"href": "?screen=production", "label": "Production"},
+      {"href": "?screen=sales", "label": "Sales", "active": true},
+      {"href": "?screen=costs", "label": "Costs"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "240px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "grid",
+          "props": {"columns": 3, "gap": "12px"},
+          "children": [
+            {"type": "stat-card", "props": {"title": "Kegs In Stock", "value": "{sales.kegsStock}", "color": "#0ff"}},
+            {"type": "stat-card", "props": {"title": "Open Orders", "value": "{sales.openOrders}", "color": "#ffa500"}},
+            {"type": "stat-card", "props": {"title": "Pending Delivery", "value": "{sales.pending}", "color": "#ff6b35"}}
+          ]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Keg Inventory"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "beer", "header": "Beer"},
+                {"field": "half", "header": "1/2 BBL"},
+                {"field": "sixth", "header": "1/6 BBL"},
+                {"field": "case", "header": "Cases"}
+              ],
+              "data": "{sales.kegInv}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Recent Orders"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "id", "header": "Order#"},
+                {"field": "customer", "header": "Customer"},
+                {"field": "items", "header": "Items"},
+                {"field": "status", "header": "Status"}
+              ],
+              "data": "{sales.orders}"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {"type": "button", "props": {"text": "New Order", "class": "primary"}},
+        {"type": "button", "props": {"text": "Schedule Pickup", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Print Invoice", "class": "secondary"}},
+        {
+          "type": "card",
+          "props": {"title": "Top Accounts"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "account-row", "props": {"name": "Local Taproom", "ytd": "$12,400"}},
+              {"type": "account-row", "props": {"name": "Downtown Bar", "ytd": "$8,200"}},
+              {"type": "account-row", "props": {"name": "Beer Garden", "ytd": "$6,800"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Delivery Schedule"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "4px"},
+            "children": [
+              {"type": "text", "props": {"value": "Mon: Local Taproom"}},
+              {"type": "text", "props": {"value": "Wed: Downtown Bar"}},
+              {"type": "text", "props": {"value": "Fri: Beer Garden"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}
