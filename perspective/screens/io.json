@@ -1,0 +1,103 @@
+{
+  "type": "page",
+  "props": {
+    "title": "I/O Status",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=pid", "label": "PID Tuning"},
+      {"href": "?screen=io", "label": "I/O Status", "active": true},
+      {"href": "?screen=historian", "label": "Historian"},
+      {"href": "?screen=alarms", "label": "Alarms"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "200px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Analog Inputs (AI)"},
+          "children": [{
+            "type": "io-table",
+            "props": {
+              "type": "AI",
+              "channels": [
+                {"addr": "AI:0", "tag": "HLT_TT01", "desc": "HLT Temp", "raw": 3842, "eng": "168.2°F", "status": "ok"},
+                {"addr": "AI:1", "tag": "MLT_TT01", "desc": "MLT Temp", "raw": 3156, "eng": "152.1°F", "status": "ok"},
+                {"addr": "AI:2", "tag": "BK_TT01", "desc": "BK Temp", "raw": 4012, "eng": "212.0°F", "status": "ok"},
+                {"addr": "AI:3", "tag": "HLT_LT01", "desc": "HLT Level", "raw": 2890, "eng": "75%", "status": "ok"},
+                {"addr": "AI:4", "tag": "FV1_TT01", "desc": "FV1 Temp", "raw": 1245, "eng": "64.2°F", "status": "ok"},
+                {"addr": "AI:5", "tag": "GLY_TT01", "desc": "Glycol Temp", "raw": 512, "eng": "28°F", "status": "ok"},
+                {"addr": "AI:6", "tag": "PH_AT01", "desc": "Mash pH", "raw": 2100, "eng": "5.38", "status": "ok"},
+                {"addr": "AI:7", "tag": "FLOW_FT01", "desc": "Flow Rate", "raw": 1850, "eng": "12.3 GPM", "status": "ok"}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Analog Outputs (AO)"},
+          "children": [{
+            "type": "io-table",
+            "props": {
+              "type": "AO",
+              "channels": [
+                {"addr": "AO:0", "tag": "HLT_CV01", "desc": "HLT Heat", "raw": 2867, "eng": "70%", "status": "ok"},
+                {"addr": "AO:1", "tag": "P1_SPD", "desc": "Pump 1 VFD", "raw": 3276, "eng": "80%", "status": "ok"},
+                {"addr": "AO:2", "tag": "GLY_CV01", "desc": "Glycol Valve", "raw": 1638, "eng": "40%", "status": "ok"}
+              ]
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Digital I/O"},
+          "children": [{
+            "type": "dio-grid",
+            "props": {
+              "inputs": [
+                {"tag": "P1_RUN", "state": true},
+                {"tag": "P2_RUN", "state": false},
+                {"tag": "V1_OPN", "state": true},
+                {"tag": "V1_CLS", "state": false},
+                {"tag": "HI_LVL", "state": false},
+                {"tag": "LO_LVL", "state": true},
+                {"tag": "E_STOP", "state": false},
+                {"tag": "DOOR", "state": false}
+              ],
+              "outputs": [
+                {"tag": "P1_CMD", "state": true},
+                {"tag": "P2_CMD", "state": false},
+                {"tag": "V1_OPN", "state": true},
+                {"tag": "ALARM", "state": false},
+                {"tag": "BEACON", "state": true}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Comms Status"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "comms-status", "props": {"name": "PLC", "protocol": "Modbus TCP", "status": "ok", "latency": "12ms"}},
+              {"type": "comms-status", "props": {"name": "HMI", "protocol": "OPC-UA", "status": "ok", "latency": "8ms"}},
+              {"type": "comms-status", "props": {"name": "Historian", "protocol": "MQTT", "status": "ok", "latency": "45ms"}}
+            ]
+          }]
+        }
+      ]
+    }]
+  }]
+}

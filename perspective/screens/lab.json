@@ -1,0 +1,82 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Lab & Quality Control",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=water", "label": "Water Chem"},
+      {"href": "?screen=ferm-kinetics", "label": "Ferm Kinetics"},
+      {"href": "?screen=lab", "label": "Lab/QC", "active": true},
+      {"href": "history.html", "label": "History"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "stat-card", "props": {"title": "Batches in Spec", "value": "94", "unit": "%", "color": "#0f0"}},
+          {"type": "stat-card", "props": {"title": "Avg Efficiency", "value": "78", "unit": "%", "color": "#0ff"}},
+          {"type": "stat-card", "props": {"title": "Pending Tests", "value": "3", "color": "#ffa500"}},
+          {"type": "stat-card", "props": {"title": "DO Level", "value": "15", "unit": "ppb", "color": "#0f0"}}
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Recent Lab Results"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "batch", "header": "Batch"},
+                  {"field": "test", "header": "Test"},
+                  {"field": "result", "header": "Result"},
+                  {"field": "spec", "header": "Spec"},
+                  {"field": "status", "header": "Status"}
+                ],
+                "data": "{lab.results}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Sensory Panel"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "batch", "header": "Batch"},
+                  {"field": "date", "header": "Date"},
+                  {"field": "aroma", "header": "Aroma"},
+                  {"field": "flavor", "header": "Flavor"},
+                  {"field": "overall", "header": "Overall"}
+                ],
+                "data": "{lab.sensory}"
+              }
+            }]
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Quality Trends"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 3, "gap": "15px"},
+          "children": [
+            {"type": "trend", "props": {"title": "OG Consistency", "data": "{lab.ogTrend}", "target": 1.052, "color": "#ff6b35"}},
+            {"type": "trend", "props": {"title": "pH Control", "data": "{lab.phTrend}", "target": 5.4, "color": "#0ff"}},
+            {"type": "trend", "props": {"title": "ABV Accuracy", "data": "{lab.abvTrend}", "target": 5.2, "color": "#0f0"}}
+          ]
+        }]
+      }
+    ]
+  }]
+}

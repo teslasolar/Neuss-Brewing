@@ -107,6 +107,40 @@ const Store = {
       { id: 'WO-45', equip: 'FV2', issue: 'Temp probe drift', priority: 2, status: 'Open' },
       { id: 'WO-44', equip: 'P1', issue: 'Seal leak', priority: 1, status: 'Parts ordered' }
     ]
+  },
+  // Controls data
+  pid: {
+    hlt: { pv: 168.2, sp: 170, out: 72, trend: [165,167,168,169,170,169,168,168,169,168] },
+    mlt: { pv: 152.1, sp: 152, out: 0, trend: [150,151,152,152,152,152,152,152,152,152] },
+    bk: { pv: 212.0, sp: 212, out: 85, trend: [180,195,205,210,212,212,212,212,212,212] },
+    fv1: { pv: 64.2, sp: 64, out: 25, trend: [64,64,65,65,64,64,64,64,64,64] },
+    fv2: { pv: 38.1, sp: 38, out: 15, trend: [40,39,38,38,38,38,38,38,38,38] }
+  },
+  lab: {
+    results: [
+      { batch: 'B-042', test: 'OG', result: '1.052', spec: '1.050-1.054', status: 'Pass' },
+      { batch: 'B-042', test: 'pH', result: '5.38', spec: '5.2-5.6', status: 'Pass' },
+      { batch: 'B-041', test: 'ABV', result: '5.8%', spec: '5.5-6.0%', status: 'Pass' },
+      { batch: 'B-041', test: 'DO', result: '12ppb', spec: '<50ppb', status: 'Pass' }
+    ],
+    sensory: [
+      { batch: 'B-041', date: '01/18', aroma: '4.2', flavor: '4.0', overall: '4.1' },
+      { batch: 'B-040', date: '01/12', aroma: '4.5', flavor: '4.3', overall: '4.4' }
+    ],
+    ogTrend: [1.051,1.053,1.052,1.050,1.052,1.053,1.052,1.051],
+    phTrend: [5.35,5.42,5.38,5.40,5.36,5.39,5.41,5.38],
+    abvTrend: [5.1,5.3,5.2,5.4,5.2,5.3,5.2,5.3]
+  },
+  alarms: {
+    history: [
+      { time: '06:22:15', tag: 'HLT_TT01', desc: 'HLT Temp High', action: 'Reduced heat' },
+      { time: '05:45:30', tag: 'P1_VIB', desc: 'Pump vibration', action: 'Inspected - OK' },
+      { time: '04:12:08', tag: 'GLY_TT01', desc: 'Glycol temp warn', action: 'Auto-cleared' }
+    ],
+    hourly: [1,0,0,1,2,1,0,0,1,0,1,2,0,1,0,0,0,1,0,0,0,1,1,0]
+  },
+  hist: {
+    trendData: []
   }
 };
 

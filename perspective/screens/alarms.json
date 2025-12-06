@@ -1,0 +1,80 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Alarm Management",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=pid", "label": "PID Tuning"},
+      {"href": "?screen=io", "label": "I/O Status"},
+      {"href": "?screen=historian", "label": "Historian"},
+      {"href": "?screen=alarms", "label": "Alarms", "active": true}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 4, "gap": "12px"},
+        "children": [
+          {"type": "alarm-stat", "props": {"title": "Critical", "count": 0, "color": "#f00"}},
+          {"type": "alarm-stat", "props": {"title": "High", "count": 1, "color": "#ffa500"}},
+          {"type": "alarm-stat", "props": {"title": "Medium", "count": 2, "color": "#ff0"}},
+          {"type": "alarm-stat", "props": {"title": "Low/Info", "count": 5, "color": "#0ff"}}
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Active Alarms"},
+        "children": [{
+          "type": "alarm-list",
+          "props": {
+            "alarms": [
+              {"time": "09:15:32", "tag": "HLT_TT01", "desc": "HLT Temp High", "priority": 2, "value": "175°F", "limit": "172°F", "state": "active"},
+              {"time": "08:45:12", "tag": "P1_VIB", "desc": "Pump 1 Vibration", "priority": 3, "value": "2.1g", "limit": "1.5g", "state": "ack"},
+              {"time": "07:22:45", "tag": "GLY_TT01", "desc": "Glycol Temp Warn", "priority": 3, "value": "32°F", "limit": "30°F", "state": "active"}
+            ]
+          }
+        }]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "card",
+            "props": {"title": "Alarm History (24h)"},
+            "children": [{
+              "type": "table",
+              "props": {
+                "columns": [
+                  {"field": "time", "header": "Time"},
+                  {"field": "tag", "header": "Tag"},
+                  {"field": "desc", "header": "Description"},
+                  {"field": "action", "header": "Action"}
+                ],
+                "data": "{alarms.history}"
+              }
+            }]
+          },
+          {
+            "type": "card",
+            "props": {"title": "Alarm Statistics"},
+            "children": [{
+              "type": "flex",
+              "props": {"direction": "column", "gap": "8px"},
+              "children": [
+                {"type": "calc-row", "props": {"label": "Total Today", "value": "12"}},
+                {"type": "calc-row", "props": {"label": "Avg Response", "value": "2.3 min"}},
+                {"type": "calc-row", "props": {"label": "Most Frequent", "value": "GLY_TT01 (4x)"}},
+                {"type": "calc-row", "props": {"label": "Longest Active", "value": "45 min"}},
+                {"type": "trend", "props": {"title": "24h Distribution", "data": "{alarms.hourly}", "color": "#f00", "height": 60}}
+              ]
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}

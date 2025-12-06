@@ -1,0 +1,93 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Data Historian",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=pid", "label": "PID Tuning"},
+      {"href": "?screen=io", "label": "I/O Status"},
+      {"href": "?screen=historian", "label": "Historian", "active": true},
+      {"href": "?screen=alarms", "label": "Alarms"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "240px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Trend View"},
+          "children": [{
+            "type": "historian-trend",
+            "props": {
+              "timeRange": "24h",
+              "pens": [
+                {"tag": "HLT_TT01", "color": "#ff6b35", "visible": true},
+                {"tag": "MLT_TT01", "color": "#8b4513", "visible": true},
+                {"tag": "BK_TT01", "color": "#ffa500", "visible": true},
+                {"tag": "FV1_TT01", "color": "#0ff", "visible": true}
+              ],
+              "data": "{hist.trendData}"
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Batch Report - B-042"},
+          "children": [{
+            "type": "batch-timeline",
+            "props": {
+              "phases": [
+                {"name": "Strike", "start": "06:00", "end": "06:45", "status": "complete"},
+                {"name": "Mash", "start": "06:45", "end": "07:45", "status": "complete"},
+                {"name": "Sparge", "start": "07:45", "end": "08:30", "status": "complete"},
+                {"name": "Boil", "start": "08:30", "end": "09:30", "status": "active"},
+                {"name": "Cool", "start": "09:30", "end": "10:00", "status": "pending"}
+              ]
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Tag Browser"},
+          "children": [{
+            "type": "tag-tree",
+            "props": {
+              "nodes": [
+                {"name": "Brewhouse", "children": ["HLT_TT01", "MLT_TT01", "BK_TT01", "HLT_LT01"]},
+                {"name": "Fermenters", "children": ["FV1_TT01", "FV2_TT01", "FV3_TT01"]},
+                {"name": "Utilities", "children": ["GLY_TT01", "CO2_PT01", "CIP_FT01"]}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Time Range"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "button", "props": {"text": "1 Hour", "class": "secondary"}},
+              {"type": "button", "props": {"text": "8 Hours", "class": "secondary"}},
+              {"type": "button", "props": {"text": "24 Hours", "class": "primary"}},
+              {"type": "button", "props": {"text": "7 Days", "class": "secondary"}},
+              {"type": "button", "props": {"text": "Custom...", "class": "secondary"}}
+            ]
+          }]
+        },
+        {"type": "button", "props": {"text": "Export CSV", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Print Report", "class": "secondary"}}
+      ]
+    }]
+  }]
+}

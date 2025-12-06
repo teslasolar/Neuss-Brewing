@@ -1,0 +1,120 @@
+{
+  "type": "page",
+  "props": {
+    "title": "PID Control Loops",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=pid", "label": "PID Tuning", "active": true},
+      {"href": "?screen=io", "label": "I/O Status"},
+      {"href": "?screen=historian", "label": "Historian"},
+      {"href": "?screen=water", "label": "Water Chem"}
+    ]
+  },
+  "children": [{
+    "type": "flex",
+    "props": {"direction": "column", "gap": "15px"},
+    "children": [
+      {
+        "type": "grid",
+        "props": {"columns": 3, "gap": "15px"},
+        "children": [
+          {
+            "type": "pid-loop",
+            "props": {
+              "name": "HLT Temp",
+              "tag": "HLT_TC01",
+              "pv": "{pid.hlt.pv}",
+              "sp": "{pid.hlt.sp}",
+              "out": "{pid.hlt.out}",
+              "kp": 2.5,
+              "ki": 0.8,
+              "kd": 0.2,
+              "mode": "auto",
+              "trend": "{pid.hlt.trend}"
+            }
+          },
+          {
+            "type": "pid-loop",
+            "props": {
+              "name": "MLT Temp",
+              "tag": "MLT_TC01",
+              "pv": "{pid.mlt.pv}",
+              "sp": "{pid.mlt.sp}",
+              "out": "{pid.mlt.out}",
+              "kp": 1.8,
+              "ki": 0.5,
+              "kd": 0.1,
+              "mode": "auto",
+              "trend": "{pid.mlt.trend}"
+            }
+          },
+          {
+            "type": "pid-loop",
+            "props": {
+              "name": "BK Temp",
+              "tag": "BK_TC01",
+              "pv": "{pid.bk.pv}",
+              "sp": "{pid.bk.sp}",
+              "out": "{pid.bk.out}",
+              "kp": 3.0,
+              "ki": 1.0,
+              "kd": 0.3,
+              "mode": "manual",
+              "trend": "{pid.bk.trend}"
+            }
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "props": {"columns": 2, "gap": "15px"},
+        "children": [
+          {
+            "type": "pid-loop",
+            "props": {
+              "name": "FV1 Glycol",
+              "tag": "FV1_TC01",
+              "pv": "{pid.fv1.pv}",
+              "sp": "{pid.fv1.sp}",
+              "out": "{pid.fv1.out}",
+              "kp": 1.2,
+              "ki": 0.3,
+              "kd": 0.05,
+              "mode": "auto",
+              "trend": "{pid.fv1.trend}"
+            }
+          },
+          {
+            "type": "pid-loop",
+            "props": {
+              "name": "FV2 Glycol",
+              "tag": "FV2_TC01",
+              "pv": "{pid.fv2.pv}",
+              "sp": "{pid.fv2.sp}",
+              "out": "{pid.fv2.out}",
+              "kp": 1.2,
+              "ki": 0.3,
+              "kd": 0.05,
+              "mode": "auto",
+              "trend": "{pid.fv2.trend}"
+            }
+          }
+        ]
+      },
+      {
+        "type": "card",
+        "props": {"title": "Loop Tuning Assistant"},
+        "children": [{
+          "type": "grid",
+          "props": {"columns": 4, "gap": "10px"},
+          "children": [
+            {"type": "button", "props": {"text": "Auto-Tune", "class": "primary"}},
+            {"type": "button", "props": {"text": "Step Test", "class": "secondary"}},
+            {"type": "button", "props": {"text": "Bump Test", "class": "secondary"}},
+            {"type": "button", "props": {"text": "Export Params", "class": "secondary"}}
+          ]
+        }]
+      }
+    ]
+  }]
+}

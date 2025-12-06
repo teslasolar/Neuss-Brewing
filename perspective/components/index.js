@@ -6,6 +6,8 @@ import './display.js';
 import './input.js';
 import './python.js';
 import './business.js';
+import './controls.js';
+import './science.js';
 
 // Page template components (atomic structure)
 

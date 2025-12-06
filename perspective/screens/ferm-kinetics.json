@@ -1,0 +1,92 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Fermentation Kinetics",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=water", "label": "Water Chem"},
+      {"href": "?screen=ferm-kinetics", "label": "Ferm Kinetics", "active": true},
+      {"href": "?screen=lab", "label": "Lab/QC"},
+      {"href": "fermentation.html", "label": "Fermenters"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "260px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "FV1 - Hefeweizen (Day 5)"},
+          "children": [{
+            "type": "ferm-chart",
+            "props": {
+              "og": 1.052, "sg": 1.018, "fg": 1.012,
+              "temp": [64, 64, 65, 66, 68, 67, 66, 65, 64, 64],
+              "gravity": [1.052, 1.048, 1.042, 1.035, 1.028, 1.024, 1.021, 1.019, 1.018, 1.018],
+              "ph": [4.8, 4.5, 4.3, 4.2, 4.15, 4.12, 4.1, 4.1, 4.1, 4.1],
+              "attenuation": 65, "abvCurrent": 4.5, "abvFinal": 5.2
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Yeast Kinetics Model"},
+          "children": [{
+            "type": "kinetics-model",
+            "props": {
+              "strain": "WLP300",
+              "pitchRate": 0.75,
+              "cellCount": "185B",
+              "viability": 94,
+              "lag": "8h",
+              "peakCO2": "Day 3",
+              "estCompletion": "Day 12",
+              "model": "monod"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Calculations"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "8px"},
+            "children": [
+              {"type": "calc-row", "props": {"label": "Apparent Atten", "value": "65.4%"}},
+              {"type": "calc-row", "props": {"label": "Real Atten", "value": "53.2%"}},
+              {"type": "calc-row", "props": {"label": "ABV (current)", "value": "4.47%"}},
+              {"type": "calc-row", "props": {"label": "ABV (projected)", "value": "5.25%"}},
+              {"type": "calc-row", "props": {"label": "Calories/12oz", "value": "158"}},
+              {"type": "calc-row", "props": {"label": "Residual Extract", "value": "4.6°P"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Yeast Health"},
+          "children": [{
+            "type": "flex",
+            "props": {"direction": "column", "gap": "6px"},
+            "children": [
+              {"type": "gauge", "props": {"label": "Viability", "value": 94, "max": 100, "unit": "%", "color": "#0f0"}},
+              {"type": "gauge", "props": {"label": "Vitality", "value": 82, "max": 100, "unit": "%", "color": "#0ff"}},
+              {"type": "calc-row", "props": {"label": "Cell Count", "value": "185B cells"}},
+              {"type": "calc-row", "props": {"label": "Pitch Rate", "value": "0.75M/mL/°P"}}
+            ]
+          }]
+        },
+        {"type": "button", "props": {"text": "Log Reading", "class": "primary"}},
+        {"type": "button", "props": {"text": "Adjust Temp Profile", "class": "secondary"}}
+      ]
+    }]
+  }]
+}

@@ -1,0 +1,121 @@
+{
+  "type": "page",
+  "props": {
+    "title": "Water Chemistry",
+    "nav": [
+      {"href": "overview.html", "label": "Overview"},
+      {"href": "?screen=water", "label": "Water Chem", "active": true},
+      {"href": "?screen=ferm-kinetics", "label": "Ferm Kinetics"},
+      {"href": "?screen=lab", "label": "Lab/QC"},
+      {"href": "recipes.html", "label": "Recipes"}
+    ]
+  },
+  "children": [{
+    "type": "sidebar-layout",
+    "props": {"width": "280px"},
+    "children": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "15px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Source Water Profile"},
+          "children": [{
+            "type": "water-profile",
+            "props": {
+              "name": "Municipal",
+              "ca": 45, "mg": 12, "na": 25, "cl": 35, "so4": 55, "hco3": 120,
+              "ph": 7.8, "residualAlk": 82
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Target Profile"},
+          "children": [{
+            "type": "grid",
+            "props": {"columns": 2, "gap": "8px"},
+            "children": [
+              {"type": "select", "props": {"label": "Style", "options": ["Pilsner", "IPA", "Stout", "Hefe", "Custom"], "value": "IPA"}},
+              {"type": "button", "props": {"text": "Load", "class": "secondary"}}
+            ]
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Salt Additions (per gal)"},
+          "children": [{
+            "type": "salt-calc",
+            "props": {
+              "salts": [
+                {"name": "Gypsum (CaSO4)", "amt": 1.2, "unit": "g"},
+                {"name": "Calcium Chloride", "amt": 0.4, "unit": "g"},
+                {"name": "Epsom (MgSO4)", "amt": 0.2, "unit": "g"},
+                {"name": "Baking Soda", "amt": 0, "unit": "g"},
+                {"name": "Chalk (Cite)", "amt": 0, "unit": "g"},
+                {"name": "Lactic Acid 88%", "amt": 0.8, "unit": "mL"}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Resulting Profile"},
+          "children": [{
+            "type": "water-profile",
+            "props": {
+              "name": "Adjusted",
+              "ca": 125, "mg": 18, "na": 25, "cl": 75, "so4": 275, "hco3": 45,
+              "ph": 5.4, "residualAlk": -12, "sulfateChloride": "3.7:1"
+            }
+          }]
+        }
+      ]
+    }],
+    "sidebar": [{
+      "type": "flex",
+      "props": {"direction": "column", "gap": "12px"},
+      "children": [
+        {
+          "type": "card",
+          "props": {"title": "Style Targets"},
+          "children": [{
+            "type": "table",
+            "props": {
+              "columns": [
+                {"field": "ion", "header": "Ion"},
+                {"field": "target", "header": "Target"},
+                {"field": "actual", "header": "Actual"}
+              ],
+              "data": [
+                {"ion": "Ca", "target": "100-150", "actual": "125"},
+                {"ion": "SO4", "target": "200-400", "actual": "275"},
+                {"ion": "Cl", "target": "50-100", "actual": "75"},
+                {"ion": "SO4:Cl", "target": ">2:1", "actual": "3.7:1"}
+              ]
+            }
+          }]
+        },
+        {
+          "type": "card",
+          "props": {"title": "Mash pH"},
+          "children": [{
+            "type": "ph-calc",
+            "props": {
+              "grainBill": [
+                {"grain": "2-Row", "pct": 85, "color": 2},
+                {"grain": "Crystal 40", "pct": 10, "color": 40},
+                {"grain": "Munich", "pct": 5, "color": 8}
+              ],
+              "predictedPh": 5.38,
+              "targetPh": 5.4
+            }
+          }]
+        },
+        {"type": "button", "props": {"text": "Calculate All", "class": "primary"}},
+        {"type": "button", "props": {"text": "Save Profile", "class": "secondary"}},
+        {"type": "button", "props": {"text": "Export", "class": "secondary"}}
+      ]
+    }]
+  }]
+}

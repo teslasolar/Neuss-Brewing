@@ -208,6 +208,93 @@ body{font:12px system-ui,monospace;background:linear-gradient(135deg,var(--p-bg)
 
 .p-gantt{border:1px solid var(--p-border)}
 
+/* Controls Components */
+.p-pid-loop{background:var(--p-bg2);border:1px solid var(--p-border);border-radius:8px;padding:12px}
+.p-pid-loop.manual{border-color:var(--p-yel)}
+.p-pid-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.p-pid-name{font-weight:bold;color:var(--p-accent)}.p-pid-tag{font-size:10px;color:#888}
+.p-pid-mode{font-size:9px;padding:2px 6px;border-radius:3px;background:#333}
+.p-pid-mode.auto{background:#0a3d0a;color:var(--p-grn)}.p-pid-mode.manual{background:#3d3d0a;color:var(--p-yel)}
+.p-pid-display{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.p-pid-pv,.p-pid-sp,.p-pid-out{text-align:center;background:#1a0e08;padding:8px;border-radius:4px}
+.p-pid-pv .lbl,.p-pid-sp .lbl,.p-pid-out .lbl{display:block;font-size:9px;color:#888}
+.p-pid-pv .val{font-size:18px;color:var(--p-grn)}.p-pid-sp .val{font-size:18px;color:var(--p-cyn)}
+.p-pid-out .val{font-size:18px;color:var(--p-yel)}
+.p-pid-bar{height:8px;background:#1a0e08;border-radius:4px;overflow:hidden}
+.p-pid-fill{height:100%;background:linear-gradient(90deg,var(--p-grn),var(--p-yel))}
+.p-pid-params{display:flex;gap:10px;margin-top:8px;font-size:10px;color:#888}
+
+.p-io-table{width:100%;font-size:11px;border-collapse:collapse}
+.p-io-table th{text-align:left;padding:6px;background:#1a0e08;color:#888;font-size:9px}
+.p-io-table td{padding:6px;border-bottom:1px solid var(--p-border)}
+.p-io-table .tag{color:var(--p-cyn)}.p-io-table .raw{color:#888}.p-io-table .eng{color:var(--p-grn)}
+.p-io-status{display:inline-block;width:8px;height:8px;border-radius:50%;background:#666}
+.p-io-status.ok{background:var(--p-grn);box-shadow:0 0 4px var(--p-grn)}
+.p-io-status.fault{background:var(--p-red);box-shadow:0 0 4px var(--p-red)}
+
+.p-dio-grid{display:flex;flex-direction:column;gap:8px}
+.p-dio-section{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.p-dio-lbl{font-size:10px;color:#888;width:25px}
+.p-dio{font-size:8px;padding:3px 5px;border-radius:3px;background:#333;color:#888}
+.p-dio.on{background:var(--p-grn);color:#000}
+
+.p-comms-status{display:flex;align-items:center;gap:8px;padding:6px;border-radius:4px;font-size:11px}
+.p-comms-status.ok{background:rgba(0,255,0,.1)}.p-comms-dot{width:6px;height:6px;border-radius:50%;background:var(--p-grn)}
+.p-comms-name{flex:1}.p-comms-proto{color:#888;font-size:9px}.p-comms-latency{color:var(--p-cyn)}
+
+.p-alarm-stat{background:var(--p-bg2);border:2px solid;border-radius:8px;padding:12px;text-align:center}
+.p-alarm-count{font-size:28px;font-weight:bold}.p-alarm-label{font-size:10px;color:#888}
+
+.p-alarm-list{display:flex;flex-direction:column;gap:4px}
+.p-alarm-row{display:flex;align-items:center;gap:10px;padding:8px;border-radius:4px;font-size:11px}
+.p-alarm-row.pri-1{background:rgba(255,0,0,.15);border-left:3px solid var(--p-red)}
+.p-alarm-row.pri-2{background:rgba(255,165,0,.15);border-left:3px solid var(--p-yel)}
+.p-alarm-row.pri-3{background:rgba(255,255,0,.1);border-left:3px solid #ff0}
+.p-alarm-row.ack{opacity:.6}.p-alarm-time{color:#888;width:70px}.p-alarm-tag{color:var(--p-cyn);width:80px}
+.p-alarm-desc{flex:1}.p-alarm-val{color:#888;font-size:10px}
+.p-alarm-ack{background:var(--p-accent);border:none;color:#fff;padding:2px 8px;border-radius:3px;font-size:9px;cursor:pointer}
+
+.p-trend-legend{display:flex;gap:12px;margin-bottom:8px;font-size:11px}
+.p-batch-timeline{display:flex;flex-direction:column;gap:4px}
+.p-timeline-phase{display:flex;justify-content:space-between;padding:6px 8px;border-radius:4px;font-size:11px}
+.p-timeline-phase.complete{background:rgba(0,255,0,.1);border-left:3px solid var(--p-grn)}
+.p-timeline-phase.active{background:rgba(255,165,0,.15);border-left:3px solid var(--p-yel)}
+.p-timeline-phase.pending{background:#1a0e08;border-left:3px solid #333}
+.p-phase-time{color:#888}
+
+.p-tag-tree{font-size:11px}.p-tree-node{margin-bottom:8px}
+.p-tree-folder{display:block;color:var(--p-accent);margin-bottom:4px}
+.p-tree-children{display:flex;flex-wrap:wrap;gap:4px;padding-left:12px}
+.p-tree-tag{background:#1a0e08;padding:2px 6px;border-radius:3px;color:var(--p-cyn);cursor:pointer}
+.p-tree-tag:hover{background:#2d1810}
+
+.p-calc-row{display:flex;justify-content:space-between;padding:4px 0;font-size:11px;border-bottom:1px solid var(--p-border)}
+.p-calc-lbl{color:#888}.p-calc-val{color:var(--p-cyn)}
+
+/* Science Components */
+.p-water-profile{background:#1a0e08;border-radius:6px;padding:10px}
+.p-water-name{font-weight:bold;color:var(--p-accent);margin-bottom:8px}
+.p-water-ions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.p-water-ions .ion{font-size:11px}.p-water-ions .ion b{display:block;font-size:9px;color:#888}
+.p-water-meta{display:flex;gap:12px;font-size:10px;color:#888}
+
+.p-salt-calc{display:flex;flex-direction:column;gap:4px}
+.p-salt-row{display:flex;justify-content:space-between;padding:4px 6px;font-size:11px;border-radius:3px}
+.p-salt-row.active{background:rgba(0,255,255,.1)}.p-salt-amt{color:var(--p-cyn)}
+
+.p-ph-calc{font-size:11px}.p-grain-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--p-border)}
+.p-ph-result{margin-top:10px;padding:8px;background:#1a0e08;border-radius:4px;text-align:center}
+.p-ph-predicted{font-size:14px}.p-ph-predicted b{color:var(--p-grn)}.p-ph-target{font-size:10px;color:#888}
+
+.p-ferm-chart{}.p-ferm-stats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px}
+.p-ferm-stats span{background:#1a0e08;padding:4px 8px;border-radius:4px}
+
+.p-kinetics-model{}.p-kinetics-header{display:flex;justify-content:space-between;margin-bottom:10px}
+.p-yeast-strain{font-weight:bold;color:var(--p-accent)}.p-kinetics-type{font-size:10px;color:#888}
+.p-kinetics-params{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.p-kp{background:#1a0e08;padding:6px;border-radius:4px;font-size:11px}
+.p-kp .lbl{display:block;font-size:9px;color:#888}.p-kp .val{color:var(--p-cyn)}
+
 /* Responsive */
 @media(max-width:768px){
   .p-sidebar-layout,.p-sidebar-template{grid-template-columns:1fr}
